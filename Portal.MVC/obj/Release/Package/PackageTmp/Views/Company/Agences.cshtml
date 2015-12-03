@@ -1,0 +1,87 @@
+﻿@model IEnumerable<ThankNet.Models.Agence>
+
+@{
+    ViewBag.Title = "Agences";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+}
+
+<h2>商户申请</h2>
+ 
+<table class="table table-bordered">
+    <tr>
+        <th>
+           名称
+        </th>
+        <th>
+            性质
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Mobile)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ShopAddress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Phone)
+        </th>
+       
+        <th>
+           申请时间
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+               @if (item.IsCompany)
+               {
+                   <span>公司</span>
+               }
+               else
+               {
+                <span>个人</span>
+               }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Mobile)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShopAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreateTime)
+            </td>
+            <td>
+                @Html.ActionLink("详情", "AgencesDetail", new { id = item.Id }) |
+                 <a href="#" class="deletea" data-id="@item.Id">删除</a>
+            </td>
+        </tr>
+    }
+
+</table>
+
+<script>
+    $(".deletea").click(function() {
+        var id = $(this).data("id");
+        var row = $(this).parent().parent();
+        if(confirm("确定要删除这条记录？"))
+            $.post("/Company/DeleteAgence", { id: id }, function (data) {
+                row.fadeOut();
+            });
+    })
+    
+</script>

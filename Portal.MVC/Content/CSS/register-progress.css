@@ -1,0 +1,166 @@
+﻿.register-progress .pross {
+  position: relative;
+  background: #ddd;
+  float: left;
+  width: 300px;
+  height: 35px;
+  line-height: 35px;
+  color: #666;
+  font-size: 14px;
+  padding-left: 10px;
+  overflow: hidden;
+}
+.register-progress .pross .index {
+  background: #999;
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  line-height: 18px;
+  -webkit-border-radius: 18px;
+  -moz-border-radius: 18px;
+  border-radius: 18px;
+  color: #fff;
+  text-align: center;
+  margin-right: 10px;
+}
+.register-progress .pross .pross-dir {
+  background: #ddd;
+  position: absolute;
+  top: -17px;
+  right: -19px;
+}
+.register-progress .pross .pross-dir .outside,
+.register-progress .pross .pross-dir .inside {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 35px 19px;
+}
+.register-progress .pross .pross-dir .outside {
+  border-color: transparent transparent transparent #f8f8f8;
+}
+.register-progress .pross .pross-dir .inside {
+  border-color: transparent transparent transparent #ddd;
+  margin-left: -47px;
+}
+.register-progress .pross-ok {
+  background: #57b382;
+  color: #fff;
+}
+.register-progress .pross-ok .index {
+  background: #fff;
+    color: #57b382;
+}
+.register-progress .pross-ok .pross-dir {
+  background: #ddd;
+}
+.register-progress .pross-ok .pross-dir .outside {
+  border-color: transparent transparent transparent #f8f8f8;
+}
+.register-progress .pross-ok .pross-dir .inside {
+  border-color: transparent transparent transparent #57b382;
+}
+.register-progress .pross-ok .pross-dir-bg {
+  background: #57b382;
+}
+
+.dwell {
+    width: 83%;margin-top: 20px; 
+    padding-right: 5px;
+}
+.holdbox{ margin: 10px 15%;} .holdbox ul{ list-style: none;}
+.holdbox ul li span{ display: inline-block;width: 85px; }
+.holdbox ul li{ padding: 10px;}
+
+.logon-control {
+    width: 195px;
+    height: 30px;
+    padding: 0 0 0 5px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    vertical-align: middle;
+    line-height: 30px;
+}
+
+.validcode {
+    width: 70px;
+    height: 30px;
+    padding: 0 0 0 5px;
+    font-size: 14px;
+    border: 1px solid #cccccc;
+    margin-right: 15px;
+    vertical-align: middle;
+    line-height: 30px;
+}
+
+.findguid {
+    font-size: 16px;
+    width: 360px;
+    padding-bottom: 60px;
+    line-height: 1.5em;
+}
+
+ .required-char {
+     font-size: 14px;
+ }
+.required-char i{
+    color: red;
+    padding-right: 5px;
+}
+
+.dwell .result {
+    border: 1px solid #e3e3e3;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);
+}
+ .dwell .success ,.dwell .result {
+    min-height: 20px;
+    padding: 19px;
+    height: 200px;
+    margin-bottom: 20px;
+    text-align: center
+ } 
+
+.success-info {
+    margin: 50px auto;
+    
+}
+
+.btn-color {
+    color: #fff;
+    background-color: #57b382;
+    border-color: #57b382;
+}
+
+.fieldset-title {
+    position: relative;
+    left: 20px;
+    top: -10px;
+    display: inline;
+    white-space: nowrap;
+    font-weight: bold;
+    background-color: #fff;
+}
+.myfieldset {
+    border: 1px solid #cccccc;
+}
+
+.error-info {
+    border: 1px solid #ff0000;
+    background-color: #ffeeee;
+}
+
+.error-text{
+    display: none;
+    color: #ff0000;
+    font-size: 12px;
+    margin-left: 15px;
+}
+
+.pwdinfo {
+    font-size: 12px;
+    color: #999999;
+    margin-left: 15px;
+}

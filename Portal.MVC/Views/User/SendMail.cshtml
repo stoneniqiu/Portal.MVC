@@ -1,0 +1,90 @@
+﻿@{
+    ViewBag.Title = "找回密码方式";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Content/CSS/register-progress.css" rel="stylesheet" />
+<div class="container" style="width:1120px;">
+    <div class="row-fluid divcontent">
+        
+        <div  style="margin-top: 40px;"></div>
+        <div class="register-progress clearfix hidden-xs hidden-sm">
+          <div class="pross pross-ok"><span class="index">1</span>输入登录帐号
+            <div class="pross-dir pross-dir-bg"><span class="outside"></span><span class="inside"></span></div>
+          </div>
+          <div class="pross pross-ok"><span class="index">2</span>找回密码方式
+            <div class="pross-dir"><span class="outside"></span><span class="inside"></span></div>
+          </div>
+            <div class="pross"><span class="index">3</span>修改密码
+            </div>
+          </div>
+        </div>
+        <div class="dwell">
+          <div class="myfieldset">
+            <div class="fieldset-title">邮箱找回密码</div>
+               <div class="holdbox">
+               <ul>
+                 <li>
+                     您的注册邮箱为：<span style="color:#2e8b57">@ViewBag.Email</span>
+                 </li>
+                   <li>
+                       <span class="required-char"><i>*</i>验证码：</span> <input type="text" id="code" class="validcode"/><img src="@Url.Action("GetValidateCode","User")" id="yanzheng" title="换一张" alt="验证码"/>
+                   </li>
+                   <li>   <span style=" "> </span><input type="submit"style="margin-left: 5px;"  class="btn btn-color" id="nextbt" value="找回密码" /> <span class="errorinfo" style="display: none;vertical-align: baseline; width: 120px;width: auto"></span></li>
+                </ul>
+              </div>
+        </div>
+            <script type="text/javascript">
+                $(function() {
+                    $("#yanzheng").bind("click", function() {
+                        this.src = "../User/GetValidateCode?time=" + (new Date()).getTime();
+                    });
+
+                    $("#code").blur(function() {
+                        var code = $("#code").val();
+                        if ($.trim(code) != "") {
+                            $.get("/User/CheckvCode", { code: code }, function(data) {
+                                if (data != 1) {
+                                    $.infoShow(data);
+                                }
+                            });
+                        }
+                    });
+
+
+                    $("#nextbt").click(function() {
+                        var code = $("#code").val();
+                        if ($.trim(code) != "") {
+                            $.get("/User/CheckvCode", { code: code }, function(data) {
+                                if (data != 1) {
+                                    $.infoShow(data);
+                                    return;
+                                }
+                                window.open("@Url.Action("SendMailComplete", "User", new {ViewBag.username})", "_self");
+                            });
+                        } else {
+                            $.infoShow("请输入验证码");
+                            return;
+                        }
+
+
+                    });
+
+                    $.extend({
+                        infoShow: function (txt, type) {
+                            $(".errorinfo").html(txt).show();
+                            if (type == "1") {
+                                $(".errorinfo").css("color", "#57b382");
+                            } else {
+                                $(".errorinfo").css("color", "#ff0000");
+                            }
+                            setTimeout(function () {
+                                $(".errorinfo").fadeOut();
+                            }, 2000);
+                        }
+                    });
+                });
+           </script>
+        </div>
+      
+    </div>

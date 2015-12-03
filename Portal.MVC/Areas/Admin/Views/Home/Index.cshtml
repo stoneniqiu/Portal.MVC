@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+}
+
+<div id="content-header">
+    <div id="breadcrumb"><a href="@Url.Action("Index","Home")" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>主页</a></div>
+</div>
+<div class="container-fluid">
+    <div style="padding-top: 20px;">
+        <div class="alert alert-success alert-block">
+            <a class="close" data-dismiss="alert" href="#">×</a>
+              欢迎：@User.Identity.Name
+        </div>
+    </div>
+    <div class="quick-actions_homepage">
+        <ul class="quick-actions">
+            <li class="bg_lo span2"> <a href="@Url.Action("Index","User")"> <i class="icon-user-md"></i><span class="label label-success">@ViewBag.UserCount</span>用户 </a> </li>
+        </ul>
+    </div>
+</div>
+
+
+<script>
+        $(function() {
+            $("#home").addClass("active");
+        });
+</script> 

@@ -1,0 +1,113 @@
+﻿@{
+    ViewBag.Title = "CaseIndex";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<style>
+    .imgbox img {
+        width: 175px;
+        height: 165px;
+    }
+
+    .imgbox {
+        margin-bottom: 10px;
+        padding: 10px;
+        text-align: center;
+    }
+
+        .imgbox h6 {
+            text-align: center;
+        }
+
+        .imgbox:hover {
+            cursor: pointer;
+        }
+
+            .imgbox:hover > h6 {
+            }
+
+ 
+
+    #pager {
+        margin-left: 10px;margin-top: 10px;
+    }
+       
+      .temp_news img {
+        width: 130px;height: 100px;
+    }
+    .datepost img {
+        width:20px;height: 20px;
+    }
+    .news_update {
+        height: auto;overflow: auto; 
+    }
+        h6 a{color: gray} h6{text-align: center}
+   .news_update ul li{width: 100%; padding-bottom: 10px;  border-bottom: 1px transparent dotted} 
+   .caseul li:hover {
+       -webkit-box-shadow: 0 0 5px gray;
+       -ms-box-shadow: 0 0 5px gray;
+       box-shadow: 0 0 5px gray;
+       border-bottom: 1px gray dotted
+   }
+   .jPag-pages{width: 100% !important}
+</style>
+<script src="~/Content/jPaginate/jquery.paginate.js"></script>
+<link href="~/Content/jPaginate/css/style.css" rel="stylesheet" />
+
+<div class="row">
+    <div class="breadcrumbline" style="margin-bottom: 20px;"></div>
+    <div class="span3">
+        <div style="padding-left: 10px;">
+
+          @Html.Action("Categorys")
+            <h4 class="">热门产品</h4>
+<div class="heading_border"></div>
+           @Html.Action("HotList","Product")
+        </div>
+
+    </div>
+    <div class="span8">
+        <h4>成功案例 </h4>
+        <div class="heading_border"></div>
+        <div id="page">
+            @Html.Action("List",new{page=1,cat=ViewBag.Cat})
+        </div>
+        <div id="pager"></div>
+    </div>
+   
+    <div class="clearfix" style="margin-bottom: 20px;"></div>
+</div>
+<script>
+    $(function () {
+        $(".nav-collapse .nav li:eq(3)").addClass("active");
+        $(".nav-collapse .nav li:eq(3)").siblings().removeClass("active");
+
+        $("#pager").paginate({
+            count: $("#pagecount").val(),//总页数
+            start: 1,//起始页
+            display: 5,// 显示的页数
+            border: true,
+            border_color: 'transparent',//自己调整样式。
+            text_color: 'gray',
+            background_color: 'transparent',
+            text_hover_color: 'black',
+            background_hover_color: '#dcdcdc',
+            border_hover_color: '#dcdcdc',
+            images: false,
+            mouse: 'press',
+            onChange: function (page) { //翻页
+                var cat = $("#cat").val();
+                $.post("/Example/List" ,{page:page,cat:cat},function (content) {
+                    
+                    $("#page").fadeOut(function () {
+                        $("#page").html(content).show();
+                    });
+                });
+            }
+        });
+
+
+
+    })
+</script>

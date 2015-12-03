@@ -1,0 +1,231 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+    <head>
+        <title>jQuery Pagination - jPaginate</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="description" content="jPaginate - jQuery Pagination Plugin" />
+        <meta name="keywords" content="jquery, plugin, pagination, fancy" />
+        <link rel="stylesheet" type="text/css" href="css/style.css" media="screen"/>
+        <style>
+            body{
+                background: #a7c7dc url(bg.png) repeat-x top left;
+                font-family: verdana;
+                padding:0px;
+                margin:0px;
+                letter-spacing:2px;
+            }
+            .header{
+                position:absolute;
+                top:0px;
+                left:0px;
+                width:100%;
+                height:80px;            
+            }
+            .header h1{
+                color:#fff;
+                font-size: 38px;
+                margin:0px 0px 0px 30px;
+                font-weight:100;
+                line-height:80px;
+                padding:0px;
+            }
+            .footer{
+                width:100%;
+                margin:10px 0px 5px 0px;
+            }
+            a img{
+                border:none;
+                outline:none;
+            }
+            .content{
+                margin-top:100px;
+                padding:0px;
+                bottom:0px;
+            }
+            .about{
+                width:100%;
+                height:400px;
+                background:transparent url(about.png) repeat-x top left;
+                border-top:2px solid #ccc;
+                border-bottom:2px solid #000;
+            }
+            .about .text{
+                width:16%;
+                margin:5px 2% 10px 2%;
+                height:380px;
+                float:left;
+                color:#FCFEF3;
+                font-size: 16px;
+                text-align:justify;
+                letter-spacing:0px;
+            }
+            .about .text h1{
+                border-bottom: 1px dashed #ccc;
+                color:#fff;
+            }
+            .demo{
+                width:580px;
+                padding:10px;
+                margin:10px auto;
+                border: 1px solid #fff;
+                background-color:#f7f7f7;
+            }
+            h1{
+                color:#404347;
+                margin:5px 30px 20px 0px;
+                font-weight:100;
+            }
+			.pagedemo{
+				border: 1px solid #CCC;
+				width:310px;
+				margin:2px;
+                padding:50px 10px;
+                text-align:center;
+				background-color:white;	
+			}
+        </style>
+    </head>
+    <body>
+        <div class="header">
+            <h1>jPaginate</h1>
+        </div>
+        <div class="content">
+            <div class="demo">
+                <h1>Demo 1</h1>
+                <div id="demo1">                   
+                </div>
+            </div>
+			<div class="demo">
+                <h1>Demo 2</h1>
+                <div id="demo2">                   
+                </div>
+            </div>
+			<div class="demo">
+                <h1>Demo 3</h1>
+                <div id="demo3">                   
+                </div>
+            </div>
+			<div class="demo">
+                <h1>Demo 4</h1>
+                <div id="demo4">                   
+                </div>
+            </div>
+			<div id="paginationdemo" class="demo">
+                <h1>Demo 5</h1>
+                <div id="p1" class="pagedemo _current" style="">Page 1</div>
+				<div id="p2" class="pagedemo" style="display:none;">Page 2</div>
+				<div id="p3" class="pagedemo" style="display:none;">Page 3</div>
+				<div id="p4" class="pagedemo" style="display:none;">Page 4</div>
+				<div id="p5" class="pagedemo" style="display:none;">Page 5</div>
+				<div id="p6" class="pagedemo" style="display:none;">Page 6</div>
+				<div id="p7" class="pagedemo" style="display:none;">Page 7</div>
+				<div id="p8" class="pagedemo" style="display:none;">Page 8</div>
+				<div id="p9" class="pagedemo" style="display:none;">Page 9</div>
+				<div id="p10" class="pagedemo" style="display:none;">Page 10</div>
+				<div id="demo5">                   
+                </div>
+            </div>
+        </div>
+            <div class="about">
+                <div class="text">
+                    <h1>Demo 1</h1>
+                    <p>Hover over the arrows to make the pages move or keep the mouse button down in order to move a whole set.</p>   
+					<p>Clicking a page number will make it move to the center</p>	
+                </div>
+                <div class="text">
+                    <h1>Demo 2</h1>
+                    <p>Demo 2 shows how the plugin can be used with arrow images.</p>                   
+                </div>
+                <div class="text">
+                    <h1>Demo 3</h1>
+                    <p>This is an example without any arrows. The user just sees the current page and the surrounding pages.</p>                    
+                </div>
+                <div class="text">
+                    <h1>Demo 4</h1>
+                    <p>Demo 4 shows how the plugin can be configured in style (no borders for the page numbers).</p>                    
+                </div>
+				<div class="text">
+                    <h1>Demo 5</h1>
+                    <p>This one shows how to integrate the plugin with an onChange event.</p>                    
+                </div>
+            </div>
+        </div>
+        <div class="footer"><a href="http://www.tympanus.net/codrops/"><img src="codrops_back.png" alt="Back to Codrops"/></a></div> 
+		<script type="text/javascript" src="jquery-1.3.2.js"></script>
+		<script src="jquery.paginate.js" type="text/javascript"></script>
+		<script type="text/javascript">
+		$(function() {
+			$("#demo1").paginate({
+				count 		: 100,
+				start 		: 1,
+				display     : 8,
+				border					: true,
+				border_color			: '#fff',
+				text_color  			: '#fff',
+				background_color    	: 'black',	
+				border_hover_color		: '#ccc',
+				text_hover_color  		: '#000',
+				background_hover_color	: '#fff', 
+				images					: false,
+				mouse					: 'press'
+			});
+			$("#demo2").paginate({
+				count 		: 50,
+				start 		: 5,
+				display     : 10,
+				border					: false,
+				text_color  			: '#888',
+				background_color    	: '#EEE',	
+				text_hover_color  		: 'black',
+				background_hover_color	: '#CFCFCF'
+			});
+			$("#demo3").paginate({
+				count 		: 50,
+				start 		: 20,
+				display     : 12,
+				border					: true,
+				border_color			: '#BEF8B8',
+				text_color  			: '#68BA64',
+				background_color    	: '#E3F2E1',	
+				border_hover_color		: '#68BA64',
+				text_hover_color  		: 'black',
+				background_hover_color	: '#CAE6C6', 
+				rotate      : false,
+				images		: false,
+				mouse		: 'press'
+			});
+			$("#demo4").paginate({
+				count 		: 50,
+				start 		: 20,
+				display     : 12,
+				border					: false,
+				text_color  			: '#79B5E3',
+				background_color    	: 'none',	
+				text_hover_color  		: '#2573AF',
+				background_hover_color	: 'none', 
+				images		: false,
+				mouse		: 'press'
+			});
+			$("#demo5").paginate({
+				count 		: 10,
+				start 		: 1,
+				display     : 7,
+				border					: true,
+				border_color			: '#fff',
+				text_color  			: '#fff',
+				background_color    	: 'black',	
+				border_hover_color		: '#ccc',
+				text_hover_color  		: '#000',
+				background_hover_color	: '#fff', 
+				images					: false,
+				mouse					: 'press',
+				onChange     			: function(page){
+											$('._current','#paginationdemo').removeClass('_current').hide();
+											$('#p'+page).addClass('_current').show();
+										  }
+			});
+		});
+		</script>
+	</body>
+</html>
+

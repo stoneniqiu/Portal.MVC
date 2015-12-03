@@ -1,0 +1,160 @@
+﻿@model ThankNet.Models.Agence
+
+@{
+    ViewBag.Title = "AgencesDetail";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+}
+<style>
+    .display-label{padding: 10px 0;font-weight: bold;}
+    .display-field{border-bottom: 1px solid gainsboro}
+</style>
+<fieldset>
+    <legend>@Model.Name</legend>
+
+    <div class="display-label">
+         性质：
+    </div>
+    <div class="display-field">
+        @if (Model.IsCompany)
+        {
+            <span>公司</span>
+        }
+        else
+        {
+            <span>个人</span>
+        }
+    </div>
+
+  
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Email)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Email)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Mobile)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Mobile)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ShopAddress)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ShopAddress)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Phone)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Phone)
+    </div>
+    @if (!Model.IsCompany)
+    {
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.Bank)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Bank)
+        </div>
+        <div class="display-label">
+            银行卡号
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.BankNumber)
+        </div>
+    }
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DoorImg)
+    </div>
+    <div class="display-field">
+        <img src="@Model.DoorImg" />
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.InsideImg)
+    </div>
+    <div class="display-field">
+        <img src="@Model.InsideImg" />
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.IdCardFrontImg)
+    </div>
+    <div class="display-field">
+        <img src="@Model.IdCardFrontImg" />
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.IdCardBackImg)
+    </div>
+    <div class="display-field">
+        <img src="@Model.IdCardBackImg" />
+    </div>
+
+  
+    @if (Model.IsCompany)
+    {
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.LicenseImg)
+        </div>
+        <div class="display-field">
+            <img src="@Model.LicenseImg" />
+        </div>
+
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.TaxImg)
+        </div>
+        <div class="display-field">
+            <img src="@Model.TaxImg" />
+        </div>
+
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.InstitutionalImg)
+        </div>
+        <div class="display-field">
+            <img src="@Model.InstitutionalImg" />
+        </div>
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.BanklincenseImg)
+        </div>
+        <div class="display-field">
+            <img src="@Model.BanklincenseImg" />
+        </div>
+    }
+    else
+    {
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.BankFrontImg)
+        </div>
+        <div class="display-field">
+            <img src="@Model.BankFrontImg" />
+        </div>
+
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.BankBackImg)
+        </div>
+        <div class="display-field">
+            <img src="@Model.BankBackImg" />
+        </div>
+    }
+   
+
+  
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CreateTime)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CreateTime)
+    </div>
+
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

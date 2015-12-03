@@ -1,0 +1,39 @@
+body {
+	background-color:#CCC;
+	background-image:url(../images/switcher/5.jpg)	
+}
+.banner {
+/*	background-image: url(../slider/lrgimg4.jpg);*/
+}
+.mainnav li a.active, .mainnav li a:hover,.breadcrumbline ,a.more {
+	background:  #94ca20;
+	color: #000000 !important;
+	text-decoration:none;
+}
+a , .nav-collapse .nav .nav-header ,.logo span{ color:#94ca20; }
+h2 span, .carousel_header {
+color:#94ca20; 
+	}
+.dropdown-menu li > a:hover,
+.dropdown-menu .active > a,
+.dropdown-menu .active > a:hover ,
+.navbar .nav .active > a,
+.navbar .nav .active > a:hover,div.cat:after{
+  background-color:#94ca20;
+  color: #FFF !important;
+}/*.ca-menu li:hover .ca-icon*/
+.ca-menu li:hover .ca-main,#twitter .text a{ color:#94ca20; 	text-shadow: 1px 1px 0px #000; }
+.heading_border, .style3 .slides ,.ui-datepicker-calendar .ui-state-active ,.ui-datepicker-calendar .ui-state-hover ,.ui-datepicker-calendar th {
+	border-color:#94ca20;
+}
+.ui-datepicker-header {
+	border-color:#94ca20;
+	}
+a.more {
+	background-image: url(../images/arrow_more.png);
+		background-position: 0 -15px;
+	}
+.flex-control-paging li a:hover,.flex-control-paging li a.flex-active{
+background-image:none;
+background-color:#94ca20;
+	}

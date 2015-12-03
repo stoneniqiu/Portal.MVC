@@ -1,0 +1,68 @@
+﻿@{
+    ViewBag.Title = "Avatar";
+    Layout = "~/Views/Shared/_UserCenter.cshtml";
+}
+@model Niqiu.Core.Domain.User.User
+
+<script src="~/Content/uploadify/jquery.uploadify.js"></script>
+<link href="~/Content/uploadify/uploadify.css" rel="stylesheet" />
+<style>
+   .imgbig, .img100 {width: 100px; height: 100px;display: inline-block;vertical-align: top;margin-left: 10px;}
+   .imgbig{width: 200px;height: 200px;}
+</style>
+<div class="uc-wp info-uc">
+    <div class="hd">
+        <div class="fl">
+            <h2>头像照片</h2>
+        </div>
+    </div>
+    <div id="type_swf" class="info-space">
+        <img class="imgbig" src="@Model.ImgUrl" />
+        <img class="img100" src="@Model.ImgUrl" />
+    </div>
+    <div class="row-fluid" style="padding-top: 10px;">
+        <div id="fileQueue"></div>
+        <input type="file" id="file_upload" name="file_upload" />
+        <input type="hidden" id="ImgUrl" value="@Model.ImgUrl" />
+        <input type="button" id="imgbt" class="btn btn-primary" value="确定" />
+    </div>
+</div>
+<script>
+    $(function() {
+
+        $('#file_upload').uploadify({
+            'swf': '@Url.Content("~/Content/uploadify/uploadify.swf?var="+(new DateTime()).TimeOfDay)',
+            'uploader': '@Url.Action("UploadImg", "User",new{var=(new DateTime()).Date})',
+            multi: false,
+            'buttonText': '上传图片',
+            'queueID': 'fileQueue',
+            'auto': true,
+            'onUploadSuccess': function (file, data, response) {
+                eval("data=" + data);
+                if (data.Success) {
+                    var str = "../../Content/UploadFiles/" + data.SaveName;
+                    $(".info-space img").attr("src", str);
+                    $("#ImgUrl").val(str);
+                    alert(str);
+
+                } else {
+                    alert(data.Message);
+                }
+            }
+        });
+
+        $("#imgbt").click(function() {
+            var url = $("#ImgUrl").val();
+            $.post('@Url.Action("ChangeAvatar")', { url: url }, function(data) {
+                if (data == 1) {
+                    alert("修改成功");
+                } else {
+                    alert("修改失败");
+                }
+
+            });
+        });
+
+    });
+
+</script>

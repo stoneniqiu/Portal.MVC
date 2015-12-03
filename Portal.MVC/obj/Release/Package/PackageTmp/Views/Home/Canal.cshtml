@@ -1,0 +1,84 @@
+﻿@{
+    ViewBag.Title = "Canal";
+    Layout = "~/Views/Shared/_NewLayout.cshtml";
+}
+<link href="~/css/pa_skin.css" rel="stylesheet" />
+<style>
+</style>
+<div class="tenant">
+    <div class="content" style="padding-top: 50px;padding-bottom: 30px">
+        <div class="selectwarp">
+            <div class="kh_left">
+                <div class="pa_box01" style="width:397px;">
+                    <div class="main01 bdr">
+                        <div class="conLeft">
+                            <div class="comm_t">
+                                <p class="ay_title ay_kaihu">个体经营</p>
+                            </div>
+                            <div class="btn_box2">
+                                <span class="btn_l"></span>
+                                <a href="@Url.Action("OpenAccount", new { isCompany=false })" id="kh" otype="button" otitle="安e理财-立即开户" type="btn" class="ay_self_btn">立即申请</a>
+                                <span class="btn_r"></span>
+                            </div>
+                            <dl>
+                                <dt>申请前准备</dt>
+                            </dl>
+                            <ul>
+                                <li>门头照片一张</li>
+                                <li>店内照一张</li>
+                                <li>个人身份证正反面照片各一张</li>
+                                <li>银行卡正反面照片各一张  </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="kh_right">
+                <div class="pa_box01">
+                    <div class="main01">
+                        <div class="conRight">
+                            <div class="comm_t">
+                                <p class="ay_title ay_kaihu">企业经营</p>
+                            </div>
+                            <div class="btn_box2">
+                                <span class="btn_l"></span>
+                                <a type="btn" class="ay_self_btn" href="@Url.Action("OpenAccount", new { isCompany=true })" id="zh" otype="button" otitle="安e理财-一人多户">立即申请</a>
+                                <span class="btn_r"></span>
+                            </div>
+                            <dl>
+                                <dt>申请前准备</dt>
+                                
+                            </dl>
+                            <ul>
+                                <li>营业执照照片</li>
+                                <li>税务登记证照片</li>
+                                <li>组织机构代码照片</li>
+                                <li>法人身份证正反面照片</li>
+                                <li>银行开户许可证照片</li>
+                                <li>门头照片一张</li>
+                                <li>店内照一张</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                 
+            </div>
+        </div>
+
+
+
+    </div>
+</div>
+
+        <script>
+
+            $(function () {
+                $(".runline a").removeClass("active");
+                $(".line4 a").addClass("active");
+                $(".undline").css("left", "320px");
+                $(".undline").css("width", "100px");
+
+            })
+        </script>

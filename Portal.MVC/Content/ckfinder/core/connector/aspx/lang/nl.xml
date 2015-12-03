@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<messages>
+  <errorUnknown>Het was niet mogelijk om deze actie uit te voeren. (Fout %1)</errorUnknown>
+  <errors>
+    <error number="10">Verkeerd commando.</error>
+    <error number="11">De bestand typen komt niet voor in de aanvraag.</error>
+    <error number="12">De gevraagde resource type is niet geldig.</error>
+    <error number="102">Foute bestand of folder naam.</error>
+    <error number="103">Het was niet mogelijk om verzoek te doen naar de authorization restrictions.</error>
+    <error number="104">Het was niet mogelijk om toegang te krijgen tot het permissie systeem.</error>
+    <error number="105">Deze extentie mag niet.</error>
+    <error number="109">Verkeerde aanvraag.</error>
+    <error number="110">Onbekende fout.</error>
+    <error number="115">Er bestaat al een bestand of folder met deze naam.</error>
+    <error number="116">Folder niet gevonden, vernieuw het systeem of kies een andere folder.</error>
+    <error number="117">Bestand niet gevonden, vernieuw het systeem of kies een andere folder.</error>
+    <error number="201">Een bestand met de zelfde naam is er al. Het geuploade bestand is hernoemd naar: "%1"</error>
+    <error number="202">Verkeerde bestand</error>
+    <error number="203">Verkeerde bestand. Het bestand is te groot.</error>
+    <error number="204">De geuploade file is kapot.</error>
+    <error number="205">Er is geen hoofd folder gevonden.</error>
+    <error number="206">Uploaden van de file is afgebroken, er is html in het bestand aangetroffen.</error>
+    <error number="207">Het geuploade bestand is hernoemd naar: "%1"</error>
+    <error number="500">Het uploaden van een file is momenteel niet mogelijk. Contacteer de admin of kijk in het CKFinder configuratie bestand..</error>
+    <error number="501">Het is niet mogelijk om mini-afbeeldingen te maken.</error>
+  </errors>
+</messages>

@@ -1,0 +1,11 @@
+﻿ .errorinfo{ color: blue;margin-left: 20px;padding: 8px;background-color:ivory;border: 2px solid #999999;
+    font-weight: bold;display: none;
+}
+ .bottomline{ border-bottom: 1px solid gainsboro;padding-bottom: 5px;}
+ .jPag-pages li{ border: 1px solid transparent;float: right}
+ .nolistyle{ margin: 0;padding: 0;overflow: auto}
+ .nolistyle li{ list-style: none;} 
+ button{ margin-right: 5px;}
+ .ncloes {
+    
+ }

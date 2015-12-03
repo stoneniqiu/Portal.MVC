@@ -1,0 +1,260 @@
+﻿@{
+    ViewBag.Title = "CategoryList";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+}
+
+@Html.Partial("JqgridInit")
+
+<script src="~/Content/Js/jquery.slimscroll.min.js"></script>
+		<script src="~/Content/Js/jquery.easy-pie-chart.min.js"></script>
+		<script src="~/Content/Js/jquery.sparkline.min.js"></script>
+		<script src="~/Content/Js/flot/jquery.flot.min.js"></script>
+		<script src="~/Content/Js/flot/jquery.flot.pie.min.js"></script>
+		<script src="~/Content/Js/flot/jquery.flot.resize.min.js"></script>
+<div id="piechart-placeholder"></div>
+<script>
+    $(function () {
+    $(".page-header h1 span,#currentpart").html("产品");
+    $(".page-header h1 small span").html("分类管理");
+    $(".nav-list>li:eq(1)").addClass("active").siblings().removeClass("active");
+    $(".nav-list>li:eq(1)>ul>li:eq(2)").addClass("active").siblings().removeClass("active");
+    jQuery("#list2").jqGrid({
+        url: '/Product/GetAllCategorys',
+        datatype: "json",
+      //  colNames: ['Actions', 'ProductId', '产品', '分类', '品牌', '规格', '莎莎价格','卓越价格','卡莱价格','万宁价格','屈臣氏价格','药店价格','其他','时间'],
+        colNames: ['操作', 'CategoryId', '分类', '产品数', '备注', '更新时间'],
+        colModel: [
+            {
+                name: 'myac', index: '操作', width: 60, fixed: true, sortable: false, resize: false, formatter: 'actions', formatoptions: {
+                    keys: true,
+                    delOptions: { recreateForm: true, beforeShowForm: beforeDeleteCallback, },//改变原来的样式  msg: '您确定要删除这条记录？</span>                }
+                //    name: 'act', index: 'act', width: 75, sortable: false
+            },
+           { name: 'CategoryId', index: 'Id', hidden: true, editable: true },
+           { name: 'CategoryName', index: 'CategoryName', editable: true, editrules: { required: true } },
+           { name: 'ProductCount', index: 'ProductCount', editable: false },
+           { name: 'Description', index: 'Description', editable: true, edittype: 'textarea' },
+            {
+                name: 'ModifyTime', index: '更新时间', width: 200, formatter: 'date',
+                formatoptions: { srcformat: 'Y-m-d H:i:s', newformat: 'Y-m-d H:i:s', searchoptions: { sopt: ['eq', 'ne', 'cn'] } }
+            }
+         
+        ],
+        rowNum: 10,
+        rowList: [10, 20, 30],
+        sortorder: "asc",
+        pager: '#pager2',
+        sortname: 'CategoryName',
+        viewrecords: true,
+        caption: "分类明细",
+        autowidth: true,
+        multiselect: true,
+        height: 180,
+        gridComplete: function () {
+            var icons = $(".ui-icon-trash");//隐藏删除键
+            icons.hide();
+            //var ids = jQuery("#list2").jqGrid('getDataIDs');
+            //for (var i = 0; i < ids.length; i++) {
+            //    be = "<span class='ui-icon ui-icon-pencil'></span>";//修改
+            //    se = "<span class='ui-icon ui-icon-trash'></span>";//删除
+            //    ce = "<span class='icon-ok  ui-icon'></span>";//删除
+            //    jQuery("#list2").jqGrid('setRowData', ids[i], { act: be + se + ce });
+            //}
+        },        loadComplete: function () {
+            $("#grid-table").hide();
+            var table = this;
+            enableTooltips(table);
+            updatePagerIcons(table);
+        },
+
+        editurl: "/Product/EditCategory",
+        //无效！！！！
+        serializeDelData: function (postdata) {
+            var rowdata = jQuery('#list2').getRowData(postdata.id);
+            return { id: postdata.id, oper: postdata.oper, user: rowdata };
+        }
+        //edit  del
+    });
+    jQuery("#list2").jqGrid('navGrid', '#pager2', {
+            edit: true,
+            editicon: 'icon-pencil blue',
+            add: true,
+            addicon: 'icon-plus-sign purple',
+            del: false,
+            delicon: 'icon-trash red',
+            search: true,
+            searchicon: 'icon-search orange',
+            refresh: true,
+            refreshicon: 'icon-refresh green',
+            view: false,
+            viewicon: 'icon-zoom-in grey',
+        },
+        {
+            //eidt
+            url: '/Product/Edit', mtype: 'POST',
+            afterSubmit: function (xhr, postdata) {
+                var id = $("#list2").jqGrid('getGridParam', 'selrow');
+                jQuery("#list2").jqGrid('setRowData', id, postdata);
+            }, closeAfterEdit: true, closeOnEscape: true
+        },
+        {
+            //add
+            recreateForm: true,
+            url: '/Product/CreateCategory',
+            mtype: 'POST',
+            afterSubmit: function (xhr, postdata) {
+                var id = $("#list2").jqGrid('getGridParam', 'selrow');
+                jQuery("#list2").jqGrid('addRowData', postdata.Id, postdata);
+                return [true, 'successfule!', false];
+            }, closeAfterAdd: true
+        },
+        {
+            //delete
+            recreateForm: true,            url: '/Product/Delete', mtype: 'POST',
+            beforeShowForm: function (e) {
+                var form = $(e[0]);
+                if (form.data('styled')) return false;
+                form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />');
+                styleDeleteForm(form);
+                form.data('styled', true); return true;
+            },            afterSubmit: function (xhr, postdata) {
+                var consoleDlg = $("#list2");
+                var selectedRowIds =
+                    $("#list2").jqGrid("getGridParam", "selarrrow");
+                var len = selectedRowIds.length;
+                for (var i = 0; i < len ; i++) {
+                    $("#list2").jqGrid("delRowData", selectedRowIds[0]);
+                }
+            },
+
+            closeAfterDel: true
+
+        },
+        {
+            //search
+
+            },
+        {
+            //view     
+
+            }
+    );
+    //添加注释
+    function enableTooltips(table) {
+        $('.navtable .ui-pg-button').tooltip({ container: 'body' });
+        $(table).find('.ui-pg-div').tooltip({ container: 'body' });
+    }
+
+
+    function beforeDeleteCallback(e) {
+        var form = $(e[0]);
+        if (form.data('styled')) return false;
+        form.closest('.ui-jqdialog').find('.ui-jqdialog-titlebar').wrapInner('<div class="widget-header" />');
+        styleDeleteForm(form);
+        form.data('styled', true);
+        return true;
+    }
+
+
+    //修改 删除form的样式
+    function styleDeleteForm(form) {
+        var buttons = form.next().find('.EditButton .fm-button');
+        buttons.addClass('btn btn-sm').find('[class*="-icon"]').remove();//ui-icon, s-icon
+        buttons.eq(0).addClass('btn-danger').prepend('<i class="icon-trash"></i>');
+        buttons.eq(1).prepend('<i class="icon-remove"></i>');
+    }
+    //更新分页图标
+    function updatePagerIcons() {
+
+        var replacement =
+        {
+            'ui-icon-seek-first': 'icon-double-angle-left bigger-140',
+            'ui-icon-seek-prev': 'icon-angle-left bigger-140',
+            'ui-icon-seek-next': 'icon-angle-right bigger-140',
+            'ui-icon-seek-end': 'icon-double-angle-right bigger-140'
+        };
+        $('.ui-pg-table:not(.navtable) > tbody > tr > .ui-pg-button > .ui-icon').each(function () {
+            var icon = $(this);
+            var $class = $.trim(icon.attr('class').replace('ui-icon', ''));
+
+            if ($class in replacement) icon.attr('class', 'ui-icon ' + replacement[$class]);
+        });
+
+        var x = $("#pager2_left").find("#coco");
+        if (x.length == 0) {
+            $("#pager2_left table tbody>tr").prepend("<td class='ui-pg-button ui-corner-all' title data-original-title='Remove a row'><div id='coco'  class='ui-pg-div'>" +
+                "<span class='ui-icon icon-trash blue'></span></div></td>");
+        }
+    }
+
+
+    //绑定事件 执行删除
+    $("#pager2_left table tbody>tr").on("click", '#coco', function () {
+        var selectedRowIds = $("#list2").jqGrid("getGridParam", "selarrrow");
+        var len = selectedRowIds.length;
+        if (len != 0) {
+            if (confirm("确定要删除选中项？")) {
+                for (var i = 0; i < len; i++) {
+                    var rowData = $("#list2").jqGrid('getRowData', selectedRowIds[i]);
+                    $.post('/Product/DeletCategory', { id: rowData.CategoryId }, function (data) {
+                        $("#list2").jqGrid("delRowData", selectedRowIds[0]);
+                    });
+                }
+            }
+
+        } else {
+            $.infoShow("未勾选", 0);
+        }
+    });
+    var placeholder = $('#piechart-placeholder').css({ 'width': '90%', 'min-height': '150px' });
+    function drawPieChart(placeholder, data, position) {
+        $.plot(placeholder, data, {
+            series: {
+                pie: {
+                    show: true,
+                    tilt: 0.8,
+                    highlight: {
+                        opacity: 0.25
+                    },
+                    stroke: {
+                        color: '#fff',
+                        width: 2
+                    },
+                    startAngle: 2
+                }
+            },
+            legend: {
+                show: true,
+                position: position || "ne",
+                labelBoxBorderColor: null,
+                margin: [-30, 15]
+            },
+            grid: {
+                hoverable: true,
+                clickable: true
+            }
+        });
+    }
+
+
+    $.post("/Product/GetChartData", function (cdata) {
+        drawPieChart(placeholder, cdata);
+        });            var $tooltip = $("<div class='tooltip top in'><div class='tooltip-inner'></div></div>").hide().appendTo('body');
+    var previousPoint = null;
+    placeholder.on('plothover', function (event, pos, item) {
+        if (item) {
+            if (previousPoint != item.seriesIndex) {
+                previousPoint = item.seriesIndex;
+                var tip = item.series['label'] + " : " + item.series['percent'] + '%';
+                $tooltip.show().children(0).text(tip);
+            }
+            $tooltip.css({ top: pos.pageY + 10, left: pos.pageX + 10 });
+        } else {
+            $tooltip.hide();
+            previousPoint = null;
+        }
+
+    });
+
+    });
+</script>

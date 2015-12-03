@@ -1,0 +1,98 @@
+﻿@model ThankNet.Models.Company
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+}
+<script src="~/Content/ckeditor/ckeditor.js"></script>
+<script src="~/Content/uploadify/jquery.uploadify.js"></script>
+<link href="~/Content/uploadify/uploadify.css" rel="stylesheet" />
+
+
+
+@using (Html.BeginForm("Edit", "Company", FormMethod.Post, new { name = "Form1", id = "Form1" }))
+{
+    <h3>@Model.Name</h3>
+    <input type="hidden" name="Name" value="@Model.Name"/>
+    <textarea class="ckeditor" id="editor1" name="Introduce">
+     @Model.Introduce 
+    </textarea>
+    <div>
+        <p>简短介绍：</p>
+        <textarea name="Brief" cols="100" rows="6">
+        @Model.Brief
+    </textarea>
+    </div>
+
+          <div class="editor-field">
+            <div id="showimg">
+                <img src="@Model.ImgUrl" alt="公司图片" /></div>
+            <input type="hidden" id="imgurl" name="ImgUrl" />
+        </div>
+        <div id="fileQueue"></div>
+        <input type="file" id="file_upload" name="file_upload" />
+        <span class="errorinfo"></span>
+
+    
+    <div class="btn-group" style="margin-top: 10px;">
+        @*  <button type="submit" id="publish" class="btn btn-primary">保存</button>*@
+
+        <button type="submit" id="publish" class="btn btn-app btn-primary btn-xs radius-4">
+            <i class="icon-save bigger-160"></i>
+            保存
+        </button>
+
+    </div>
+    <span class="errorinfo"></span>
+    
+    if(TempData["message"] != null)
+    {
+     
+    <div class="alert alert-block alert-success">
+        <button type="button" class="close" data-dismiss="alert">
+            <i class="icon-remove"></i>
+        </button>
+
+        <strong class="green">@TempData["message"]
+        </strong>
+    </div>
+    }
+}
+
+
+
+<div>
+    <span>更新时间:@Model.ModifyTime  创建时间：@Model.CreateTime</span>
+</div>
+
+<script>
+    $(function() {
+        $(".page-header h1 span,#currentpart").html("公司");
+        $(".page-header h1 small span").html("公司简介");
+        $(".nav-list>li:eq(2)").addClass("active").siblings().removeClass("active");
+        $(".nav-list>li:eq(2)>ul>li:eq(0)").addClass("active").siblings().removeClass("active");
+
+        $('#file_upload').uploadify({
+            'swf': '@Url.Content("~/Content/uploadify/uploadify.swf")',
+                'uploader': '@Url.Action("UploadImg","Product")',
+                multi: false,
+                'buttonText': '上传图片',
+                'queueID': 'fileQueue',
+                'auto': true,
+                'onUploadSuccess': function (file, data, response) {
+                    eval("data=" + data);
+                    //alert('文件 ' + file.name + ' 已经上传成功，并返回 ' + response + ' 保存文件名称为 ' + data.SaveName);
+                    if (data.Success) {
+                        var str = "../../Content/UploadFiles/" + data.SaveName;
+                        $("#showimg").html("<img src='" + str + "' alt='' />");
+                        $("#imgurl").val(str);
+                    } else {
+                        $.infoShow(data.Message, 0);
+                    }
+
+                }
+            });
+
+    });
+
+</script>

@@ -1,0 +1,10 @@
+﻿@model ThankNet.Models.Company
+       <ul class="listcontact">
+                        <li class="cont-phone">
+                          @Model.PhoneNumber 
+                        </li>
+                        <li class="cont-email"><a href="mailto:@Model.Email">@Model.Email</a></li>
+                        <li class="cont-adress"><strong>ThanksSSL &trade;</strong><small></small><br />
+                            @Model.Address</li>
+                        <li class="">QQ:@Model.QQ</li>
+                    </ul>

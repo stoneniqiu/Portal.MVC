@@ -1,0 +1,111 @@
+﻿@model ThankNet.Models.HomePage
+
+@{
+    ViewBag.Title = "PageThree";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+}
+
+<style>
+    textarea, input[type='text'] {
+        width: 500px;
+    }
+
+</style>
+<script src="~/Content/uploadify/jquery.uploadify.js"></script>
+<link href="~/Content/uploadify/uploadify.css" rel="stylesheet" />
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>第三个子页面</legend> 
+        
+        
+         <div class="editor-label">
+            @Html.LabelFor(model => model.NavTitle)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.NavTitle)
+            @Html.ValidationMessageFor(model => model.NavTitle)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.MainTitle)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.MainTitle, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.MainTitle)
+        </div>
+
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ChildTitle)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ChildTitle)
+            @Html.ValidationMessageFor(model => model.ChildTitle)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Content)
+        </div>
+        <div class="editor-field">
+            @Html.TextAreaFor(model => model.Content)
+            @Html.ValidationMessageFor(model => model.Content)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ImgUrl)  图片大小：484 * 1487
+        </div>
+        <div class="editor-field">
+            <div id="showimg">
+                <img src="@Model.ImgUrl" alt="Logo" />
+            </div>
+            <input type="hidden" id="imgurl" name="ImgUrl" value="@Model.ImgUrl" />
+        </div>
+        <div id="fileQueue"></div>
+        <input type="file" id="file_upload" name="file_upload" />
+        <span class="errorinfo"></span>
+
+        @Html.HiddenFor(model => model.Id)
+
+        <p>
+            <input type="submit" class="btn btn-large  btn-primary" value="保存" />
+        </p>
+        @if (TempData["info"] != null)
+        {
+            <div class="alert alert-info">@TempData["info"]</div>
+        }
+        @if (TempData["error"] != null)
+        {
+            <div class="alert alert-info">@TempData["error"]</div>
+        }
+        
+        <script>
+            $(function () {
+                
+                $('#file_upload').uploadify({
+                    'swf': '@Url.Content("~/Content/uploadify/uploadify.swf?var="+(new DateTime()).TimeOfDay)',
+                    'uploader': '@Url.Action("UploadImg","Product",new{var=(new DateTime()).Date})',
+                       multi: false,
+                       'buttonText': '上传图片',
+                       'queueID': 'fileQueue',
+                       'auto': true,
+                       'onUploadSuccess': function (file, data, response) {
+                           eval("data=" + data);
+                           //alert('文件 ' + file.name + ' 已经上传成功，并返回 ' + response + ' 保存文件名称为 ' + data.SaveName);
+                           if (data.Success) {
+                               var str = "../../Content/UploadFiles/" + data.SaveName;
+                               $("#showimg").html("<img src='" + str + "' alt='' />");
+                               $("#imgurl").val(str);
+                           } else {
+                               $.infoShow(data.Message, 0);
+                           }
+                       }
+                   });
+            })
+
+        </script>
+    </fieldset>
+}

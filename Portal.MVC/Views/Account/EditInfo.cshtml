@@ -1,0 +1,122 @@
+﻿@{
+    ViewBag.Title = "EditInfo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .content ul li {
+        list-style: none;
+        line-height: 30px;
+        width: 400px;
+        clear: both;
+    }
+
+    .content ul div span {
+        width: 100px;
+        display: block;
+        float: left;
+    }
+
+    .content ul i {
+        float: left;
+        display: none;
+    }
+
+    .content ul li input {
+        float: left;
+    }
+
+    .content ul {
+        overflow: visible;
+        clear: both; 
+    }
+
+    .content samp {
+        float: left;
+        margin-left: 10px;
+    }
+
+    .content ul li div {
+        width: 100%;
+    }
+
+    #infosa {
+        color: red;
+    }
+</style>
+<div id="content-header">
+    <div id="breadcrumb">
+        <a href="@Url.Action("Index", "User")" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>Home</a>
+        <a href="@Url.Action("EditInfo","User")" class="current">密码重置</a>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="widget-box content">
+        <ul>
+            <li><div><span>旧密码:</span><input type="password" id="Oldpassword" /></div><i class="icon-ok"><i class="icon-remove"></i></i></li>
+            <li><div><span>新密码:</span><input type="password" id="Newpassword" /></div><samp id="infosa"></samp></li>
+            <li><div><span>确认密码:</span><input type="password" id="Newpassword1" /></div><i class="icon-ok"><i class="icon-remove"></i></i></li>
+            <li><button id="sure" class="btn btn-primary">确定修改</button> <span class="errorinfo"></span></li>
+        </ul>
+    </div>
+</div>
+<script src="~/Content/Js/user.js"></script>
+
+<script>
+            $(function () {
+
+                $("#Oldpassword").keyup(function () {
+                    var oldcode = $(this).val();
+                    $.post("/User/CheckOldCode", { code: oldcode }, function (data) {
+                        if (data == 1) {
+                            $(".icon-ok:eq(0)").show().attr("data-id", "1");
+                            $(".icon-remove:eq(0)").hide();
+                        } else {
+                            $(".icon-ok:eq(0)").hide().attr("data-id", "0");
+                            $(".icon-remove:eq(0)").show();
+                        }
+                    });
+                });
+                $("#Newpassword").keyup(function () {
+                    var newcode = $(this).val();
+                    if (newcode.length < 6) {
+                        $("#infosa").html("密码太短");
+                    } else {
+                        $("#infosa").hide();
+                    }
+                });
+
+                $("#Newpassword1").keyup(function () {
+                    var newcode1 = $(this).val();
+                    var newcode = $("#Newpassword").val();
+                    if (newcode1.length >= 6 && newcode == newcode1) {
+                        $(".icon-ok:eq(1)").show().attr("data-id", "1");;
+                    } else {
+                        $(".icon-ok:eq(1)").hide().attr("data-id", "0");;
+                    }
+                });
+
+                $("#sure").click(function () {
+                    if ($(".icon-ok:eq(0)").attr("data-id") == "1" && $(".icon-ok:eq(1)").attr("data-id") == "1") {
+                        var newcode = $("#Newpassword").val();
+                        var old = $("#Oldpassword").val();
+                        $.post("/User/SaveNewCode", { newcode: newcode, oldcode: old }, function (data) {
+                            if (data == 1) {
+                                $.infoShow("修改成功", 1);
+                                $("input[type='password']").val("");
+                                $(".icon-ok").hide().attr("data-id", "0");
+                                ;
+                                return;
+                            } else {
+                                $.infoShow("需要重新登录", 0);
+                            }
+                        });
+                    } else {
+                        $.infoShow("输入错误", 0);
+                    }
+
+                });
+            })
+
+</script>

@@ -1,0 +1,147 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="~/Content/Matrix_Admin/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/Content/Matrix_Admin/css/bootstrap-theme.min.css" />
+    <link rel="stylesheet" href="~/Content/Matrix_Admin/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/Content/Matrix_Admin/css/bootstrap-responsive.min.css" />
+    <link rel="stylesheet" href="~/Content/Matrix_Admin/css/fullcalendar.css" />
+    <link rel="stylesheet" href="~/Content/Matrix_Admin/css/matrix-style.css" />
+    <link rel="stylesheet" href="~/Content/Matrix_Admin/css/matrix-media.css" />
+    <link rel="stylesheet" href="~/Content/Matrix_Admin/css/uniform.css" />
+    <link rel="stylesheet" href="~/Content/Matrix_Admin/css/select2.css" />
+    <link href="~/Content/Matrix_Admin/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/Content/Matrix_Admin/css/jquery.gritter.css" />
+    <title>@ViewBag.Title</title>
+    <script src="~/Content/Matrix_Admin/js/excanvas.min.js"></script>
+    <script src="~/Content/Matrix_Admin/js/jquery.min.js"></script>
+    <script src="~/Content/Matrix_Admin/js/bootstrap.min.js"></script>
+    <script src="~/Content/Matrix_Admin/js/matrix.js"></script>
+    
+    <style>
+        table tbody tr td:first-child {
+            text-align: center;
+        }
+        .controls label, input[type='checkbox'] {
+            display: inline-block !important;
+        }
+            .controls label:hover {
+                color: black;
+            }
+
+        .deleta:hover {
+            color: red;
+        }
+
+        .field-validation-error {
+            color: red;
+        }
+
+ .editor-label {margin-left: 20px;margin-top: 10px;}
+ .editor-field {padding-left: 20px;padding-bottom: 10px;
+
+    border-bottom: 1px solid #eeeeee;
+ }
+    </style>
+</head>
+<body>
+    <!--Header-part-->
+    <div id="header">
+        <h1><a href="#">Matrix Admin</a></h1>
+    </div>
+
+    <!--close-Header-part-->
+    <!--top-Header-menu-->
+    <div id="user-nav" class="navbar navbar-inverse">
+        <ul class="nav">
+            <li class="dropdown" id="profile-messages">
+                <a title="" href="#" data-toggle="dropdown" data-target="#profile-messages" class="dropdown-toggle"><i class="icon icon-user"></i><span class="text">欢迎  
+                          @if (Request.IsAuthenticated) {
+                              <text>
+                                  <span>@User.Identity.Name</span>
+                              </text>
+                          }                                                                                                                                                  
+                     </span><b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#"><i class="icon-user"></i>我的资料</a></li>
+                    <li class="divider"></li>
+                    <li><a href="@Url.Action("LogOff", "Account")"><i class="icon-key"></i>退出</a></li>
+                </ul>
+            </li>
+
+            <li class=""><a title="" href="@Url.Action("LogOff","Account")"><i class="icon icon-share-alt"></i><span class="text">退出</span></a></li>
+        </ul>
+    </div>
+    <!--close-top-Header-menu-->
+    <!--close-top-Header-menu-->
+    <!--start-top-serch-->
+
+    <div id="search">
+        <input type="text" class="" placeholder="Search here..." />
+        <button type="submit" class="tip-bottom" title="Search"><i class="icon-search icon-white"></i></button>
+    </div>
+    <!--close-top-serch-->
+    <!--sidebar-menu-->
+    <div id="sidebar">
+
+        <ul>
+            <li id="home" class=""><a href="@Url.Action("Index","Home")"><i class="icon icon-home"></i><span>控制面板</span></a> </li>
+            <li id="usermanage" class="submenu">
+                <a href="#"><i class="icon icon-user-md"></i><span>用户管理</span></a>
+                <ul>
+                    <li><a href="@Url.Action("Index", "User",new{area="Admin"})">操作员查询</a></li>
+                    <li><a href="@Url.Action("Create", "User")">新增操作员</a></li>
+                    @*<li><a href="@Url.Action("ChangePassword", "Account")">密码重置</a></li>*@
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <!--sidebar-menu-->
+
+    <div id="content" class="">
+        @RenderBody()
+    </div>
+    @RenderSection("scripts", required: false)
+
+    <script type="text/javascript">
+        
+        $("th input:checkbox").click(function () {
+            var checkedStatus = this.checked;
+            var checkbox = $(this).parents('.widget-box').find('tr td:first-child input:checkbox');
+            checkbox.each(function () {
+                this.checked = checkedStatus;
+                if (checkedStatus == this.checked) {
+                    $(this).closest('.checker > span').removeClass('checked');
+                }
+                if (this.checked) {
+                    $(this).closest('.checker > span').addClass('checked');
+                }
+            });
+        });
+        // This function is called from the pop-up menus to transfer to
+        // a different page. Ignore if the value returned is a null string:
+        function goPage(newURL) {
+
+            // if url is empty, skip the menu dividers and reset the menu selection to default
+            if (newURL != "") {
+
+                // if url is "-", it is this page -- reset the menu:
+                if (newURL == "-") {
+                    resetMenu();
+                }
+                // else, send page to designated URL
+                else {
+                    document.location.href = newURL;
+                }
+            }
+        }
+
+        // resets the menu selection upon entry to this page:
+        function resetMenu() {
+            document.gomenu.selector.selectedIndex = 2;
+        }
+    </script>
+</body> 
+</html>

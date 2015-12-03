@@ -1,0 +1,35 @@
+﻿@model IEnumerable<ThankNet.Models.Product>
+
+@{
+  
+    var i = 0;
+}
+<ul class="slides row-fluid">
+    
+
+    @foreach (var e in Model)
+    {
+        
+        if ((i)%4 == 0)
+        {
+            @Html.Raw("<li>")
+           
+        }
+
+        i++;
+        <div class="span3 imgbox">
+            <a href="@Url.Action("Details","Product",new {productId=e.Id})">
+                <img src="@e.ImgUrl" />
+            </a>
+            
+            <h6 class="carousel_header">
+                <a href="@Url.Action("Details","Product",new {productId=e.Id})">@e.ProductName </a>
+            </h6>
+        </div>
+        
+         if (i%4 == 0||i==Model.Count())
+        {
+            @Html.Raw("</li>")
+        }
+    }
+</ul> 

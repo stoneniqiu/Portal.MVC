@@ -1,0 +1,103 @@
+﻿@model IEnumerable<ThankNet.Models.Qmsg>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+}
+
+<style>
+    #qmsg {
+        color: red;
+    }
+    #boxhold {
+        background-color: #e0ffff;margin-top: 10px;padding: 10px;display:none ;
+    }
+    .deleteq {
+        
+    }
+    
+
+    #addq {margin-bottom: 10px;}
+
+</style>
+<button id="addq" class="btn btn-primary">添加QQ</button>
+<div id="boxhold">
+        QQ:<input type="text" name="QQnum" onkeyup="value=value.replace(/[^\d]/g,'')"  id="QQnum" />
+        昵称：<input type="text" name="Name" id="Name" />
+        <button id="addqq">提交</button>  <span id="qmsg"></span>
+</div>
+
+ 
+<table class="table table-hover table-bordered">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.QQnum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+           更新时间
+        </th>
+        <th>操作</th>
+    </tr>
+
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.QQnum)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ModifyTime)
+            </td>
+            <td>
+                <a href="#"  class="deleteq" data-id="@item.Id">删除</a>
+              
+            </td>
+        </tr>
+    }
+
+</table>
+<script>
+    $(function () {
+
+        $("#addq").click(function() {
+            $("#boxhold").slideToggle();
+        });
+
+        $("#addqq").click(function() {
+            var name = $.trim($("#Name").val());
+            var qq = $.trim($("#QQnum").val());
+            $.get("/QQ/Create", { name: name, qq: qq }, function(data) {
+                if (data == 1) {
+                    location.reload();
+                } else {
+                    $("#qmsg").html(data);
+                }
+            });
+        });
+
+        $(".deleteq").click(function () {
+            if (confirm("确定删除该QQ")) {
+                var id = $(this).attr("data-id");
+                $.get("/QQ/Delete", { id: id }, function (data) {
+                    if (data == 1) {
+                        location.reload();
+                    } else {
+                        $("#qmsg").html("删除异常,该QQ不存在");
+                    }
+                });
+            }
+        });
+
+        $(".page-header h1 span,#currentpart").html("控制台");
+        $(".page-header h1 small span").html("QQ");
+        $(".nav-list>li:eq(0)").addClass("active").siblings().removeClass("active");
+        $(".nav-list>li:eq(0)>ul>li:eq(3)").addClass("active").siblings().removeClass("active");
+    })
+</script>
+
+

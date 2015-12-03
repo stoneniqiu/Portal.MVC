@@ -1,0 +1,110 @@
+﻿.slide {
+    margin: 0;
+}
+.blue {
+    background-color: #4682b4   
+}
+.lightblue {
+    background-color: #00bfff  
+}
+.deepred {
+    background-color: #cd5c5c 
+}
+.purper {
+    background-color: #9400d3   
+}
+.tit {
+    height:35px;
+    padding-left: 10px;
+    line-height: 35px;
+    font-size: 20px;
+    font-weight: normal;
+    margin-top: 20px;
+}
+.bluet {
+    border-left: 6px solid #00bfff;
+}
+.deepredt {
+  border-left: 6px solid #cd5c5c 
+}
+.article-post {
+    line-height: 30px;
+     padding-top: 20px;text-indent: 20px;
+}
+h3{ font-size: 16px;font-weight: bold}
+.item {
+    padding: 10px 0 0 0;
+    height: 300px;
+}
+    .item img {
+        margin: 0 auto;
+    }
+    .mydot {
+        margin-bottom: 0;
+    }
+.infoblock {
+    width: 290px;
+    float: left; 
+    padding: 10px 40px;
+    border-radius: 3px;
+}
+.infoblock .infotitle {
+    font-size: 1.5em;
+    font-weight: bold;
+    font-family: Microsoft JhengHei,LaneNarrowRegular, Arial;
+}
+.infocontent{ float: left;
+    margin-right: 30px;
+}
+.infocontent img {
+    width: 200px;
+    height: 200px;
+}
+.box-hd {
+position: relative;
+/*height: 58px;*/
+-webkit-font-smoothing: antialiased;
+}
+   .box-hd   .title {
+         margin: 0;
+         font-size: 22px;
+         font-weight: 200;
+         line-height: 48px;
+         color: #333;margin-bottom: 20px;
+     } .box-hd .more .more-link {
+font-size: 16px;
+line-height: 58px;
+color: #424242;
+-webkit-transition: all 0.4s;
+transition: all 0.4s;
+}
+       .box-hd .more .more-link .iconfont {
+width: 12px;
+height: 12px;
+padding: 4px;
+margin-left: 8px;
+font-size: 12px;
+background: #b0b0b0;
+color: #fff; 
+vertical-align: 1px;
+-webkit-transition: all 0.4s;
+transition: all 0.4s;
+}
+       .iconfont {
+font-family: "iconfont" !important;
+font-style: normal;
+-webkit-font-smoothing: antialiased;
+-webkit-text-stroke-width: 0.2px;
+-moz-osx-font-smoothing: grayscale;
+}
+       .box-hd .more .more-link:hover{
+           color: #ff6700;
+       }
+        .more .more-link:hover .iconfont {
+         background: #ff6700;
+       }  
+        .box-hd .more {
+position: absolute;
+top: 0;
+right: 0;
+}

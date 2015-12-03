@@ -1,0 +1,50 @@
+﻿@{
+    ViewBag.Title = "案例";
+    Layout = "~/Views/Shared/_NewLayout.cshtml";
+}
+<div class="tenant">
+    <div class="content" >
+        <div class="antmain1">
+            <h3 class="tit">
+                烧鹅仔<span> —— 白领快餐 使用3个月</span>
+            </h3>
+            <p class="ant1">
+                <img src="../../images/ant1.png" alt="烧鹅仔增长率" title="烧鹅仔增长率">
+            </p>
+            <p class="ant2">
+                <img src="../../images/ant2.png" alt="烧鹅仔增长率" title="烧鹅仔增长率">
+            </p>
+        </div>
+        <div class="antmain2">
+            <p class="ant3">
+                <img class="lazy" src="../../images/ant3.png" data-original="../../images/ant3.png" alt="金钱豹增长率" title="金钱豹增长率" style="display: block;">
+            </p>
+            <div class="ant4">
+                <h3 class="tit">
+                    金钱豹<span> —— 国内最顶级的自助餐厅</span>
+                </h3>
+                <span class="texts">
+                    目前已经开始接入微信支付，并联合微信的核心合作伙伴——哆啦宝，推出了系列促销活动，喜爱金钱豹的小伙伴们有福了。
+                </span>
+            </div>
+        </div>
+        <p class="forlineten"></p>
+        <a id="maod"></a>
+        <div class="antmain3">
+            <h3>已服务超过5000家品牌商户</h3>
+            <p>
+                <img class="lazy" src="../../images/original.gif" data-original="../../images/ant5.png" alt="已服务品牌" title="已服务品牌">
+            </p>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $(function () {
+        $(".runline a").removeClass("active");
+        $(".line3 a").addClass("active");
+        $(".undline").css("left", "220px");
+    })
+
+</script>

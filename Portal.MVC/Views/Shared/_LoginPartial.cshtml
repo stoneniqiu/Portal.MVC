@@ -1,0 +1,19 @@
+﻿<style>
+     #loginul li{float: left;list-style: none;padding:15px 0;}  #loginul{margin: 0;padding: 0;}
+                                                                .loga{float: left;  display: inline-block;padding-top: 13px;margin-right: 5px;color:#57b382;}
+                                                                #logoutForm{float: left;}
+ </style>
+@if (Request.IsAuthenticated) {
+    <text>
+        <span class="loga">你好，@Html.ActionLink(User.Identity.Name, "Index", "User", routeValues: null, htmlAttributes: new { @class = "username", title = "管理" })!</span>
+        @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" })) {
+            @Html.AntiForgeryToken()
+            <a class="loga" href="javascript:document.getElementById('logoutForm').submit()">注销</a>
+        }
+    </text>
+} else {
+         
+           <a class="btn  btn-signin" href="@Url.Action("Logon","Account")">登录</a>
+           <a class="btn btn-primary btn-signup" href="@Url.Action("Register","Account")"   >注册</a>
+}
+

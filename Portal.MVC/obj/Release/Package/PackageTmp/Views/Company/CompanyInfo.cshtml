@@ -1,0 +1,32 @@
+﻿@model ThankNet.ViewModel.CompanyView
+
+<div class="columnBottom inner" id="comfooter">
+            <div class="row-fluid">
+                <div class="span4">
+                    <h4>联系我们</h4>
+                    <ul class="listcontact">
+                        <li class="cont-phone">
+                          @Model.Company.PhoneNumber 
+                        </li>
+                        <li class="cont-email"><a href="mailto:@Model.Company.Email">@Model.Company.Email</a></li>
+                        <li class="cont-adress"><strong>ThanksSSL &trade;</strong><small></small><br />
+                            @Model.Company.Address</li>
+                        <li class="">QQ:@Model.Company.QQ</li>
+                    </ul>
+                </div>
+
+                <div class="span4">
+                    <h4>我们的产品</h4>
+                    <ul class="liststar">
+                        @foreach (var str in Model.ProductList)
+                        {
+                        <li><a href="@Url.Action("Details","Product",new{productId=str.Id})">@str.ProductName</a></li>
+                        }
+                    </ul>
+                </div>
+                <div class="span4">
+                    <h4>关于我们</h4>
+                   <p style="color: #666666;font-size: small">@Model.Company.Brief</p>
+                </div>
+            </div>
+        </div>

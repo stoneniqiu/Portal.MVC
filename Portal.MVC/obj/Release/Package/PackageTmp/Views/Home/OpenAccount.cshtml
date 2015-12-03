@@ -1,0 +1,750 @@
+﻿@{
+    ViewBag.Title = "OpenAccount";
+    Layout = "~/Views/Shared/_NewLayout.cshtml";
+}
+@model ThankNet.Models.Agence
+
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/validate-methods.js"></script>
+<script src="~/Content/uploadify/jquery.uploadify.js"></script>
+<link href="~/Content/uploadify/uploadify.css" rel="stylesheet" />
+<script src="~/Content/uploadify/jquery.uploadify.js"></script>
+<link href="~/Content/uploadify/uploadify.css" rel="stylesheet" />
+
+<style>
+    textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input {
+        background-color: #fff;
+        border: 1px solid #ccc;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+        -moz-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+        box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+        -webkit-transition: border linear .2s, box-shadow linear .2s;
+        -moz-transition: border linear .2s, box-shadow linear .2s;
+        -o-transition: border linear .2s, box-shadow linear .2s;
+        transition: border linear .2s, box-shadow linear .2s;
+    }
+
+    select, textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input {
+        display: inline-block;
+        height: 20px;
+        padding: 4px 6px;
+        margin-bottom: 10px;
+        font-size: 14px;
+        line-height: 20px;
+        color: #555;
+        vertical-align: middle;
+        -webkit-border-radius: 4px;
+        -moz-border-radius: 4px;
+        border-radius: 4px;
+    }
+
+    .form-horizontal .control-group {
+        border-top: 1px solid #ffffff;
+        border-bottom: 1px solid #eeeeee;
+        margin-bottom: 0;
+        clear: both;
+        min-height: 20px;
+        display: block;
+        height: auto;
+    }
+
+    .form-horizontal .control-label {
+        float: left;
+        width: 160px;
+        padding-top: 5px;
+        text-align: right;
+    }
+
+    .form-horizontal .control-label {
+        padding-top: 15px;
+        width: 180px;
+    }
+
+    .form-horizontal .controls {
+        margin-left: 200px;
+        padding: 10px 0;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+        cursor: pointer;
+    }
+
+    label, input, button, select, textarea {
+        font-size: 14px;
+        font-weight: normal;
+        line-height: 20px;
+    }
+
+    .control-group.error .help-inline {
+        color: #b94a48;
+    }
+
+    .controls span {
+        margin-left: 5px;
+    }
+
+    .controls .imghold img {
+        display: inline;
+    }
+
+    .btn {
+        display: inline-block;
+        padding: 6px 12px;
+        margin-bottom: 0;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 1.42857143;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: middle;
+        -ms-touch-action: manipulation;
+        touch-action: manipulation;
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        background-image: none;
+        border: 1px solid transparent;
+        border-radius: 4px;
+    }
+
+    .btn-success {
+        color: #fff;
+        background-color: #5cb85c;
+        border-color: #4cae4c;
+    }
+
+        .btn-success:hover {
+            color: #fff;
+            background-color: #449d44;
+            border-color: #398439;
+        }
+
+    .btn-primary {
+        color: #fff;
+        background-color: #337ab7;
+        border-color: #2e6da4;
+    }
+
+    .bg-danger {
+        background-color: #f2dede;padding: 15px;text-align: center;
+    }
+    .content form {
+        width: 600px;margin: 10px auto;
+    }
+    .tenant .content{padding-top: 50px !important;}
+    #personform{margin-top: 50px;}
+</style>
+
+<div class="tenant">
+    <div class="content">
+
+
+        @if (Model.IsCompany)
+        {
+            //企业
+            <div class="company">
+                <form id="companyform" action="@Url.Action("OpenAccount")" class="form-horizontal" method="POST">
+
+                    @if (TempData["err"] != null)
+                    {
+                        <div class="bg-danger">@TempData["err"]</div>
+                    }
+                    @Html.HiddenFor(n => n.IsCompany)
+                    <div class="control-group">
+                        <div class="control-label">
+                            企业名称：
+                        </div>
+                        <div class="controls">
+                            @Html.EditorFor(model => model.Name)
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="control-label">
+                            邮箱：
+                        </div>
+                        <div class="controls">
+                            @Html.EditorFor(model => model.Email)
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="control-label">
+                            手机：
+                        </div>
+                        <div class="controls">
+                            @Html.EditorFor(model => model.Mobile)
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="control-label">
+                            座机：
+                        </div>
+                        <div class="controls">
+                            @Html.EditorFor(model => model.Phone)
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="control-label">
+                            店面地址：
+                        </div>
+                        <div class="controls">
+                            @Html.EditorFor(model => model.ShopAddress)
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="control-label">
+                            营业执照照片：
+                        </div>
+                        <div class="controls">
+                            @Html.HiddenFor(model => model.LicenseImg)
+                            <div id="LicenseImgdiv" class="imghold">
+                                <img src="@Model.LicenseImg" alt="营业执照照片" />
+                            </div>
+                            <input type="file" id="LicenseImgfile_upload" name="file_upload" />
+                            <div id="LicenseImgfileQueue"></div>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="control-label">
+                            税务登记证照片：
+                        </div>
+                        <div class="controls">
+                            @Html.HiddenFor(model => model.TaxImg)
+                            <div id="TaxImgdiv" class="imghold">
+                                <img src="@Model.TaxImg" alt="税务登记证照片" />
+                            </div>
+                            <input type="file" id="TaxImgfile_upload" name="file_upload" />
+                            <div id="TaxImgfileQueue"></div>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <div class="control-label">
+                            组织机构代码照片：
+                        </div>
+                        <div class="controls">
+                            @Html.HiddenFor(model => model.InstitutionalImg)
+                            <div id="InstitutionalImgdiv" class="imghold">
+                                <img src="@Model.InstitutionalImg" alt="组织机构代码照片" />
+                            </div>
+                            <input type="file" id="InstitutionalImgfile_upload" name="file_upload" />
+                            <div id="InstitutionalImgfileQueue"></div>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="control-label">
+                            法人身份证正面照片：
+                        </div>
+                        <div class="controls">
+                            @Html.HiddenFor(model => model.IdCardFrontImg)
+                            <div id="IdCardFrontImgdiv" class="imghold">
+                                <img src="@Model.IdCardFrontImg" alt="法人身份证正面照片" />
+                            </div>
+                            <input type="file" id="IdCardFrontImgfile_upload" name="file_upload" />
+                            <div id="IdCardFrontImgfileQueue"></div>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="control-label">
+                            法人身份证反面照片：
+                        </div>
+                        <div class="controls">
+                            @Html.HiddenFor(model => model.IdCardBackImg)
+                            <div id="IdCardBackImgdiv" class="imghold">
+                                <img src="@Model.IdCardBackImg" alt="法人身份证反面照片" />
+                            </div>
+                            <input type="file" id="IdCardBackImgfile_upload" name="file_upload" />
+                            <div id="IdCardBackImgfileQueue"></div>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="control-label">
+                            银行开户许可证照片：
+                        </div>
+                        <div class="controls">
+                            @Html.HiddenFor(model => model.BanklincenseImg)
+                            <div id="BanklincenseImgdiv" class="imghold">
+                                <img src="@Model.BanklincenseImg" alt="银行开户许可证照片" />
+                            </div>
+                            <input type="file" id="BanklincenseImgfile_upload" name="file_upload" />
+                            <div id="BanklincenseImgfileQueue"></div>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="control-label">
+                            门头照一张：
+                        </div>
+                        <div class="controls">
+                            @Html.HiddenFor(model => model.DoorImg)
+                            <div id="DoorImgdiv" class="imghold">
+                                <img src="@Model.DoorImg" alt="门头照一张" />
+                            </div>
+                            <input type="file" id="DoorImgfile_upload" name="file_upload" />
+                            <div id="DoorImgfileQueue"></div>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="control-label">
+                            店内照一张：
+                        </div>
+                        <div class="controls">
+                            @Html.HiddenFor(model => model.InsideImg)
+                            <div id="InsideImgdiv" class="imghold">
+                                <img src="@Model.InsideImg" alt="店内照一张" />
+                            </div>
+                            <input type="file" id="InsideImgfile_upload" name="file_upload" />
+                            <div id="InsideImgfileQueue"></div>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="control-label">
+                        </div>
+                        <div class="controls">
+                            <button type="submit" class="btn btn-success">提交</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        }
+        else
+        {
+            <div class="person">
+                <form id="personform" action="@Url.Action("OpenAccount")" class="form-horizontal" method="POST">
+                    @if (TempData["err"] != null)
+                    {
+                        <div class="bg-danger">@TempData["err"]</div>
+                    }
+                    @Html.HiddenFor(n => n.IsCompany)
+                    <div class="control-group">
+                        <div class="control-label">
+                            名称：
+                        </div>
+                        <div class="controls">
+                            @Html.EditorFor(model => model.Name)
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="control-label">
+                            邮箱：
+                        </div>
+                        <div class="controls">
+                            @Html.EditorFor(model => model.Email)
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="control-label">
+                            手机：
+                        </div>
+                        <div class="controls">
+                            @Html.EditorFor(model => model.Mobile)
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="control-label">
+                            店面地址：
+                        </div>
+                        <div class="controls">
+                            @Html.EditorFor(model => model.ShopAddress)
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="control-label">
+                            座机：
+                        </div>
+                        <div class="controls">
+                            @Html.EditorFor(model => model.Phone)
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="control-label">
+                            银行卡开户行：
+                        </div>
+                        <div class="controls">
+                            @Html.EditorFor(model => model.Bank)
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="control-label">
+                            银行卡账号：
+                        </div>
+                        <div class="controls">
+                            @Html.EditorFor(model => model.BankNumber)
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="control-label">
+                            身份证正面照片：
+                        </div>
+                        <div class="controls">
+                            @Html.HiddenFor(model => model.IdCardFrontImg)
+                            <div id="IdCardFrontImgdiv" class="imghold">
+                                <img src="@Model.IdCardFrontImg" alt="身份证正面照片" />
+                            </div>
+                            <input type="file" id="IdCardFrontImgfile_upload" name="file_upload" />
+                            <div id="IdCardFrontImgfileQueue"></div>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="control-label">
+                            身份证反面照片：
+                        </div>
+                        <div class="controls">
+                            @Html.HiddenFor(model => model.IdCardBackImg)
+                            <div id="IdCardBackImgdiv" class="imghold">
+                                <img src="@Model.IdCardBackImg" alt="身份证反面照片" />
+                            </div>
+                            <input type="file" id="IdCardBackImgfile_upload" name="file_upload" />
+                            <div id="IdCardBackImgfileQueue"></div>
+                        </div>
+                    </div>
+                  
+                    <div class="control-group">
+                        <div class="control-label">
+                            银行卡反面照片：
+                        </div>
+                        <div class="controls">
+                            @Html.HiddenFor(model => model.BankBackImg)
+                            <div id="BankBackImgdiv" class="imghold">
+                                <img src="@Model.BankBackImg" alt="银行卡反面照片" />
+                            </div>
+                            <input type="file" id="BankBackImgfile_upload" name="file_upload" />
+                            <div id="BankBackImgfileQueue"></div>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="control-label">
+                            银行卡正面照片：
+                        </div>
+                        <div class="controls">
+                            @Html.HiddenFor(model => model.BankFrontImg)
+                            <div id="BankFrontImgdiv" class="imghold">
+                                <img src="@Model.BankFrontImg" alt="银行卡正面照片" />
+                            </div>
+                            <input type="file" id="BankFrontImgfile_upload" name="file_upload" />
+                            <div id="BankFrontImgfileQueue"></div>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="control-label">
+                            门头照一张：
+                        </div>
+                        <div class="controls">
+                            @Html.HiddenFor(model => model.DoorImg)
+                            <div id="DoorImgdiv" class="imghold">
+                                <img src="@Model.DoorImg" alt="门头照一张" />
+                            </div>
+                            <input type="file" id="DoorImgfile_upload" name="file_upload" />
+                            <div id="DoorImgfileQueue"></div>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="control-label">
+                            店内照一张：
+                        </div>
+                        <div class="controls">
+                            @Html.HiddenFor(model => model.InsideImg)
+                            <div id="InsideImgdiv" class="imghold">
+                                <img src="@Model.InsideImg" alt="店内照一张" />
+                            </div>
+                            <input type="file" id="InsideImgfile_upload" name="file_upload" />
+                            <div id="InsideImgfileQueue"></div>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="control-label">
+                        </div>
+                        <div class="controls">
+                            <button type="submit" class="btn btn-success">提交</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        }
+    </div>
+</div>
+
+<script>
+
+    $(function () {
+        $(".runline a").removeClass("active");
+        $(".line4 a").addClass("active");
+        $(".undline").css("left", "320px");
+        $(".undline").css("width", "100px");
+
+        $('#BankFrontImgfile_upload').uploadify({
+            'swf': '@Url.Content("~/Content/uploadify/uploadify.swf?var="+(new DateTime()).TimeOfDay)',
+            'uploader': '@Url.Action("UploadImg", "Product", new { var = (new DateTime()).Date })',
+            multi: false,
+            'buttonText': '上传图片',
+            'queueID': 'BankFrontImgfileQueue',
+            'auto': true,
+            'onUploadSuccess': function (file, data, response) {
+                eval("data=" + data);
+                if (data.Success) {
+                    var str = "../../Content/UploadFiles/" + data.SaveName;
+                    $("#BankFrontImgdiv").html("<img src='" + str + "' alt='' />");
+                    $("#BankFrontImg").val(str);
+                } else {
+                    $.infoShow(data.Message, 0);
+                }
+            }
+        });
+        $('#BankBackImgfile_upload').uploadify({
+            'swf': '@Url.Content("~/Content/uploadify/uploadify.swf?var="+(new DateTime()).TimeOfDay)',
+            'uploader': '@Url.Action("UploadImg", "Product", new { var = (new DateTime()).Date })',
+            multi: false,
+            'buttonText': '上传图片',
+            'queueID': 'BankBackImgfileQueue',
+            'auto': true,
+            'onUploadSuccess': function (file, data, response) {
+                eval("data=" + data);
+                if (data.Success) {
+                    var str = "../../Content/UploadFiles/" + data.SaveName;
+                    $("#BankBackImgdiv").html("<img src='" + str + "' alt='' />");
+                    $("#BankBackImg").val(str);
+                } else {
+                    $.infoShow(data.Message, 0);
+                }
+            }
+        });
+
+        $('#BanklincenseImgfile_upload').uploadify({
+            'swf': '@Url.Content("~/Content/uploadify/uploadify.swf?var="+(new DateTime()).TimeOfDay)',
+            'uploader': '@Url.Action("UploadImg", "Product", new { var = (new DateTime()).Date })',
+            multi: false,
+            'buttonText': '上传图片',
+            'queueID': 'BanklincenseImgfileQueue',
+            'auto': true,
+            'onUploadSuccess': function (file, data, response) {
+                eval("data=" + data);
+                if (data.Success) {
+                    var str = "../../Content/UploadFiles/" + data.SaveName;
+                    $("#BanklincenseImgdiv").html("<img src='" + str + "' alt='' />");
+                    $("#BanklincenseImg").val(str);
+                } else {
+                    $.infoShow(data.Message, 0);
+                }
+            }
+        });
+        $('#DoorImgfile_upload').uploadify({
+            'swf': '@Url.Content("~/Content/uploadify/uploadify.swf?var="+(new DateTime()).TimeOfDay)',
+            'uploader': '@Url.Action("UploadImg", "Product", new { var = (new DateTime()).Date })',
+            multi: false,
+            'buttonText': '上传图片',
+            'queueID': 'DoorImgfileQueue',
+            'auto': true,
+            'onUploadSuccess': function (file, data, response) {
+                eval("data=" + data);
+                if (data.Success) {
+                    var str = "../../Content/UploadFiles/" + data.SaveName;
+                    $("#DoorImgdiv").html("<img src='" + str + "' alt='' />");
+                    $("#DoorImg").val(str);
+                } else {
+                    $.infoShow(data.Message, 0);
+                }
+            }
+        });
+        $('#InsideImgfile_upload').uploadify({
+            'swf': '@Url.Content("~/Content/uploadify/uploadify.swf?var="+(new DateTime()).TimeOfDay)',
+            'uploader': '@Url.Action("UploadImg", "Product", new { var = (new DateTime()).Date })',
+            multi: false,
+            'buttonText': '上传图片',
+            'queueID': 'InsideImgfileQueue',
+            'auto': true,
+            'onUploadSuccess': function (file, data, response) {
+                eval("data=" + data);
+                if (data.Success) {
+                    var str = "../../Content/UploadFiles/" + data.SaveName;
+                    $("#InsideImgdiv").html("<img src='" + str + "' alt='' />");
+                    $("#InsideImg").val(str);
+                } else {
+                    $.infoShow(data.Message, 0);
+                }
+            }
+        });
+        $('#InsideImgfile_upload').uploadify({
+            'swf': '@Url.Content("~/Content/uploadify/uploadify.swf?var="+(new DateTime()).TimeOfDay)',
+            'uploader': '@Url.Action("UploadImg", "Product", new { var = (new DateTime()).Date })',
+            multi: false,
+            'buttonText': '上传图片',
+            'queueID': 'InsideImgfileQueue',
+            'auto': true,
+            'onUploadSuccess': function (file, data, response) {
+                eval("data=" + data);
+                if (data.Success) {
+                    var str = "../../Content/UploadFiles/" + data.SaveName;
+                    $("#InsideImgdiv").html("<img src='" + str + "' alt='' />");
+                    $("#InsideImg").val(str);
+                } else {
+                    $.infoShow(data.Message, 0);
+                }
+            }
+        });
+        $('#IdCardBackImgfile_upload').uploadify({
+            'swf': '@Url.Content("~/Content/uploadify/uploadify.swf?var="+(new DateTime()).TimeOfDay)',
+            'uploader': '@Url.Action("UploadImg", "Product", new { var = (new DateTime()).Date })',
+            multi: false,
+            'buttonText': '上传图片',
+            'queueID': 'IdCardBackImgfileQueue',
+            'auto': true,
+            'onUploadSuccess': function (file, data, response) {
+                eval("data=" + data);
+                if (data.Success) {
+                    var str = "../../Content/UploadFiles/" + data.SaveName;
+                    $("#IdCardBackImgdiv").html("<img src='" + str + "' alt='' />");
+                    $("#IdCardBackImg").val(str);
+                } else {
+                    $.infoShow(data.Message, 0);
+                }
+            }
+        });
+        $('#IdCardFrontImgfile_upload').uploadify({
+            'swf': '@Url.Content("~/Content/uploadify/uploadify.swf?var="+(new DateTime()).TimeOfDay)',
+            'uploader': '@Url.Action("UploadImg", "Product", new { var = (new DateTime()).Date })',
+            multi: false,
+            'buttonText': '上传图片',
+            'queueID': 'IdCardFrontImgfileQueue',
+            'auto': true,
+            'onUploadSuccess': function (file, data, response) {
+                eval("data=" + data);
+                if (data.Success) {
+                    var str = "../../Content/UploadFiles/" + data.SaveName;
+                    $("#IdCardFrontImgdiv").html("<img src='" + str + "' alt='' />");
+                    $("#IdCardFrontImg").val(str);
+                } else {
+                    $.infoShow(data.Message, 0);
+                }
+            }
+        });
+
+        $('#InstitutionalImgfile_upload').uploadify({
+            'swf': '@Url.Content("~/Content/uploadify/uploadify.swf?var="+(new DateTime()).TimeOfDay)',
+            'uploader': '@Url.Action("UploadImg", "Product", new { var = (new DateTime()).Date })',
+            multi: false,
+            'buttonText': '上传图片',
+            'queueID': 'InstitutionalImgfileQueue',
+            'auto': true,
+            'onUploadSuccess': function (file, data, response) {
+                eval("data=" + data);
+                if (data.Success) {
+                    var str = "../../Content/UploadFiles/" + data.SaveName;
+                    $("#InstitutionalImgdiv").html("<img src='" + str + "' alt='' />");
+                    $("#InstitutionalImg").val(str);
+                } else {
+                    $.infoShow(data.Message, 0);
+                }
+            }
+        });
+
+        $('#TaxImgfile_upload').uploadify({
+            'swf': '@Url.Content("~/Content/uploadify/uploadify.swf?var="+(new DateTime()).TimeOfDay)',
+            'uploader': '@Url.Action("UploadImg", "Product", new { var = (new DateTime()).Date })',
+            multi: false,
+            'buttonText': '上传图片',
+            'queueID': 'TaxImgfileQueue',
+            'auto': true,
+            'onUploadSuccess': function (file, data, response) {
+                eval("data=" + data);
+                if (data.Success) {
+                    var str = "../../Content/UploadFiles/" + data.SaveName;
+                    $("#TaxImgdiv").html("<img src='" + str + "' alt='' />");
+                    $("#TaxImg").val(str);
+                } else {
+                    $.infoShow(data.Message, 0);
+                }
+            }
+        });
+        $('#LicenseImgfile_upload').uploadify({
+            'swf': '@Url.Content("~/Content/uploadify/uploadify.swf?var="+(new DateTime()).TimeOfDay)',
+            'uploader': '@Url.Action("UploadImg", "Product", new { var = (new DateTime()).Date })',
+            multi: false,
+            'buttonText': '上传图片',
+            'queueID': 'LicenseImgfileQueue',
+            'auto': true,
+            'onUploadSuccess': function (file, data, response) {
+                eval("data=" + data);
+                if (data.Success) {
+                    var str = "../../Content/UploadFiles/" + data.SaveName;
+                    $("#LicenseImgdiv").html("<img src='" + str + "' alt='' />");
+                    $("#LicenseImg").val(str);
+                } else {
+                    $.infoShow(data.Message, 0);
+                }
+            }
+        });
+
+        $("#companyform").validate({
+            rules: {
+                Name: {
+                    required: true,
+                    minlength: 2,
+                    maxlength: 50
+                }, Email: {
+                    required: true,
+                    email: true,
+                },
+                Mobile: {
+                    required: true,
+                    isTel: true,
+                },
+                Phone: {
+                    isPhone: true,
+                },
+                ShopAddress: {
+                    required: true,
+                }
+                
+            },
+            errorClass: "help-inline",
+            errorElement: "span",
+            highlight: function (element, errorClass, validClass) {
+                $(element).parents('.control-group').addClass('error');
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                $(element).parents('.control-group').removeClass('error');
+                $(element).parents('.control-group').addClass('success');
+            }
+        });
+
+        $("#personform").validate({
+            rules: {
+                Name: {
+                    required: true,
+                    minlength: 2,
+                    maxlength: 50
+                }, Email: {
+                    required: true,
+                    email: true,
+                },
+                Mobile: {
+                    required: true,
+                    isTel: true,
+                },
+                Phone: {
+                    isPhone: true,
+                },
+                Bank: {
+                    required: true,
+                }, ShopAddress: {
+                    required: true,
+                }, BankNumber: {
+                    required: true,
+                    isDigits: true,
+                }
+            },
+            errorClass: "help-inline",
+            errorElement: "span",
+            highlight: function (element, errorClass, validClass) {
+                $(element).parents('.control-group').addClass('error');
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                $(element).parents('.control-group').removeClass('error');
+                $(element).parents('.control-group').addClass('success');
+            }
+        });
+
+    })
+</script>

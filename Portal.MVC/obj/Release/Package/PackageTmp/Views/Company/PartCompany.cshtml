@@ -1,0 +1,20 @@
+﻿@model ThankNet.Models.Company
+
+@*<div class="  span4  "><h3>关于公司</h3><br /><img src="@Model.ImgUrl" alt="" /> </div>
+
+
+<div class="span7">
+    <h2 class=" "><img class=" " src="@Model.LogoUrl" style="height:80px" alt="" /> </h2>
+    <p class=" " style="text-indent: 30px;text-align: left;  ">
+        @Html.Raw(Model.Introduce) <br/>
+        <span class="morelink"><a href="@Url.Action("About","Company")">more...</a></span>
+    </p>
+</div>*@
+
+@*<h2><img class=" " src="@Model.LogoUrl" style="height:80px" alt="" /></h2>*@
+<p style="">
+    <a href="@Url.Action("About","Company")"> <img src="@Model.ImgUrl" alt=""  style="float: left;margin-right: 10px;margin-bottom: 20px;"/> </a>
+    @Html.Raw(Model.Introduce) <br/>
+</p>
+
+ 

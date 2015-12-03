@@ -1,0 +1,323 @@
+﻿@model ThankNet.Models.Introduce
+
+@{
+    ViewBag.Title = "Introduce";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+}
+<style>
+    .editor-field input{width: 100%;}
+     #showimg, #showimg1,#showimg2,#showimg3,#showimg4,#showimg5,#showimg6 {
+        padding: 10px;
+        background-color: #00bfff;
+        height: auto;
+        display: block;
+    }
+</style>
+<script src="~/Content/uploadify/jquery.uploadify.js"></script>
+<link href="~/Content/uploadify/uploadify.css" rel="stylesheet" />
+<script src="~/Content/ckeditor/ckeditor.js"></script>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>关于我们内容编辑</legend>
+        @if(TempData["message"] != null)
+        {
+
+        <div class="alert alert-block alert-success">
+            <button type="button" class="close" data-dismiss="alert">
+                <i class="icon-remove"></i>
+            </button>
+
+            <strong class="green">
+                @TempData["message"]
+        </strong>
+    </div>
+    }
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TitleTop)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.TitleTop)
+            @Html.ValidationMessageFor(model => model.TitleTop)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TitleTopSmall)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.TitleTopSmall)
+            @Html.ValidationMessageFor(model => model.TitleTopSmall)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TitleCenter1)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.TitleCenter1)
+            @Html.ValidationMessageFor(model => model.TitleCenter1)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.TitleCenter2)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.TitleCenter2)
+            @Html.ValidationMessageFor(model => model.TitleCenter2)
+        </div>
+
+        <div class="editor-field">
+            <div id="showimg1"><img src="@Model.Tag1" /> </div>
+            @Html.HiddenFor(n => Model.Tag1)
+        </div>
+        <input type="file" id="file_upload1" name="file_upload" />
+
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Tag1Des)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Tag1Des)
+            @Html.ValidationMessageFor(model => model.Tag1Des)
+        </div>
+
+        <div class="editor-field">
+            <div id="showimg2"><img src="@Model.Tag2" /> </div>
+            @Html.HiddenFor(n => Model.Tag2)
+        </div>
+        <input type="file" id="file_upload2" name="file_upload" />
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Tag2Des)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Tag2Des)
+            @Html.ValidationMessageFor(model => model.Tag2Des)
+        </div>
+
+        <div class="editor-field">
+            <div id="showimg3"><img src="@Model.Tag3" /> </div>
+            @Html.HiddenFor(n => Model.Tag3)
+        </div>
+        <input type="file" id="file_upload3" name="file_upload" />
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Tag3Des)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Tag3Des)
+            @Html.ValidationMessageFor(model => model.Tag3Des)
+        </div>
+
+        <div class="editor-field">
+            <div id="showimg4"><img src="@Model.Tag4" /> </div>
+            @Html.HiddenFor(n => Model.Tag4)
+        </div>
+        <input type="file" id="file_upload4" name="file_upload" />
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Tag4Des)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Tag4Des)
+            @Html.ValidationMessageFor(model => model.Tag4Des)
+        </div>
+
+        <div class="editor-field">
+            <div id="showimg5"><img src="@Model.Tag5" /> </div>
+            @Html.HiddenFor(n => Model.Tag5)
+        </div>
+        <input type="file" id="file_upload5" name="file_upload" />
+
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Tag5Des)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Tag5Des)
+            @Html.ValidationMessageFor(model => model.Tag5Des)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Title2)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Title2)
+            @Html.ValidationMessageFor(model => model.Title2)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.StrongWrod)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.StrongWrod)
+            @Html.ValidationMessageFor(model => model.StrongWrod)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Brife)
+        </div>
+        <div class="editor-field">
+            <textarea class="ckeditor" id="editor1" name="Brife">
+                @Model.Brife
+            </textarea>
+        </div>
+
+        <div class="editor-field">
+            <div id="showimg6"><img src="@Model.ImgUrl" /> </div>
+            @Html.HiddenFor(n => Model.ImgUrl)
+        </div>
+        <input type="file" id="file_upload6" name="file_upload" />
+
+        <div id="fileQueue"></div>
+        <span class="errorinfo"></span>
+       
+        <p>
+            <input type="submit" class="btn btn-primary" value="Create" />
+        </p>
+    </fieldset>
+}
+
+
+<script>
+    $(function () {
+        $(".page-header h1 span,#currentpart").html("控制台");
+        $(".page-header h1 small span").html("二维码");
+        $(".nav-list>li:eq(0)").addClass("active").siblings().removeClass("active");
+        $(".nav-list>li:eq(0)>ul>li:eq(2)").addClass("active").siblings().removeClass("active");
+
+
+        $('#file_upload1').uploadify({
+            'swf': '@Url.Content("~/Content/uploadify/uploadify.swf")',
+            'uploader': '@Url.Action("UploadImg","Product")',
+            multi: false,
+            'buttonText': '上传图片',
+            'queueID': 'fileQueue',
+            'auto': true,
+            'onUploadSuccess': function (file, data, response) {
+                eval("data=" + data);
+                //alert('文件 ' + file.name + ' 已经上传成功，并返回 ' + response + ' 保存文件名称为 ' + data.SaveName);
+                if (data.Success) {
+                    var str = "../../Content/UploadFiles/" + data.SaveName;
+                    $("#showimg1").html("<img src='" + str + "' alt='' />");
+                    $("#Tag1").val(str);
+                } else {
+                    $.infoShow(data.Message, 0);
+                }
+
+            }
+        });
+
+        $('#file_upload2').uploadify({
+            'swf': '@Url.Content("~/Content/uploadify/uploadify.swf")',
+            'uploader': '@Url.Action("UploadImg","Product")',
+            multi: false,
+            'buttonText': '上传图片',
+            'queueID': 'fileQueue',
+            'auto': true,
+            'onUploadSuccess': function (file, data, response) {
+                eval("data=" + data);
+                //alert('文件 ' + file.name + ' 已经上传成功，并返回 ' + response + ' 保存文件名称为 ' + data.SaveName);
+                if (data.Success) {
+                    var str = "../../Content/UploadFiles/" + data.SaveName;
+                    $("#showimg2").html("<img src='" + str + "' alt='' />");
+                    $("#Tag2").val(str);
+                } else {
+                    $.infoShow(data.Message, 0);
+                }
+
+            }
+        });
+
+        $('#file_upload6').uploadify({
+            'swf': '@Url.Content("~/Content/uploadify/uploadify.swf")',
+            'uploader': '@Url.Action("UploadImg","Product")',
+            multi: false,
+            'buttonText': '上传图片',
+            'queueID': 'fileQueue',
+            'auto': true,
+            'onUploadSuccess': function (file, data, response) {
+                eval("data=" + data);
+                //alert('文件 ' + file.name + ' 已经上传成功，并返回 ' + response + ' 保存文件名称为 ' + data.SaveName);
+                if (data.Success) {
+                    var str = "../../Content/UploadFiles/" + data.SaveName;
+                    $("#showimg6").html("<img src='" + str + "' alt='' />");
+                    $("#ImgUrl").val(str);
+                } else {
+                    $.infoShow(data.Message, 0);
+                }
+
+            }
+        });
+        $('#file_upload3').uploadify({
+            'swf': '@Url.Content("~/Content/uploadify/uploadify.swf")',
+            'uploader': '@Url.Action("UploadImg","Product")',
+            multi: false,
+            'buttonText': '上传图片',
+            'queueID': 'fileQueue',
+            'auto': true,
+            'onUploadSuccess': function (file, data, response) {
+                eval("data=" + data);
+                //alert('文件 ' + file.name + ' 已经上传成功，并返回 ' + response + ' 保存文件名称为 ' + data.SaveName);
+                if (data.Success) {
+                    var str = "../../Content/UploadFiles/" + data.SaveName;
+                    $("#showimg3").html("<img src='" + str + "' alt='' />");
+                    $("#Tag3").val(str);
+                } else {
+                    $.infoShow(data.Message, 0);
+                }
+
+            }
+        });
+        $('#file_upload4').uploadify({
+            'swf': '@Url.Content("~/Content/uploadify/uploadify.swf")',
+            'uploader': '@Url.Action("UploadImg","Product")',
+            multi: false,
+            'buttonText': '上传图片',
+            'queueID': 'fileQueue',
+            'auto': true,
+            'onUploadSuccess': function (file, data, response) {
+                eval("data=" + data);
+                //alert('文件 ' + file.name + ' 已经上传成功，并返回 ' + response + ' 保存文件名称为 ' + data.SaveName);
+                if (data.Success) {
+                    var str = "../../Content/UploadFiles/" + data.SaveName;
+                    $("#showimg4").html("<img src='" + str + "' alt='' />");
+                    $("#Tag4").val(str);
+                } else {
+                    $.infoShow(data.Message, 0);
+                }
+
+            }
+        });
+        $('#file_upload5').uploadify({
+            'swf': '@Url.Content("~/Content/uploadify/uploadify.swf")',
+            'uploader': '@Url.Action("UploadImg","Product")',
+            multi: false,
+            'buttonText': '上传图片',
+            'queueID': 'fileQueue',
+            'auto': true,
+            'onUploadSuccess': function (file, data, response) {
+                eval("data=" + data);
+                //alert('文件 ' + file.name + ' 已经上传成功，并返回 ' + response + ' 保存文件名称为 ' + data.SaveName);
+                if (data.Success) {
+                    var str = "../../Content/UploadFiles/" + data.SaveName;
+                    $("#showimg5").html("<img src='" + str + "' alt='' />");
+                    $("#Tag5").val(str);
+                } else {
+                    $.infoShow(data.Message, 0);
+                }
+            }
+        });
+
+
+    })
+</script>
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

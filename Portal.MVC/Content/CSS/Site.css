@@ -1,0 +1,160 @@
+﻿body {
+    font-size: .85em;
+    font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
+    color: #232323;
+    background-color: #fff;
+}
+
+header, footer, nav, section {
+    display: block;
+}
+
+
+html, body {
+height: 100%;
+}
+/* Styles for basic forms
+-----------------------------------------------------------*/
+fieldset {
+    border: 1px solid #ddd;
+    padding: 0 1.4em 1.4em 1.4em;
+    margin: 0 0 1.5em 0;
+}
+
+legend {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+textarea {
+    min-height: 75px;
+}
+
+.editor-label {
+    margin: 1em 0 0 0;
+}
+
+.editor-field {
+    margin: 0.5em 0 0 0;
+}
+
+
+/* Styles for validation helpers
+-----------------------------------------------------------*/
+.field-validation-error {
+    color: #f00;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+.input-validation-error {
+    border: 1px solid #f00;
+    background-color: #fee;
+}
+
+.validation-summary-errors {
+    font-weight: bold;
+    color: #f00;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+.footer{ margin: 10px;padding: 0;} 
+.footer li{ float: left;list-style: none;} .footer li a:hover{ text-decoration: none;}
+                                           .footer li i{ margin: 0 10px;}
+footer {
+    
+    padding: 30px 0;
+    border-top: 1px solid #e5e5e5;
+     background-color: #a9a9a9; 
+}
+.copy{ float: right;width: 500px;}  
+.myline {
+    width: 1000px;margin: 20px auto;
+    padding: 20px 0px;border: 1px solid gainsboro; 
+     clear: both;overflow:auto;
+    -webkit-box-shadow: 0 0 5px gainsboro;
+    -ms-box-shadow: 0 0 5px gainsboro;
+    box-shadow: 0 0 5px gainsboro;
+}
+.myline:hover {
+    background-color: ghostwhite;cursor: default;
+}
+.blueboder {
+     border-left: 5px #00bfff solid;
+}
+.blackboder {
+      border-left: 5px #111 solid;
+}
+.purperboder {
+      border-left: 5px #9400d3 solid;
+}
+
+.myband {
+    color: #333;
+    font-weight: bold;
+    vertical-align: central;
+    font-size: 2em;
+}
+.logonbt {
+      vertical-align: bottom;
+      margin-top: 10px;
+    width: 80px;padding-bottom: 10px;
+}
+
+
+/* Styles for footer
+-----------------------------------------------------------*/
+
+#dlog{ margin-top: -15px;}
+#footul{ width: 100%;padding-top: 20px;}
+#footul li{ width: 16%;text-align: left;color: gainsboro; }
+#footul li a{ color: gainsboro}
+#footul li a:hover{text-decoration: none; color: gainsboro}
+footer{ background-color: #3E3D49;color: gainsboro}
+.footerinfo p{ text-indent: 10px;padding: 3px 30px;}
+
+
+#minnav {background-color: #353644;border: 1px slategrey solid}
+#minnav ul li ,#minnav ul li a{color: white}
+
+
+.wrapper {
+min-height: 100%;
+height: auto !important;
+/*2015/8/10注释掉为了页面内容高度*/
+/*height: 100%;
+margin: 0 auto -194px;
+    */
+}
+.footer, .push {
+height: 80px;
+}
+
+/* Styles for base
+-----------------------------------------------------------*/
+.redb{border: 1px red solid}
+.greenb{border: 1px solid green}
+.whiteb{border: 1px solid white}
+.m20{margin: 20px}
+.p20{ padding: 20px 25px;display: inline-block}
+.fsmall{font-size: small}
+nav.navbar{ margin-bottom: 0;}
+.mb100{ margin-bottom: 100px;}
+
+.position {
+color: #4f4f4f;
+font-size: small;
+margin-left: 0;
+padding: 15px 0;
+}
+
+.position a {
+color: #4f4f4f;
+}
+.position a:hover, .position .position_cur {
+color:#2e8b57;
+}

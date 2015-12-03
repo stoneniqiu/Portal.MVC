@@ -1,0 +1,17 @@
+﻿@model IEnumerable<ThankNet.Models.Example>
+<ul class="slides row-fluid">
+  
+        @foreach (var e in Model)
+        {
+              <li><div class=" imgbox" style="width: 100%">
+                <a href="@Url.Action("Details", "Example", new { id = e.Id })">
+                    <img src="@e.ImgUrl" />
+                </a>
+
+                <h6 class="carousel_header">
+                    <a href="@Url.Action("Details", "Example", new { id = e.Id })">@e.ProjectName </a>
+                </h6>
+            </div>  </li>
+        }
+  
+</ul>

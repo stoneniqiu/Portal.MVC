@@ -1,0 +1,33 @@
+﻿@model IEnumerable<ThankNet.Models.Example>
+ <style>
+
+</style>
+ <div id="news_update1" class=" " style="position: relative;  ">
+<ul class="caseul">
+    @foreach (var p in Model)
+    {
+        <li class=" " style="margin-bottom: 10px;padding: 5px;">
+            <div class="row-fluid">
+                <div class="span3  ">
+                     <a href="@Url.Action("Details","Example",new {id=p.Id})">
+                     <img src="@p.ImgUrl" alt="emptyimg" /> </a>
+                   <h6><a href="@Url.Action("Details","Example",new {id=p.Id})">@p.ProjectName </a></h6>
+                    
+                </div>
+                <div class="span9">
+                      <p class=" " style="padding-right: 10px;max-height: 60px;text-indent: 20px;overflow:hidden;"> @Html.Raw(p.Description)    <span class="morelink"><a href="@Url.Action("Details","Example",new {id=p.Id})">more</a></span> </p>
+                     <small class="datepost">  <img src="@p.ImgUrl" class="locality" />
+                    <a style="color: gray" href="@Url.Action("CaseIndex","Example",new {cat=p.Category})">@p.Category</a>   </small>
+                    <small style="color: gray"> 合作公司：@p.Name </small>
+                </div>
+
+            </div>
+
+            <div class="clearfix"></div>
+        </li>
+    }
+</ul>
+     </div>
+<div class="clearfix"></div>
+<input type="hidden" id="pagecount" value="@ViewBag.TotalPage"/>
+ <input type="hidden" id="cat" value="@ViewBag.Category"/>

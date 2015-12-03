@@ -1,0 +1,251 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/CSS/portalbase.css" rel="stylesheet" />
+    <link href="~/Content/CSS/Site.css" rel="stylesheet" />
+    <link href="~/Content/CSS/custom.css" rel="stylesheet"/>
+    <link href="~/Content/CSS/golab.css" rel="stylesheet" />
+    <link href="~/Content/CSS/user_index.css" rel="stylesheet" />
+    <link href="~/Content/Matrix_Admin/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link rel="shortcut icon" type="image/x-icon" href="~/Content/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="~/Content/favicon.ico" />
+    
+    
+     <script src="~/Scripts/respond.min.js"></script>
+    <script src="~/Scripts/jquery-1.9.1.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/bootstrap-paginator.js"></script>
+    <script src="~/Scripts/jquery.pin.min.js"></script>
+
+    <script> 
+
+        //修改左侧菜单栏样式
+        function changemenucss(menuItem) {
+            $('ul.menuul').children(menuItem).addClass('menu-active');
+        }
+
+        window.onload = function () {
+            var pathname = location.pathname.substr(1);
+            var token;
+            if (pathname == "") {
+                token = "Home";
+            } else {
+                var patt = new RegExp("[a-z]{1,}", "i");//匹配控制器
+                token = patt.exec(pathname)[0];
+            }
+            switch (token) {
+                case "Example":
+                    changenavcss(".example");
+                    break;
+                case "Download":
+                    changenavcss(".download");
+                    break;
+                case "Product":
+                    changenavcss(".product");
+                    break;
+                case "SoftPurchase":
+                    changenavcss(".soft");
+                    break;
+                case "Ask":
+                    changenavcss(".train");
+                    break;
+                case "Topic":
+                    changenavcss(".forum");
+                    break;
+                case "About":
+                    changenavcss(".about");
+                    break;
+                case "Home":
+                    changenavcss(".home");
+                    break;
+                case "User":
+                    var pattaction = new RegExp("[a-z]{1,}", "i");//匹配Action
+                    var actionname = pattaction.exec(pathname.substr(pathname.indexOf("/") + 1))[0];
+                    switch (actionname) {
+                        case "CollectExamples":
+                            changemenucss('#collectexamples'); break;
+                        case "SetPassword":
+                        case"SetPasswordResult":
+                            changemenucss('#setpassword');
+                            break;
+                        case "MyTopic":
+                            changemenucss('#mytopic');
+                            break;
+                        case "MyQuestion":
+                            changemenucss('#myquestion');
+                            break;
+                        default:
+                            changemenucss('#index');
+                            break;
+                    }
+                    break;
+            }
+        }
+    </script>
+</head>
+
+<body>
+   
+    <div class="wrapper">
+        <div id="header">
+            <div class="viewport-wrapper">
+                <div class="container">
+                    <a class="header-logo" href="/">DIAView</a>
+                    <div class="header-account">
+                       @Html.Partial("_LoginPartial")
+                    </div>
+                    <ul class="header-nav">
+                        <li class="nav-item home"><a href="@Url.Action("Index", "Home")">首页</a></li>
+                        <li class="nav-item product"><a href="@Url.Action("BookWay", "Home")">书山有路</a></li>
+                        <li class="nav-item example">
+                            <a href="#">书单</a>
+
+                        </li>
+                        <li class="nav-item download">
+                            <a href="#">静好</a>
+
+                        </li>
+                        <li class="nav-item train">
+                            <a href="#">淘书</a>
+                            <ul class="items" role="menu">
+                                <li><a href="#">淘书</a></li>
+                                <li><a href="#">淘书</a></li>
+                                <li class="divider"></li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div id="content">
+        <div id="bd">
+            <div class="uc-hd">
+                <div class="wp">
+                    <div class="info fl">
+                        <a class="avt" href="@Url.Action("Index","User")">
+                            <img src="~/Content/user_img.jpg" alt="用户" />    
+                        </a>
+                        <a class="fl" style="color: #58b237;"href="@Url.Action("Index","User")">@ViewBag.userName</a>
+                    </div>
+                </div>
+            </div>    
+    
+    <div  class="uc-bd wp mt40" >
+        <ul class="sd uc-sd fl">
+              <li>
+                          <h3>用户信息</h3>
+                          <ul class="menuul">
+                              <li id="index"><a href="@Url.Action("Index","User")"><i class="icon-collect"></i><span>基本资料</span></a></li>
+                          </ul>
+                      </li>
+           
+            <li>
+                <h3>用户设置</h3>
+                <ul class="menuul">
+                    @*<li><a href="#"><i class="icon-xcounpon"></i><span>更换头像</span></a></li>*@
+                    <li id="setpassword"><a href="@Url.Action("SetPassword","User")"><i class="icon-schoolarship"></i><span>修改密码</span></a></li>
+                </ul>
+            </li>
+                      
+        </ul>        
+                  
+                    <div class="mn" >
+                        <div class="uc-wp">@RenderBody()</div>
+                  </div>
+
+              </div>
+    
+    
+   
+      
+    </div>
+
+        </div>
+
+
+
+        @RenderSection("scripts", required: false)
+      
+    </div>
+    <footer>
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-9" style="padding-left: 15px;">
+                    <ul id="footul" class="nav navbar-nav">
+                        <li>
+                            <h4><a href="#">nav</a></h4>
+                        </li>
+                        <li>
+                            <h4><a href="#">nav</a></h4>
+                        </li>
+                        <li>
+                            <h4><a href="#">nav</a></h4>
+                        </li>
+                        <li>
+                            <h4><a href="#">nav</a></h4>
+                        </li>
+                        <li>
+                            <h4><a href="#">nav</a></h4>
+                        </li>
+                    </ul>
+                    <div class="clear"></div>
+                    <p class="fsmall" style="margin-top:40px;">Copyright © <a href="http://www.cnblogs.com/stoneniqiu/" target="_blank">stoneniqiu </a> 喜欢就好</p>
+                </div>
+                <div class=" col-md-3 footerinfo">
+                    <p class="fsmall">书山有路公益组织</p>
+                    <p class="fsmall">业务咨询:76617768</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <a id="backTop" class="backTop" href="javascript:;" data-title="返回顶部" style="display: block; position: fixed;">
+        <div class="btn-inner-text">返回顶部</div>
+    </a>
+    <script>
+      
+       
+        //修改顶部导航栏样式
+        function changenavcss(navItem) {
+            $(".header-nav").children(navItem).addClass("nav-active");
+            $(".header-nav").children(navItem).children("a").css("color", "#57b382");
+        }
+
+      
+        //给导航栏栏目添加下拉列表，当鼠标放在栏目上面时显示出来。
+        $(".header-nav li").bind("mouseenter", function () {
+            //显示列表
+            $(this).children("ul").show();
+        }).bind("mouseleave", function () {
+            //隐藏列表
+            $(this).children("ul").hide();
+        });
+
+        //返回页面顶部
+        $("#backTop").bind("mouseenter", function () {
+            $(this).find("div").show();
+        }).bind("mouseleave", function () {
+            $(this).find("div").hide();
+        }).bind("click", function () {
+            $("body").animate({ 'scrollTop': 0 }, 100);
+        });
+
+        $(window).scroll(function () {
+            if ($("body").scrollTop()==0) {
+                $("#backTop").hide();
+            } else {
+                $("#backTop").show();
+            }
+            
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,116 @@
+﻿@model ThankNet.Models.Company
+
+@{
+    ViewBag.Title = "尚客思_联系我们";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+   <div class="row">
+      
+           <!-- breadcrumb-->
+            <div class="breadcrumbline"></div>
+			
+            <div class="span5 ">
+			<div class="inner unright unbottom">				
+			<div class="inner ">
+						
+					<!--hold_it Title-->
+					<div class="hold_it">
+					<div class="ribbon-wrapper right" style="z-index:101"><div class="ribbon">Thanksst</div></div>
+						<div class="holder">
+							<div class="shadow1"></div>
+							<div class="shadow2"></div>
+							<div class="shadow3"></div>
+							<div class="shadow4"></div>
+							<div class="map"><img src="../../Content/images/place.jpg" /></div>
+						</div>
+					</div><!-- End Class hold_it  --> 
+						<address>
+						<div style="padding:0px 0 0 20px">
+							<ul class="listcontact">
+								<li class="cont-phone">@Model.PhoneNumber</li>
+								<li class="cont-email"><a href="mailto:@Model.Email">@Model.Email</a></li>
+							    <li class="cont-adress">  
+							      @Model.Address</li>
+                                <li>QQ:@Model.QQ</li>
+							</ul>
+						</div>
+						</address>
+									
+					<div class="clearfix"></div>
+
+
+					
+            </div><!-- /inner -->
+            </div><!-- /inner -->
+			</div><!-- /span6 bg-white -->
+			
+			<div class="span5">
+			<div class="inner   unleft">
+			
+                <!-- Contact Us text-->
+                <h2>联系我们</h2>
+                <div class="heading_border"></div>
+				
+				  <!-- notifications-info text-->
+				<div class="notifications" style="display:none">
+					<div class="notif">
+						<div class="shine"></div>
+						<div class="head">Send Messages Complete ! <span>Thank  You</span></div>
+						<div class="text">
+						<strong>Please !</strong> Check Email on 24 H, thank agin.  
+						</div>
+					</div>
+				</div>
+					  
+			   @using (Html.BeginForm("Create", "Company", FormMethod.Post))
+			   {
+			        <div class="control-group">
+			            <label class="control-label">姓名 <font color="#FF0000">**</font> </label>
+			            <div class="controls">
+			                <input type="text" required="required" name="Name" id="youname" class="validate[required] span3" />
+			            </div>
+			        </div>
+			        <div class="control-group">
+			            <label class="control-label">手机 <font color="#FF0000">**</font>  </label>
+			            <div class="controls">
+			                <input type="text" required="required"  name="PhoneNumber" id="PhoneNumber" class=" span3" />
+			            </div>
+			        </div>
+			        <div class="control-group">
+			            <label class="control-label">QQ    </label>
+			            <div class="controls">
+			                <input type="text" name="QQ" id="QQ" class=" span3" />
+			            </div>
+			        </div>
+			        <div class="control-group">
+			            <label class="control-label" for="textarea">订单内容 <font color="#FF0000">**</font>  </label>
+			            <div class="controls">
+			                <textarea name="Content"  required="required"  class="validate[required] input-xlarge " id="textarea" rows="3"></textarea>
+			            </div>
+			        </div>
+			        <div class="control-group last">
+			            <div class="controls">
+			                <button type="submit" class="btn btn-danger">提交</button>
+			            </div>
+			        </div>
+		    }
+                @if (TempData["message"] != null)
+                {
+               <div class="alert alert-info">
+                   <a class="close" data-dismiss="alert" href="#">×</a>
+                    @TempData["message"].ToString();
+				</div>
+                }
+           
+			</div><!-- /inner -->
+			</div><!-- /span6 -->			
+      
+      
+    </div><!-- /row  bg-main -->
+<script>
+    $(function() {
+        $(".nav-collapse .nav li:eq(4)").addClass("active");
+        $(".nav-collapse .nav li:eq(4)").siblings().removeClass("active");
+    })
+</script>

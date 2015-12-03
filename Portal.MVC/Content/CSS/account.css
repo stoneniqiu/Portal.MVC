@@ -1,0 +1,48 @@
+﻿ 
+.loginbox {
+     padding: 10px 39px 12px 40px;
+border-radius: 6px;
+-webkit-box-shadow: 0 0 7px rgba(200,200,200,.75);
+box-shadow: 0 0 7px rgba(200,200,200,.75);
+overflow: hidden;
+width: 280px;
+position: relative;
+border: 1px solid #c9ccd0;
+background-color: #fafafa;
+font-size: 12px;
+     margin: 80px auto;
+width: 530px;
+ }
+ .loginbox form {
+width: 280px;
+margin: 30px auto 0;
+}
+
+ .loginbox form  .title {
+text-align: center;
+font-size: 18px;
+font-weight: 400;
+color: #0c94de;margin-top: 34px;
+margin-bottom: 16px;
+height: 22px;
+}
+
+  .loginbox input[name=password],.loginbox input[name=username] {
+width: 264px;
+}
+.main.signin .center-content .block input[type=password], .main.signin .center-content .block input[type=text] {
+margin-bottom: 20px;
+}
+.tip {
+color: #969696;
+text-align: left;font-size: small;font-weight: normal;
+}.abright {
+     font-size: small;float: right;vertical-align: bottom;display: inline-block;
+}.vendor-block {
+margin: 20px 20px 0;
+padding: 20px 0;
+color: #465567;
+border-top: solid 1px #e6e6e6;font-size: small;
+}
+
+

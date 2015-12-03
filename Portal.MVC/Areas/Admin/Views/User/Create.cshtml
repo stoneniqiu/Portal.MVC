@@ -1,0 +1,93 @@
+﻿@model Portal.MVC.ViewModel.RegisterModel
+
+@{
+    ViewBag.Title = ViewBag.Des;
+    Layout = "~/Views/Shared/_Admin.cshtml";
+}
+ 
+    <div id="content-header">
+        <div id="breadcrumb">
+            <a href="@Url.Action("Index", "User")" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>Home</a>
+            <a href="@Url.Action("Create","User")" title="@ViewBag.Des" class="tip-bottom current">@ViewBag.Des</a>
+        </div>
+        <h1>@ViewBag.Des</h1>
+    </div>
+
+ <div class="container-fluid">
+    <hr>
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="widget-box">
+                <div class="widget-title">
+                    <span class="icon"> <i class="icon-info-sign"></i> </span>
+                    <h5>@ViewBag.Des</h5>
+                </div>
+                <div class="widget-content nopadding">
+                    <form class="form-horizontal" method="post" action="@Url.Action("Create")" name="basic_validate" id="basic_validate" novalidate="novalidate">
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+                        @Html.HiddenFor(n=>n.Id)
+                        @Html.Partial("info")
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.UserName)
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.UserName)
+                            @Html.ValidationMessageFor(model => model.UserName)
+                        </div>
+
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Email)
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.Email)
+                            @Html.ValidationMessageFor(model => model.Email)
+                        </div>
+
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Password)
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.Password)
+                            @Html.ValidationMessageFor(model => model.Password)
+                        </div>
+
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.ConfirmPassword)
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.ConfirmPassword)
+                            @Html.ValidationMessageFor(model => model.ConfirmPassword)
+                        </div>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Mobile)
+                        </div>
+                        <div class="editor-field">
+                            @Html.EditorFor(model => model.Mobile)
+                            @Html.ValidationMessageFor(model => model.Mobile)
+                        </div><div class="editor-label">
+                            @Html.LabelFor(model => model.RoleId)
+                        </div>
+                        <div class="editor-field">
+                            @Html.DropDownListFor(model => model.RoleId, ViewBag.Roles as SelectList)
+                            @Html.ValidationMessageFor(model => model.RoleId)
+                        </div>
+                        <div class="form-actions">
+                            <input type="submit" value="提交"  class=" btn btn-success" />
+                            <input type="button" id="emptyBt" value="重置" class=" btn btn-info" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+ 
+
+<script src="~/Content/Js/user.js"></script>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,85 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+}
+@model IEnumerable<Niqiu.Core.Domain.User.User>
+ 
+ <div id="content-header">
+    <div id="breadcrumb">
+        <a href="@Url.Action("Index", "User")" title="Go to Home" class="tip-bottom"><i class="icon-home"></i>Home</a>
+        <a href="@Url.Action("Index","User")" class="current">用户</a>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="widget-box">
+        <div class="widget-title">
+            <span class="icon"><i class="icon-th"></i></span>
+            <h5>用户列表</h5>
+            <div class="pull-right">
+                <a href="@Url.Action("Create","User")" class="btn btn-default">新增</a>
+                @*<button class="btn btn-default">导入Excel</button>*@
+                <a href="@Url.Action("ExportUser")" class="btn btn-default">导出Excel</a>
+            </div>
+        </div>
+        <div class="widget-content nopadding">
+            <table class="table table-bordered data-table">
+                <thead>
+                    <tr>
+                        <th><input type="checkbox" id="title-checkbox" name="title-checkbox" /></th>
+                        <th>登录名</th>
+                        <th>姓名</th>
+                        <th>手机</th>
+                        <th>角色</th>
+                        @*<th>激活</th>*@
+                        <th>创建时间</th>
+                        <th>最后活跃时间</th>
+                        <th>编辑</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @*  这里要换成json 后台加载数据*@
+                    @foreach (var u in Model)
+                    {
+                        <tr>
+                            <td><input type="checkbox"  data-id="@u.Id" /></td>
+                            <td>@u.Username</td>
+                            <td>@u.RealName</td>
+                            <td>@u.Mobile</td>
+                            <td>@u.UserRoles.Aggregate((""), (current, r) => current + (r.Name + ","))</td>
+
+                            @*<td>
+                                @if (u.Active)
+                                {
+                                    <i class="icon-ok"></i>
+                                }
+                                else
+                                {
+                                    <i class="icon-remove"></i>
+                                }
+                            </td>*@
+                            <td>@u.CreateTime</td>
+                            <td>@u.LastActivityDateUtc</td>
+                            <td><a href="@Url.Action("Create","User",new{id=u.Id})">编辑</a></td>
+                        </tr>
+                    }
+                </tbody>
+                
+                <tfoot>
+                    <tr>
+                        <td colspan="8">
+                            <button id="dbt" class="btn btn-danger">删除</button>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<script src="~/Content/Js/user.js"></script>
+<script src="~/Content/Matrix_Admin/js/jquery.uniform.js"></script>
+<script src="~/Content/Matrix_Admin/js/select2.min.js"></script>
+<script src="~/Content/Matrix_Admin/js/jquery.dataTables.min.js"></script>
+<script src="~/Content/Matrix_Admin/js/matrix.tables.js"></script>
+ 

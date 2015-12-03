@@ -1,0 +1,10 @@
+﻿@model IEnumerable<ThankNet.Models.Example>
+
+ 
+
+<ul class="liststar">
+   @foreach (var p in Model)
+   {
+        <li><a href="@Url.Action("Details","Example",new {id=p.Id})">@p.ProjectName</a></li>
+   }
+</ul>

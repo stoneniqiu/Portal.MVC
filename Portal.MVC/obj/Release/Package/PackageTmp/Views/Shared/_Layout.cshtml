@@ -1,0 +1,142 @@
+﻿@using ThankNet.Controllers
+<!DOCTYPE html>
+<html>
+<!--[if IE 7 ]>    <html class="ie7" lang="en"> </html><![endif]-->
+<!--[if IE 8 ]>    <html class="ie8" lang="en"> </html><![endif]-->
+<!--[if IE 9 ]>    <html class="ie9" lang="en"> </html><![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<!--<![endif]--> 
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />
+    <meta content="餐饮软件，点餐宝，点餐系统" name="keywords" />
+    <meta content="尚可思互联科技有限公" name="description" />
+    <title>尚可思互联科技有限公司</title>
+
+    <link href="~/Content/CSS/bootstrap.css" rel="stylesheet" />
+    <link type="text/css" rel="stylesheet" href="~/Content/css/bootstrap-responsive.css" />
+    <link type="text/css" rel="stylesheet" href="~/Content/css/styles.css" />
+    <link type="text/css" rel="stylesheet" href="~/Content/css/styles-responsive.css" />
+    <!-- Styleswitch-->
+    <link type="text/css" rel="alternate stylesheet" media="screen" title="style1" href="~/Content/css/style1.css" />
+    <!-- Java Library -->
+    <script src="~/Content/Js/jquery.min.js"></script>
+
+    <script type="text/javascript" src="~/Content/components/BlackAndWhite/jquery.BlackAndWhite.min.js"></script>
+    <script type="application/javascript" src="~/Content/components/iscroll/iscroll.js"></script>
+    <script type="text/javascript" src="~/Content/components/vticker/jquery.vticker-min.js"></script>
+    <script type="text/javascript" src="~/Content/components/flexslider/jquery.flexslider-min.js"></script>
+    <script type="text/javascript" src="~/Content/components/touchTouch/touchTouch.jquery.js"></script>
+    <script type="text/javascript" src="~/Content/components/flickr/flickr.js"></script>
+    <!-- Styleswitch-->
+    <script type="text/javascript" src="~/Content/js/styleswitch.js"></script>
+    <!-- Library bootstrap 2.04-->
+    <script type="text/javascript" src="~/Content/js/bootstrap.min.js"></script>
+    <!-- //End Library bootstrap 2.04 -->
+
+ @*   <script type="text/javascript" src="~/Content/js/custom.js"></script>*@
+    <script type="text/javascript">
+        var myScroll;
+        function loaded() {
+            myScroll = new iScroll('weatherMore', { hScrollbar: false });
+        }
+    </script>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <style>
+        .toplog {
+    background-color: white;width: 100%;height:50px;margin-bottom: 20px;height: auto;
+}
+.toplog img{ vertical-align: baseline}
+.toplog form {
+    margin-right: 20px;margin-top: 30px;
+}
+.navbar .nav>li>a {
+    color:  #f4efef !important;
+}
+.navbar .nav>li>a:hover,.navbar .nav>li>a:active{color: white  !important;}
+.navbar a .active  {
+    color: white !important;
+}
+.thankstitle {
+    background-color:#5f5e5e;color: white;padding: 8px;text-indent: 10px;
+    border-left: 1px solid white;
+    	-webkit-box-shadow: #535353 0px 10px 10px -10px inset;
+	-moz-box-shadow: #535353 0px 10px 10px -10px inset;
+	box-shadow: #535353 0px 10px 10px -10px inset;
+} 
+.thankstitle a{ color: #c5bebe;font-size: x-small}
+.thankstitle a:hover{color: white}
+.contenttr td{ padding: 10px 0;font-size: small;color: #666}
+.contenttr td img{ height: 120px;width: 180px}
+#warp {
+    padding:30px;background-color: white;/*box-shadow: 0 0 5px;*/
+   
+}
+.contentable {
+    width: 100%; margin-top: 20px;
+}
+#sntd .flex-control-nav {
+    display: none
+}
+#sntd  a{color: gray}
+.redb{border: 1px red solid}
+.greenb{border: 1px solid green;}
+.qul{position: fixed;right: 20px;top: 120px;background-color: white;padding: 5px;opacity: 0.7}
+.qul li {padding: 2px;}
+.qul a span {font-size: small ; margin-left: 5px;color: #535353}
+.qul a span:hover{color: black}
+    </style>
+</head>
+<body>
+    <div class="bg-blacklight"></div>
+  
+    <div class="container  blackshadow bg-white" style="background-color: white; margin-top: 20px;" >
+        <div id="warp" class="" style=" ">
+            <div  class="toplog ">
+                <a href="@Url.Action("Index","Home")"> <img  class="" src="@BaseController.GetLogoUrl()" alt="" /></a>
+               
+                <div class="pull-right" style="height: 40px;">
+                    <form class="navbar-search " style="margin-top: 10px; " action="@Url.Action("ProudctIndex","Product")">
+                        <input type="text" class="search-query span2" placeholder="Search" />
+                    </form>
+                </div>     
+               
+            </div>
+            @*     <div class="navbar " style="background-color:#535353; display: none ">
+                <div class="container" style="">
+                    <a class="brand logo" href="#"><span>ThanksSST </span></a>
+                    <div class="nav-collapse" >
+                        <ul class="nav">
+                            <li class="active"><a href="~/" title="尚客思">首页</a></li>
+                            <li><a href="@Url.Action("About", "Company")">公司简介</a></li>
+                            <li><a href="@Url.Action("ProudctIndex", "Product")">公司产品</a></li>
+                            <li><a href="@Url.Action("CaseIndex", "Example")">案例分析</a></li>
+                            <li><a href="@Url.Action("ContactUs", "Company")">联系我们</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>*@
+            <div style="clear: both"></div>
+            <section class="" style="">
+                @RenderBody()
+                @*     @Html.Action("CompanyInfo", "Company")*@
+            </section>
+            <footer>
+                <div class=" copyright">
+                    &copy; Copyright &copy; 2014-2018 尚可思.By <a style="" href="http://www.cnblogs.com/stoneniqiu/">stoneniqiu</a> rights reserved.  &nbsp;&nbsp;&nbsp; 京ICP备14049936号
+                </div>
+            </footer>
+        </div>
+
+    </div>
+    <div>@Html.Action("QQlist","QQ")</div>
+    @*<script type="text/javascript"> var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://"); document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F9127641dcd8807b8bf426088e97a600b' type='text/javascript'%3E%3C/script%3E")) </script>*@
+    <!-- End  footer  -->
+
+    @* @Scripts.Render("~/bundles/jquery")*@
+    @RenderSection("scripts", required: false)
+</body>
+</html>

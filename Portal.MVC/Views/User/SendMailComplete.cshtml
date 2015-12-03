@@ -1,0 +1,39 @@
+﻿@{
+    ViewBag.Title = "修改密码";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/CSS/register-progress.css" rel="stylesheet" />
+
+<div class="container" style="width:1120px;" >
+    <div class="row-fluid divcontent">
+        
+        <div  style="margin-top: 40px;"></div>
+        <div class="register-progress clearfix hidden-xs hidden-sm">
+          <div class="pross pross-ok"><span class="index">1</span>输入登录帐号
+            <div class="pross-dir pross-dir-bg"><span class="outside"></span><span class="inside"></span></div>
+          </div>
+          <div class="pross pross-ok"><span class="index">2</span>找回密码方式
+            <div class="pross-dir  pross-dir-bg"><span class="outside"></span><span class="inside"></span></div>
+          </div>
+            <div class="pross pross-ok"><span class="index">3</span>修改密码
+               
+            </div>
+             
+          </div>
+        </div>
+        <div class="dwell">
+            <div  class="result" style="text-align: center">
+                @if (TempData["error"] != null)
+                {
+                    <div class="alert-error">
+                        @TempData["error"]
+                    </div>
+                }
+                else
+                {
+                 <div class="success-info">您的申请已提交成功，请查看您的 <span style="color:#2b8e57">@ViewBag.Email</span> 邮箱.</div>
+                }
+            </div>
+        </div>
+      
+    </div>

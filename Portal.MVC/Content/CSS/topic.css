@@ -1,0 +1,827 @@
+﻿/*整体布局*/
+
+
+.main-area {
+    width: 74%;
+    float: left;
+    padding-left: 5px;
+    margin-left: -8px;
+    margin-top: 20px;
+}
+.topics a {
+    color: #333;
+    font-weight: bold;
+}
+.main-area  a:hover {
+    color: #57b382;
+}
+.right-area {
+    float: right;
+    padding: 0;
+    width: 21.5555%;
+    margin-top: 45px;
+}
+.new-topic {
+    background-position: 20px 17px;
+    height: 64px;
+    width: 248px;
+    line-height: 64px;
+    background-image: url(../img/icon-btn.png);
+    background-repeat: no-repeat;
+    background-position: 36px 17px;
+    display: block;
+    font-size: 28px;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+    padding: 0 0 0 40px;
+    margin-bottom: 40px;
+    margin-top: 20px;
+    color: #ffffff;
+}
+/*话题筛选*/
+.topicscreen {
+   
+
+}
+.topicscreen ul {
+    font-size: 18px;
+    padding-left: 0;
+    list-style: none;
+    margin-bottom: 0;
+    float: left;
+    width: 100%;
+     border-bottom:1px solid #a9b1c9;
+    margin-top: 0;
+    padding-right: 50px;
+}
+ .clear {
+    clear: both;
+}
+
+.topicscreen li {
+    display: inline;
+    padding-bottom: 10px;
+    
+}
+
+.topicscreen li  a {
+    margin-right: 50px;
+      float: left;
+      font-size: 18px;
+      color: #424451;
+     padding: 5px 0;
+}
+li.active a {
+     color:#2e8b57;
+    border-bottom: 3px solid;
+}
+
+/*话题列表*/
+ul.topics {
+    -webkit-padding-start: 0;
+    list-style-type: none;
+    min-height: 600px;
+    margin-top: 5px;
+}
+ul.topics li {
+    border-bottom: 1px dashed #afb5cc;
+    padding: 10px 0;
+}
+.li-item {
+    width: 100%;
+}
+.com-rank {
+    float: left;
+    margin-right: 8px;
+}
+.summary {
+    margin-left: 10px;
+    overflow: auto;
+    overflow-x: hidden;
+}
+
+.com-count {
+    color: #fff;
+}
+.com-count,.look-count{
+    display: inline-block;
+    *display: inline;
+    zoom: 1; 
+    height: 40px;
+    width: 40px;
+    margin: 0 3px;
+    padding: 5px 0;
+    text-align: center;
+}
+.look-count {
+    background-color: #e7e7e7;
+}
+.com-count small,.look-count small {
+    font-size: 12px;
+    display:block;
+}
+
+ .avt {
+    float: left;
+    position: relative;
+    text-align: left;
+    margin-right: 10px;
+    width: 76px;
+    height: 76px;
+}
+.avt img {
+  display: block;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.avt em {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-break: keep-all;
+  max-width: 100%;
+  color: #81828c;
+  font-size: 13px;
+  margin-top: 6px;
+  width: 70px;
+}
+
+.avt-50 img {
+  height: 50px;
+  width: 50px;
+  max-width: 50px;
+}
+.topic {
+    overflow: hidden;
+}
+.topic h3 {
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+ul.author-info {
+    list-style-type: none;
+    font-size: 12px;
+    -webkit-padding-start: 0;
+    margin-bottom: 5px;
+    margin-top: 0;
+    color: gray;
+}
+ul.author-info li {
+    border-bottom-style: none;
+    display: inline;
+    margin-right: 10px;
+}
+.topic  .topictitle img {
+   
+    margin-bottom: 3px;
+}
+
+.topictitle {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-break: keep-all;
+    font-size: 16px;
+    line-height: 1;
+    margin-right: 10px;
+    height: 20px;
+    max-width: 70%;
+}
+
+.author-name {
+    color: #424451;
+   
+    display: inline-block;
+     *display: inline;
+    zoom: 1; 
+}
+.fans_numbox {
+    margin-left: 5px;
+}
+.fans_numbox .light {
+    color:#57B382;
+}
+.topiccontent {
+    margin-top: 16px !important;
+    overflow: hidden;
+    height: auto;
+    text-align: justify;
+}
+/*创建Topic弹出层*/
+
+
+.dialog-content {
+    border: none;
+    position: relative;
+    background-color: #ffffff;
+    outline: none;
+    margin: 0;
+    width: 860px;
+    border-radius: 10px;
+}
+
+.dialog-header {
+    background-color: #f8fafb;
+    border-bottom: 1px solid #e5e5e5;
+    padding: 15px 30px;
+    min-height: 16.428571429px;
+}
+
+
+.dialog-title {
+    margin: 0;
+    line-height: 1.428571429;
+}
+
+.icon-edit {
+    background-position: 0 -158px;
+    margin-right: 10px;
+    vertical-align: -2px;
+    height: 18px;
+    width: 18px;
+}
+
+.icon-btn {
+    background-image: url(../img/icon.png);
+    background-repeat: no-repeat;
+    display: inline-block;
+     *display: inline;
+    zoom: 1; 
+}
+.dialog-body {
+    max-height: 600px;
+    overflow: auto;
+    position: relative;
+    padding: 30px;
+}
+.dialog-body  .form-group{
+    margin: 0 0 10px 0;
+}
+.dialog-body .content {
+    float: left;
+    position: relative;
+    width: 700px;
+}
+.dialog-body .form-group > label {
+    float: left;
+    font-size: 16px;
+    font-weight: normal;
+    text-align: left !important;
+    padding: 9px 0 0;
+    width: 85px;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+.dialog-body  .form-control {
+    height: 40px;
+    line-height: 38px;
+    /*border-color: #cad2e1;*/
+}
+.dialog-body .limit-text {
+    position: absolute;
+    top: 10px;
+    right: 30px;
+    color: #57627f;
+}
+
+.dialog-body .btn-primary {
+    font-size: 18px;
+    padding: 7px 36px;
+    margin-left: 85px;
+    margin-top: 20px;
+}
+
+select#Categories {
+    margin-top: 5px;
+}
+.uploaddiv {
+    padding-top: 3px;
+    float: left;
+}
+.checkdiv {
+    padding: 8px;
+    margin-left: 250px;
+}
+.checkdiv .ckbox {
+    margin-right: 5px;
+}
+.checkdiv span {
+    font-size: 12px;
+    color: dodgerblue;
+}
+
+/*话题详细*/
+
+.topic-comments {
+    min-height: 550px;
+}
+.topic-show {
+    padding: 0 10px;
+}
+.list-view {
+     margin-top: 40px;
+   
+}
+.topimg {
+    margin-top: 20px;
+   
+}
+
+
+ @media (min-width: 768px) {
+   .topimg img {
+    width: 500px;
+    height: 295px;
+  }
+}
+@media (min-width: 992px) {
+  .topimg img {
+    width: 660px;
+      height: 390px;
+  }
+}
+@media (min-width: 1200px) {
+  .topimg img {
+     width: 786px;
+     height: 464px;
+  }
+}
+ 
+
+
+.detailcontent,.comment-content {
+    font-size: 16px;
+    line-height: 25px;
+    word-wrap: break-word;
+    padding: 0;
+    text-align: justify;
+    margin-top: 20px;
+}
+.detailcontent {
+    min-height: 600px;
+}
+.detailcontent p {
+    padding: 0;
+}
+.countcomment {
+    border-bottom: 1px solid #a9b1c9;
+    padding: 0 10px 8px;
+    margin-bottom: 20px;
+    position: relative;
+    zoom: 1;
+}
+.countcomment h3{
+    display: inline-block;
+     *display: inline;
+    zoom: 1; 
+    font-size: 18px;
+    line-height: normal;
+    font-weight: bold;
+}
+.list-view .bd{
+    /*border-top: 1px solid #a9b1c9;*/
+    margin-top: -21px;
+} 
+.list-view ul {
+    list-style-type: none;
+    -webkit-padding-start: 0;
+}
+.list-view ul > li {
+    border-bottom: 1px dashed #afb5cc;
+    min-height: 80px;
+    padding: 10px 0 0 10px;
+    position: relative;
+    zoom: 1;
+}
+.list-view ul .cont {
+    overflow: visible;
+    margin-top: 0;
+    margin-left: 93px;
+    margin-bottom: 0;
+}
+
+.list-view ul  .comment-reply-ctn ul{
+    border-radius: 5px;
+    background:#f8fafb;
+    /*border: 1px solid #e7e7e7;*/
+    position: relative;
+    margin: 0 0 10px;
+    padding: 0 10px 0;
+}
+
+.list-view ul .comment-reply-ctn li {
+    border-bottom: 1px dashed #e7e7e7;
+    padding:0 10px 0;
+    min-height: 0;
+}
+.list-view ul .list-view ul {
+    color: #81828c;
+    font-size: 12px;
+    text-align: right;
+    margin-bottom: 10px;
+    line-height: 18px;
+}
+.list-view ul .comment-reply-ctn .comment-text {
+    line-height: 24px;
+    margin-bottom: 8px;
+    min-height: 0;
+    font-size: 16px;
+    word-wrap: break-word;
+    overflow: hidden;
+}
+.list-view ul .comment-reply-ctn .comment-act {
+    margin-bottom: 5px;
+    overflow: hidden;
+    height: 18px;
+     color: #81828c;
+    font-size: 12px;
+    text-align: right;
+}
+   
+.list-view ul .comment-reply-ctn .comment-act .pubdate{
+    font-size: 11px;
+    margin: 0;
+    float: left;
+    color: #81828c;
+}
+.list-view ul .comment-reply-ctn .comment-act a {
+    font-size: 12px;
+    margin-bottom: 15px;
+    line-height: 18px;
+}
+.list-view ul .make-comments {
+    padding: 10px;
+    min-height: 55px;
+    zoom: 1;
+    margin: 0 0 10px;
+    background: #fff;
+    border: 1px solid #e7e7e7;
+    margin: 10px 0;
+    position: relative;
+}
+.list-view ul .make-comments .input-reply {
+    border: 1px solid #009aff;
+    height: 33px;
+    line-height: 23px;
+    padding: 5px 120px 5px 12px;
+    vertical-align: top;
+    border-radius: 3px;
+    width: 100%;
+}
+.list-view ul .make-comments .post-input-x {
+    position: absolute;
+    top: 18px;
+    right: 95px;
+    display: block;
+    width: 18px;
+    height: 18px;
+    border-radius: 9px;
+    line-height: 18px;
+    text-align: center;
+    color: #FFFFFF;
+    background: rgba(0, 152, 255, 0.5);
+    font-size: 12px;
+    cursor: pointer;
+}
+  
+.list-view ul .make-comments .btn {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    border-radius: 0 4px 4px 0;
+    padding: 0;
+    height: 33px;
+    width: 82px;
+}
+.handle-comment {
+    color: #81828c;
+    font-size: 12px;
+    text-align: right;
+    margin-bottom:0;
+    line-height: 18px;
+    margin-top: 10px;
+}
+.handle-comment .comment-time {
+    margin-right: 40px;
+}
+/*.list-view ul .comment-act span, .list-view ul .comment-act a {
+    margin-left: 15px;
+}*/
+
+.reply {
+    display: none;
+}
+.reply textarea {
+    margin: 0 15px 0 0;
+    height: 30px;    
+}
+
+.commentarea {
+    margin-top: 200px;
+    margin-bottom: 80px;
+}
+.commentarea .btn{
+    margin-top: 20px;
+    height: 35px;
+    line-height: 30px;
+    font-size: 18px;
+    padding: 0 30px;
+    border-radius: 6%;
+}
+.replylist {
+    -webkit-padding-start: 0;
+}
+.avt div{ color: gray;margin-top: 5px;  font-size: 12px;text-align: center !important;width: 50px;}
+
+/*热门话题排行*/
+
+.hot-topic-rank {
+  margin-top: 20px;
+  padding: 0 0 8px;
+  position: relative;
+}
+.hot-nav ,.area-nav{
+    margin-bottom: 20px;  
+    border-bottom:1px solid #a9b1c9;
+}
+.hot-nav h3 ,.area-nav h3{
+    display: inline-block;
+     *display: inline;
+    zoom: 1; 
+    padding-bottom: 10px;
+    line-height: normal;
+    font-size: 23px;
+}
+.hot-nav .time-rank{
+   position: absolute;
+    bottom: 0;
+    right: 0;
+    list-style-type: none;
+    margin: 0 8px 250px;
+   
+}
+.hot-nav .time-rank li{
+    float: left;
+    padding-bottom: 10px;
+    display: block;
+}
+.hot-nav .time-rank li a {
+     color:#424451;
+     margin: 0 15px;
+}
+.hot-nav .time-rank li.active {
+    border-bottom: 3px solid #2e8b57;
+}
+.hot-nav .time-rank li.active a {
+     color: #2e8b57;
+}
+ .rank-list,.area-list {
+    -webkit-padding-start: 0;
+     list-style: none;
+}
+.hot-top {
+    padding: 0;
+    margin-bottom: 15px;
+}
+.topic-area {
+    margin-bottom: 100px;
+}
+.area-list li {
+    padding: 0;
+    margin-bottom: 15px;
+    float: left;
+    width: 46%;
+    max-width: 100%;
+}
+.area-list li a {
+    color: #000;
+}
+.area-list li.active a,.area-list li a:hover,.area-list li a.active {
+    color: #2e8b57;
+}
+
+
+.hot-top .num {
+    font-size: 20px;
+    font-style: italic;
+    margin-right: 10px;
+}
+.hot-top .num:after {
+    content: ".";
+}
+.hot-topic-rank .rank-list li:first-child .num {
+    color: #ff0012;
+}
+.hot-topic-rank .rank-list li:first-child + li .num {
+    color: #ff6000;
+}
+.hot-topic-rank .rank-list li:first-child + li + li .num {
+    color: #f80;
+}
+.hot-top a {
+    color: #424451;
+    font-size: 15px;
+    text-align: justify;
+}
+
+.hot-topic-rank .rank-list .info {
+    display: none;
+    margin-left: 31px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 13px;
+    padding: 0;
+}
+.hot-topic-rank .rank-list .info span {
+    margin-right: 8px;
+    
+}
+.hot-topic-rank .rank-list .info span.light {
+   color: #e13d30;
+    margin-left: 8px;
+}
+
+.hot-topic-rank .rank-list .show {
+    display: block;
+}
+
+
+.help-inline {
+    color: #ff0000;
+}
+.border-line{
+    border-color: #ff0000;
+}
+
+
+/*官方动态*/
+
+.count-topics .light {
+    color: #e13d30;
+}
+.count-topics span {
+    font-size: 13px;
+    color: #81828c;
+    margin: 0 5px;
+}
+.count-topics span:first-child {
+    margin-left: 0;
+}
+.government {
+    margin-top: 20px;
+}
+.government h2 {
+    padding: 10px 0;
+    border-bottom: 1px solid #a9b1c9;
+    font-weight: normal;
+}
+.government ul {
+    list-style-type: none;
+    
+}
+.government ul li {
+    float: left;
+    width: 48%;
+    height: 155px;
+  margin-bottom: 40px;
+}
+.government .title {
+    margin-bottom: 15px;
+    font-size: 18px;
+    
+}
+.government .title a {
+    color:#424451;
+}
+.government .cont img{
+    width: 160px;
+    height: 114px;
+    float: left;
+}
+
+.government .cont .right-cont {
+    float: right;
+    width: 170px;
+    margin-right: 35px;
+   
+   
+}
+.government .cont .abstract{
+    font-size: 14px;
+    line-height: 1.5em;
+}
+.government .cont a {
+    font-size: 14px;
+    color: #2e8b57;
+    margin-top: 10px;
+    display: block;
+}
+.count-topics {
+    margin-bottom: 30px;
+}
+/*版块页面*/
+.section-box {
+    margin: 10px auto 30px 0;
+}
+.section-box img {
+    width: 80px;
+    height: 80px;
+    float: left;
+}
+.section-box  .cont {
+  padding-left: 90px;
+}
+
+.section-box  .cont h2 {
+    padding-top: 10px;
+    font-weight: normal;
+    font-size: 28px;
+}
+
+.carousel-control,.carousel-inner {
+    border-radius: 5px;
+   
+}
+
+.carousel-inner .item img {
+    min-height: 182px;
+}
+
+
+/*话题置顶，删除等*/
+
+.management-topic {
+    padding-top: 5px;
+    border-bottom: 1px dashed;
+    margin-bottom: 20px;
+}
+.management-topic ul li {
+    list-style-type: none;
+    margin-right: 10px;
+    float: left;
+  
+}
+.management-topic a {
+  border: 1px solid #1e90ff; 
+  text-align: center;
+  padding: 5px;
+  border-radius: 5px;
+  background-color: #1e90ff;
+  color: #ffffff;
+  font-size: 12px;
+}
+.management-topic a:hover {
+    color: #ffffff;
+}
+.management-topic a span {
+    margin-right: 5px;
+}
+.management-topic span.return-to-list {
+    float: right;
+}
+
+.management-topic:after {
+    display: block;
+    content: ".";
+    visibility: hidden;
+    clear: both;
+}
+
+/*推荐*/
+.recommend {
+    width: 75px;
+    height: 75px;
+    cursor: pointer;
+    margin-top: 40px;
+    margin-bottom: 80px;
+    bottom: 100px;
+    position: fixed;
+}
+.recommend .num {
+    font-size: 14px;
+    text-align: center;
+    padding: 10px 0;
+    background-color: #fafad2;
+    border-bottom: 1px solid #fafad2;
+    color: #1e90ff;
+}
+.recommend .act {
+    background-color: #f8f8ff;
+    font-size: 14px;
+    padding: 10px;
+    color: #009aff;
+}
+
+.recommend .act .glyphicon-thumbs-up {
+    margin-right: 5px;
+    margin-left: 0;
+}
+
+
+.up-info {
+    font-size: 12px;
+    text-align: center;
+   width: 75px;
+}
+                  
