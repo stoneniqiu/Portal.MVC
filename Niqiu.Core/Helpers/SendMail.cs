@@ -122,18 +122,18 @@ namespace Niqiu.Core.Helpers
             MailPort = 25;
             UseSSL = false;
 
-            MailhostUsername = "Dawn.wang";
-            MailhostPassword = "Delta123456";
-            FromAddress = "DAWN.WANG@DELTAWW.COM.CN";
-            MailHost = "172.17.161.8";
+            //MailhostUsername = "Dawn.wang";
+            //MailhostPassword = "Delta123456";
+            //FromAddress = "DAWN.WANG@DELTAWW.COM.CN";
+            //MailHost = "172.17.161.8";
 
-            //MailhostPassword = "stone123";
-            //FromAddress = "stonzrj@163.com";
-            //MailHost = "smtp.163.com";
-            //MailhostUsername = "stonzrj";
+            MailhostPassword = "stone123";
+            FromAddress = "stonzrj@163.com";
+            MailHost = "smtp.163.com";
+            MailhostUsername = "stonzrj";
         }
 
-        public SendMail(string fromemail,string name, string pwd, string host)
+        public SendMail(string fromemail, string name, string pwd, string host)
         {
             FromAddress = fromemail;
             MailhostUsername = name;
@@ -187,6 +187,6 @@ namespace Niqiu.Core.Helpers
         }
 
 
-       
+
     }
 }
