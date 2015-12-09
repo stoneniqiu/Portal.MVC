@@ -200,7 +200,6 @@
 </html>
 
 <script>
-
     window.onload = function () {
         var pathname = location.pathname.substr(1);
         var token;
@@ -243,29 +242,45 @@
         $(".header-nav").children(navItem).children("a").css("color", "#57b382");
     }
 
-    //给导航栏栏目添加下拉列表，当鼠标放在栏目上面时显示出来。
-    $(".header-nav li").bind("mouseenter", function () { $(this).children("ul").slideDown(); })
-                       .bind("mouseleave", function () { $(this).children("ul").slideUp(); });
-    $("ul.items").bind("mouseleave", function () {
-        //隐藏列表
-        $(this).slideUp();
-    });
-
-    //返回页面顶部
-    $(".jump-top a").bind("mouseenter", function () {
-
-    }).bind("mouseleave", function () {
-
-    });
-
-    $(window).scroll(function () {
-        if ($("body").scrollTop() == 0) {
-            $(".jump-top").css("visibility", "hidden");
-        } else {
-            $(".jump-top").css("visibility", "visible");
+    $(function () {
+        toastr.options = {
+            "closeButton": false,
+            "debug": false,
+            "positionClass": "toast-bottom-right",
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "3000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
         }
 
-    });
+        //给导航栏栏目添加下拉列表，当鼠标放在栏目上面时显示出来。
+        $(".header-nav li").bind("mouseenter", function () { $(this).children("ul").slideDown(); })
+                           .bind("mouseleave", function () { $(this).children("ul").slideUp(); });
+        $("ul.items").bind("mouseleave", function () {
+            //隐藏列表
+            $(this).slideUp();
+        });
 
- 
+        //返回页面顶部
+        $(".jump-top a").bind("mouseenter", function () {
+
+        }).bind("mouseleave", function () {
+
+        });
+
+
+        $(window).scroll(function () {
+            if ($("body").scrollTop() == 0) {
+                $(".jump-top").css("visibility", "hidden");
+            } else {
+                $(".jump-top").css("visibility", "visible");
+            }
+
+        });
+    });
 </script>

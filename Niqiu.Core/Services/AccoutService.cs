@@ -50,7 +50,7 @@ namespace Niqiu.Core.Services
                    pwd = password;
                    break;
            }
-           bool isValid = Encrypt.GetMd5Code(pwd) == user.Password;
+           bool isValid = Encrypt.GetMd5Code(password) == user.Password;
            if (!isValid)
                return UserLoginResults.WrongPassword;
 

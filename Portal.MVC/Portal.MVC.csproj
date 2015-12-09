@@ -194,6 +194,10 @@
     <Content Include="Content\Photos\index2.png" />
     <Content Include="Content\Photos\index3.png" />
     <Content Include="Content\Photos\index4.png" />
+    <Content Include="Content\toastr\toastr.css" />
+    <Content Include="Content\toastr\toastr.js" />
+    <Content Include="Content\toastr\toastr.min.css" />
+    <Content Include="Content\toastr\toastr.min.js" />
     <Content Include="Content\user_img.jpg" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
