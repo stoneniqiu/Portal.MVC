@@ -21,3 +21,14 @@ D:\VS2013\Portal.MVC\Portal.MVC\Niqiu.Core\bin\Debug\zh-Hans\EntityFramework.Sql
 D:\VS2013\Portal.MVC\Portal.MVC\Niqiu.Core\obj\Debug\Niqiu.Core.dll
 D:\VS2013\Portal.MVC\Portal.MVC\Niqiu.Core\obj\Debug\Niqiu.Core.pdb
 D:\VS2013\Portal.MVC\Portal.MVC\Niqiu.Core\obj\Debug\Niqiu.Core.csprojResolveAssemblyReference.cache
+D:\all in one\Git\Portal.MVC\Niqiu.Core\bin\Debug\Niqiu.Core.dll
+D:\all in one\Git\Portal.MVC\Niqiu.Core\bin\Debug\Niqiu.Core.pdb
+D:\all in one\Git\Portal.MVC\Niqiu.Core\bin\Debug\EntityFramework.dll
+D:\all in one\Git\Portal.MVC\Niqiu.Core\bin\Debug\EntityFramework.SqlServer.dll
+D:\all in one\Git\Portal.MVC\Niqiu.Core\bin\Debug\EntityFramework.xml
+D:\all in one\Git\Portal.MVC\Niqiu.Core\bin\Debug\EntityFramework.SqlServer.xml
+D:\all in one\Git\Portal.MVC\Niqiu.Core\bin\Debug\zh-Hans\EntityFramework.resources.dll
+D:\all in one\Git\Portal.MVC\Niqiu.Core\bin\Debug\zh-Hans\EntityFramework.SqlServer.resources.dll
+D:\all in one\Git\Portal.MVC\Niqiu.Core\obj\Debug\Niqiu.Core.csprojResolveAssemblyReference.cache
+D:\all in one\Git\Portal.MVC\Niqiu.Core\obj\Debug\Niqiu.Core.dll
+D:\all in one\Git\Portal.MVC\Niqiu.Core\obj\Debug\Niqiu.Core.pdb
