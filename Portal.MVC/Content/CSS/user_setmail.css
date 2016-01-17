@@ -1,0 +1,52 @@
+﻿ .rlf-btn-gray, .rlf-btn-blue {
+    display: inline-block;
+      margin-top: 10px;
+    color: #7e878c;
+    font-size: 14px;
+    background-color: #d0d6d9;
+    height: 40px;
+    line-height: 40px;
+    width: 140px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.2s;
+    -webkit-transition: background-color 0.2s;
+    -moz-transition: background-color 0.2s;
+    -o-transition: background-color 0.2s;
+}
+.rlf-btn-green {
+      margin-top: 10px;
+    color: #fff;
+    font-size: 14px;
+    background-color: #48CA9D;
+    display: inline-block;
+    height: 40px;
+    line-height: 40px;
+    width: 160px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.2s;
+    -webkit-transition: background-color 0.2s;
+    -moz-transition: background-color 0.2s;
+    -o-transition: background-color 0.2s;
+}.setting-verify .verify-un {
+    display: inline-block;
+    color: #fcb700;
+    padding-bottom: 6px;
+}.setting-verify h1 {
+    font-size: 18px;
+}.setting-verify p {
+    font-size: 20px;
+    margin: 14px 0 20px;
+}  .rlf-btn-blue {
+    color: #fff;
+    background-color: #58b9e6;
+}.setting-verify {
+     padding-top: 50px;
+ }.verified-status i {
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    margin-bottom: 10px;
+    background: url(../../Content/img/validmail-icon.png) no-repeat;
+}

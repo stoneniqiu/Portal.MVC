@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Globalization;
 using System.Linq;
 using System.Web.Mvc;
 using Ninject;
+using Niqiu.Core.Domain.Config;
 using Niqiu.Core.Domain.User;
 using Niqiu.Core.Helpers;
 using Niqiu.Core.Services;
@@ -207,6 +209,97 @@ namespace Portal.MVC.Controllers
             return View();
         }
 
+        public ActionResult ValidComplete(string name, string active = "")
+        {
+            if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(active))
+            {
+                TempData["error"] = "链接有误";
+
+                return View();
+            }
+
+            string username = Encrypt.DecryptString(name);
+            User user = _service.GetUserByUsername(username);
+            //已经激活
+            if (user.Active)
+            {
+                return View();
+            }
+            try
+            {
+                ViewBag.Email = user.Email;
+                string activetime = Encrypt.DecryptString(active);
+                var time = Convert.ToDateTime(activetime);
+                if (DateTime.Now > time.AddHours(1))
+                {
+                    TempData["error"] = "链接已经失效";
+                }
+                else
+                {
+                    user.Active = true;
+                    _service.UpdateUser(user);
+                }
+            }
+            catch
+            {
+                TempData["error"] = "验证失败";
+            }
+
+            return View();
+        }
+
+
+
+        public ActionResult ValidMail(string name)
+        {
+            User user = _service.GetUserByUsername(name);
+
+            if (user == null) return View("NoData");
+
+
+            if (!user.Active)
+            {
+                ViewBag.Email = user.Email;
+                //发送邮件
+                string relative = Url.Action("ValidComplete", "Account",
+                    new
+                    {
+                        name = Encrypt.EncryptString(user.Username),
+                        active = Encrypt.EncryptString(DateTime.Now.ToString(CultureInfo.InvariantCulture))
+                    });
+                var timenow = DateTime.Now;
+
+                if (Request.Url != null)
+                {
+                    string url = Request.Url.OriginalString.Replace(Request.Url.PathAndQuery, "") + relative;
+
+                    string alink = string.Format("<a href='{0}'>{1}</a>", url, "点击这里确认您的账号");
+                    string content =
+                        string.Format("亲爱的用户 {0}: 您好，您已成功注册{4}在线账号，您可以下载{4}相关资料并获得相关资讯和技术支持！<br /> <br />" +
+                                      "{1}" +
+                                      " 如果上面的链接点击无效，请将下面的地址复制到浏览器中<br />" +
+                                      "{2}<br /><br />注意:请您在收到邮件1个小时内({3}前)使用，否则该链接将会失效。<br /><br />",
+                            user.Username, alink, url, timenow.AddHours(1), PortalConfig.WebSiteName);
+
+                    _workContext.AsyncSendMail(user.Email, content, "邮箱激活");
+                }
+
+                //获得服务器地址  是outlook 就打开邮箱
+                var str = user.Email.Split('@')[1];
+                ViewBag.Server = "http://mail." + str;
+            }
+            else
+            {
+                return RedirectToAction("ValidComplete",
+                    new { name = Encrypt.EncryptString(user.Username), active = "valided" });
+                //返回到已经激活页面
+            }
+
+            // _portalContext.AsyncSendMail(user.Email, "注册成功！谢谢你的支持", "注册成功");
+            //用户邮箱
+            //用户邮箱网站 比如163.com
+            return View();
+        }
 
 
         #endregion

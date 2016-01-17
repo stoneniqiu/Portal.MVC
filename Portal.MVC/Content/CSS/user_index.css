@@ -2,7 +2,7 @@
   padding-top: 170px;
   height: 60px;
   border-bottom: 1px solid #dbd9da;
-  background: #f5ecea url(../img/bg-head.jpg) no-repeat center 0;
+  background: #f5ecea url(/Content/img/bg-head.jpg) no-repeat center 0;
 }
 .uc-hd .info {
   position: relative;
@@ -103,52 +103,52 @@
 .uc-sd i {
   float: left;
   display: inline-block;
-  margin-right: 6px;
+  margin-left: 6px;
   width: 24px;
   height: 24px;
-  background: url(../img/icons24x24.png) no-repeat;
+  background: url(/Content/img/icons24x24.png) no-repeat;
 }
 .uc-sd .icon-course {
-  background-position: 0px 0px;
+  background-position: 0 0;
 }
 .uc-sd .icon-collect {
-  background-position: 0px -24px;
+  background-position: 0 -24px;
 }
 .uc-sd .icon-exercise {
-  background-position: 0px -264px;
+  background-position: 0 -264px;
 }
 .uc-sd .icon-order {
-  background-position: 0px -48px;
+  background-position: 0 -48px;
 }
 .uc-sd .icon-exchange {
-  background-position: 0px -72px;
+  background-position: 0 -72px;
 }
 .uc-sd .icon-schoolarship {
-  background-position: 0px -96px;
+  background-position: 0 -96px;
 }
 .uc-sd .icon-xcoin {
-  background-position: 0px -120px;
+  background-position: 0 -120px;
 }
 .uc-sd .icon-xcounpon {
-  background-position: 0px -144px;
+  background-position: 0 -144px;
 }
 .uc-sd .icon-counpon {
-  background-position: 0px -168px;
+  background-position: 0 -168px;
 }
 .uc-sd .icon-chat {
-  background-position: 0px -192px;
+  background-position: 0 -192px;
 }
 .uc-sd .icon-message {
-  background-position: 0px -216px;
+  background-position: 0 -216px;
 }
 .uc-sd .icon-classmate {
-  background-position: 0px -240px;
+  background-position: 0 -240px;
 }
 .uc-sd .icon-certify {
-  background-position: 0px -288px;
+  background-position: 0 -288px;
 }
 .uc-sd a:hover .icon-course, .uc-sd .active .icon-course {
-  background-position: -24px 0px;
+  background-position: -24px 0;
 }
 .uc-sd a:hover .icon-collect, .uc-sd .active .icon-collect {
   background-position: -24px -24px;
@@ -424,7 +424,7 @@ table tr:nth-child(odd) td {
   line-height: 28px;
   font-size: 20px;
   color: #676767;
-  background: url(../../images/common/icon-logo.png) no-repeat 0 center;
+  background: url(/Content/images/common/icon-logo.png) no-repeat 0 center;
 }
 .ex-hd .hd > p {
   margin-top: 8px;
@@ -597,7 +597,7 @@ table tr:nth-child(odd) td {
   float: left;
 }
 .uc-msg .check {
-  margin: 25px 20px 0 0px;
+  margin: 25px 20px 0 0;
   width: 14px;
   height: 14px;
 }
@@ -827,7 +827,7 @@ table tr:nth-child(odd) td {
   border: 1px solid #cad2e1;
   border-radius: 5px;
   margin-right: 10px;
-  vertical-align: middle\0;
+  vertical-align: middle;
   height: 38px;
 }
 .uc-form .btns {
@@ -1582,7 +1582,7 @@ table tr:nth-child(odd) td {
   border: 1px solid #e5e5e5;
 }
 .uc-data .avt span {
-  display: none;
+    display: none;
   position: absolute;
   top: 5px;
   left: 5px;
@@ -1590,12 +1590,14 @@ table tr:nth-child(odd) td {
   width: 140px;
   height: 140px;
   text-align: center;
-  background: rgba(0, 0, 0, 0.5);
+    background: #000000;
+    background: rgba(0, 0, 0, 0.5);
   background: black \9;
   filter: alpha(opacity=80) \9;
   font-size: 16px;
   cursor: pointer;
 }
+
 .uc-data .avt i {
   display: block;
   margin-bottom: 5px;
@@ -1681,7 +1683,7 @@ ul.collect .num,ul.mytopics .num {
     font-size: 16px;
     font-style: italic;
     margin-right: 10px;
-    color: #57B382;
+    color: #4074e1;
 }
 
 ul.collect .num::after,ul.mytopics .num::after {
@@ -1704,20 +1706,20 @@ ul.collect li a.title,ul.mytopics .num::after {
 
 
 .menu-active {
-    background-color: #57B382;
+    background-color: #4074e1;
     border-radius: 20px;
-  
 }
+.menu-active .icon{ margin-left: 10px;}
 .menu-active a {
     color: #ffffff;
 }
-.uc-bd ul{ margin-top: 0;}
+
 ul.menuul {
+    width: 120px;
+    margin-top: 10px;
 }
- .sd li h3{ margin-top: 10px !important;}
-  .sd li ul{ padding-left: 10px;}
 ul.menuul li a span {
-   padding-left: 10px;
+    margin-left: 4px;
 }
 .pwdform {
     padding-left: 14px;
@@ -1755,7 +1757,7 @@ ul.menuul li a span {
 
  .required-char {
      font-size: 14px;
-     width: 50px;
+     width: 85px;
      margin-right: 40px;
  }
 .required-char i{
@@ -1764,10 +1766,11 @@ ul.menuul li a span {
 }
 
 .holdbox{ margin: 10px 15%;} .holdbox ul{ list-style: none;}
-.holdbox ul li span{ display: inline-block;width: 85px; }
+.holdbox ul li span{ display: inline-block;  }
 .holdbox ul li{ padding: 10px;}
 
-
+.menuul{ padding: 0;}
+ul.sd h3{ margin-top: 0;}
 .forget {
     font-size: 12px;
     text-decoration: underline;
@@ -1790,3 +1793,4 @@ ul.menuul li a span {
     padding-left: 10px;
 }
 
+#info ul{ margin: 0;}

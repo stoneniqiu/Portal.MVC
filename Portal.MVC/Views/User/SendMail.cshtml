@@ -2,9 +2,8 @@
     ViewBag.Title = "找回密码方式";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 <link href="~/Content/CSS/register-progress.css" rel="stylesheet" />
-<div class="container" style="width:1120px;">
+<div class="container">
     <div class="row-fluid divcontent">
         
         <div  style="margin-top: 40px;"></div>
@@ -39,7 +38,6 @@
                     $("#yanzheng").bind("click", function() {
                         this.src = "../User/GetValidateCode?time=" + (new Date()).getTime();
                     });
-
                     $("#code").blur(function() {
                         var code = $("#code").val();
                         if ($.trim(code) != "") {
@@ -50,8 +48,6 @@
                             });
                         }
                     });
-
-
                     $("#nextbt").click(function() {
                         var code = $("#code").val();
                         if ($.trim(code) != "") {
@@ -66,10 +62,7 @@
                             $.infoShow("请输入验证码");
                             return;
                         }
-
-
                     });
-
                     $.extend({
                         infoShow: function (txt, type) {
                             $(".errorinfo").html(txt).show();
@@ -86,5 +79,4 @@
                 });
            </script>
         </div>
-      
     </div>

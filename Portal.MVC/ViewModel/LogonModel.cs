@@ -41,7 +41,20 @@ namespace Portal.MVC.ViewModel
 
 
     }
+    public class EmailModel
+    {
+        [Required]
+        [DataType(DataType.Password)]
+        [Display(Name = "当前密码:")]
+        public string OldPassword { get; set; }
 
+        [Required]
+        [DataType(DataType.EmailAddress)]
+        [Display(Name = "Email")]
+        [Remote("CheckMail", "User", ErrorMessage = "该邮箱已经存在！")]
+        [RegularExpression(@"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}", ErrorMessage = "请输入正确的email")]
+        public string Email { get; set; }
+    }
     public class LocalPasswordModel
     {
         [Required]

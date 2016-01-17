@@ -1,0 +1,53 @@
+﻿@{
+    ViewBag.Title = "ValidComplete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/CSS/account/validComplete.css" rel="stylesheet" />
+
+<div class="container">
+    <div class="wwrap wrap-boxes">
+        <div class="wheader-wrap">
+            <h1>邮箱验证</h1>
+        </div>
+        @if (TempData["error"] == null)
+        {
+            <div class="result-container sent-success">
+                <i class="icon icon-ok-sign"></i>
+                <h1>恭喜您的邮箱验证成功</h1>
+                <p>你的邮箱 @ViewBag.Email 验证成功</p>
+                <p><span id="count"><strong>5</strong></span>秒后跳转到首页</p>
+                <div class="bottom">
+                    <a href="@Url.Action("Index", "Home")"  class="sbtn-green rlf-btn-green">返回首页</a>
+                </div>
+            </div>
+        
+        }
+        else
+        {
+            <div class="result-container sent-success">
+                <i class="icon icon-warning-sign"></i>
+                <h1 class="alert alert-error">@TempData["error"]</h1>
+                <p><span id="count"><strong>5</strong></span>秒后跳转到首页</p>
+                <div class="bottom">
+                    <a href="@Url.Action("ValidMail")"class="sbtn-green rlf-btn-green" >重新验证</a>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>
+
+
+
+<script>
+    var count = 5;
+    function check() {
+        if (count == 0) {
+            location.href = "/Home";
+        } else {
+            count--;
+            $("#count strong").html(count);
+        }
+    }
+    setInterval(check, 1000);
+</script>

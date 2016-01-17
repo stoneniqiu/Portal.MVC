@@ -4,10 +4,8 @@
 }
 <link href="~/Content/CSS/register-progress.css" rel="stylesheet" />
 
-
-<div class="container" style="width:1120px;">
+<div class="container">
     <div class="row-fluid divcontent">
-        
         <div  style="margin-top: 40px;"></div>
         <div class="register-progress clearfix">
             <div class="pross pross-ok"><span class="index">1</span>输入登录帐号
@@ -17,7 +15,6 @@
                 <div class="pross-dir"><span class="outside"></span><span class="inside"></span></div>
             </div>
             <div class="pross"><span class="index">3</span>修改密码
-              
             </div>
           </div>
         </div>
@@ -63,27 +60,27 @@
         });
 
 
-        $("#zhanghao").keyup(function() {
-            var name = $("#zhanghao").val();
-            if ($.trim(name) != "") {
-                $.get("/User/CheckUserName", { username: name }, function(data) {
-                    if (data == false) {
-                        $.infoShow("账户不存在");
-                    }
-                });
-            }
-        });
+        //$("#zhanghao").keyup(function() {
+        //    var name = $("#zhanghao").val();
+        //    if ($.trim(name) != "") {
+        //        $.get("/User/CheckUserName", { username: name }, function(data) {
+        //            if (data == false) {
+        //                $.infoShow("账户不存在");
+        //            }
+        //        });
+        //    }
+        //});
 
-        $("#code").keyup(function () {
-            var code = $("#code").val();
-            if ($.trim(code) != "") {
-                $.get("/User/CheckvCode", { code: code }, function (data) {
-                    if (data != 1) {
-                        $.infoShow(data);
-                    } 
-                });
-            }
-        });
+        //$("#code").keyup(function () {
+        //    var code = $("#code").val();
+        //    if ($.trim(code) != "") {
+        //        $.get("/User/CheckvCode", { code: code }, function (data) {
+        //            if (data != 1) {
+        //                $.infoShow(data);
+        //            } 
+        //        });
+        //    }
+        //});
 
         $("#nextbt").click(function() {
             var name = $("#zhanghao").val();

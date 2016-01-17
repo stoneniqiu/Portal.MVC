@@ -1,0 +1,45 @@
+﻿@{
+    ViewBag.Title = "SetEmail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model Niqiu.Core.Domain.User.User
+<link href="~/Content/CSS/golab.css" rel="stylesheet" />
+<link href="~/Content/CSS/user_index.css" rel="stylesheet" />
+<link href="~/Content/CSS/user_setmail.css" rel="stylesheet" />
+
+
+@Html.Action("PartInfo", "User")
+<div class="container" style="padding-left: 22px;">
+    <div class="uc-bd wp mt40">
+        @Html.Partial("UserNav", "checkmail")
+        <div class="mn">
+            <div class="uc-wp">
+
+                <div class="hd">
+                    <h2 class="fl">邮箱验证</h2>
+                </div>
+                <div class="text-center">
+                    <div class="setting-verify">
+                        <p>@Model.Email</p>
+                        @if (Model.Active)
+                        {
+                            <div class="verify-status verified-status">
+                                <i class="verify-on-icon"></i>
+                                <div>邮箱已验证</div>
+                            </div>
+                            <a href="@Url.Action("ChangeMail")" class="js-resetemail rlf-btn-green">更改邮箱</a>
+                        }
+                        else
+                        {
+                            <div class="verify-status">
+                                <span class="verify-un">邮箱未验证</span>
+                            </div>
+                            <a id="verify-btn-sent" class="rlf-btn-green" href="@Url.Action("ValidMail", "Account", new { name = Model.Username })">发送验证邮件</a>
+                            <a href="@Url.Action("ChangeMail")" class="js-resetemail rlf-btn-green">更改邮箱</a>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

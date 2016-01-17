@@ -1,0 +1,54 @@
+﻿@model Portal.MVC.ViewModel.EmailModel
+
+@{
+    ViewBag.Title = "ChangeMail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/CSS/golab.css" rel="stylesheet" />
+<link href="~/Content/CSS/user_index.css" rel="stylesheet" />
+
+
+ @Html.Action("PartInfo","User")
+<div class="container" style="padding-left:22px;">
+    <div  class="uc-bd wp mt40" >
+        @Html.Partial("UserNav", "checkmail")
+
+                    <div class="mn" >
+                        <div class="uc-wp">
+    <div class="hd">
+        <h2 class="fl">修改邮箱</h2>
+    </div>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        @Html.Partial("info")
+        <div class="holdbox">
+            <ul>
+                <li>
+                    <span class="required-char"><i>*</i>密码：</span>
+                    @Html.PasswordFor(m => m.OldPassword, new { @class = "logon-control" })
+                    @Html.ValidationMessageFor(m => m.OldPassword)
+
+                </li>
+                <li>
+                    <span class="required-char"><i>*</i>邮箱：</span>
+                    @Html.TextBoxFor(m => m.Email, new { @class = "logon-control" })
+                    @Html.ValidationMessageFor(m => m.Email)
+                </li>
+                <li>
+                    <input type="submit" class="btn btn-primary "style="background-color: #57b382;border-color: #228b22;" value="确定修改" />
+                </li>
+            </ul>
+        
+        </div> 
+ 
+    }
+                            
+                            </div>
+                  </div>
+              </div>
+    </div>
+<script src="~/Scripts/jquery-validate/jquery.unobtrusive-ajax.min.js"></script>
+<script src="~/Scripts/jquery-validate/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery-validate/jquery.validate.unobtrusive.min.js"></script>

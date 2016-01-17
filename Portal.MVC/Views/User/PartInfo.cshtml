@@ -1,0 +1,14 @@
+﻿@model Niqiu.Core.Domain.User.User
+
+ <div id="bd">
+     <div class="uc-hd">
+        <div class="wp">
+           <div class="info fl">
+                <a class="avt" href="@Url.Action("Index","User")">
+                    <img src="@Model.ImgUrl" alt="用户" />    
+                </a>
+                <a class="fl" style="color: #4074e1;"href="@Url.Action("Index","User")">@Model.Username</a>
+           </div>
+       </div>
+    </div>   
+</div>   

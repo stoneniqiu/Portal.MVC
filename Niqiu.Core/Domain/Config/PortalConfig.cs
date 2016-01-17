@@ -11,6 +11,8 @@ namespace Niqiu.Core.Domain.Config
       public const string PortalCacheStatic = "portal_cache_static";
       public const string PortalCacheRequest = "portal_cache_per_request";
 
-      
+        public const string WebSiteName = "书山有路";
+
+
     }
 }

@@ -1,34 +1,46 @@
 ﻿@{
     ViewBag.Title = "个人中心";
-    Layout = "~/Views/Shared/_UserCenter.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-                   
-    <div class="hd">
-        <h2 class="fl">基本资料</h2>
+<link href="~/Content/CSS/golab.css" rel="stylesheet" />
+<link href="~/Content/CSS/user_index.css" rel="stylesheet" />
+
+@model Niqiu.Core.Domain.User.User
+
+        
+    @Html.Action("PartInfo","User")
+   <div class="container" style="padding-left:22px;">         
+    <div  class="uc-bd wp mt40" >
+        @Html.Partial("UserNav", "info")
+
+                    <div id="contentBody"class="mn" >
+                        <div class="uc-wp">
+                            <div class="hd">
+                                <h2 class="fl">基本资料</h2>
+                            </div>
+                            <div id="info"class="bd uc-data mt20">
+                                <a class="avt fl" href="@Url.Action("Avatar","User")" title="更换头像">
+                                    <img src="@Model.ImgUrl" alt="更换头像">
+                                    <span><i class="iconfont"></i>更换头像</span>
+                                </a>
+                                <ul>
+                                    <li class="nick">@Model.Username</li>
+                                </ul>
+                                <ul>
+                                    <li>
+                                        我的案例：<a href="#">n</a>
+                                    </li>
+                                    <li>
+                                        我的提问：<a href="#">n</a>
+                                    </li>
+                                </ul>
+                                <ul>
+                                    <li>
+                                        我的帖子：<a href="#">n</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                  </div>
+              </div>
     </div>
-    <div id="info"class="bd uc-data mt20">
-        <a class="avt fl" href="@Url.Action("Avatar","User")" title="更换头像">
-            <img src="~/Content/user_img.jpg" alt="更换头像">
-            <span><i class="iconfont"></i>更换头像</span>
-        </a>
-        <ul>
-            <li class="nick">@ViewBag.userName</li>
-        </ul>
-        <ul>
-            <li>
-                我的书单：<a href="#">@ViewBag.countExample</a>
-            </li>
-            <li>
-                我读过的书：<a href="#">@ViewBag.countQuestion</a>
-            </li>
-                                 
-        </ul>
-        <ul>
-            <li>
-                正在读的书：<a href="#">@ViewBag.countTopic</a>
-            </li>
-        </ul>
-    </div>
-                
-                          
-              

@@ -1,0 +1,32 @@
+﻿
+@model string
+        
+<ul class="sd uc-sd fl">
+    <li>
+        <h3>用户信息</h3>
+        <ul class="menuul">
+            <li id="info"><a href="@Url.Action("Index", "User")"><i class="icon-collect"></i><span>基本资料</span></a></li>
+            <li><a href="#"><i class="icon-collect"></i><span>我的收藏</span></a></li>
+            <li><a href="#"><i class="icon-xcounpon"></i><span>我的提问</span></a></li>
+            <li><a href="#"><i class="icon-schoolarship"></i><span>我的帖子</span></a></li>
+        </ul>
+    </li>
+    <li>
+        <h3>用户设置</h3>
+        <ul class="menuul">
+            <li id="changepwd"><a href="@Url.Action("SetPassword", "User")"><i class="icon icon-schoolarship"></i><span>修改密码</span></a></li>
+            <li id="checkmail" class="menu-active"><a href="@Url.Action("SetEmail", "User")"><i class="icon  icon-schoolarship"></i><span>邮箱验证</span></a></li>
+        </ul>
+    </li>
+</ul>
+<input id="activeId" type="hidden" value="@Model"/>
+
+<script>
+    $(function() {
+        var id = $("#activeId").val();
+        if (id != "") {
+            $(".sd li li").removeClass("menu-active");
+            $("#"+id).addClass("menu-active");
+        }
+    });
+</script>

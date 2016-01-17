@@ -1,35 +1,50 @@
 ﻿@{
-    ViewBag.Title = "Avatar";
-    Layout = "~/Views/Shared/_UserCenter.cshtml";
+    ViewBag.Title = "账号设置";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @model Niqiu.Core.Domain.User.User
 
-<script src="~/Content/uploadify/jquery.uploadify.js"></script>
+<link href="~/Content/CSS/golab.css" rel="stylesheet" />
+<link href="~/Content/CSS/user_index.css" rel="stylesheet" />
 <link href="~/Content/uploadify/uploadify.css" rel="stylesheet" />
+<script src="~/Content/uploadify/jquery.uploadify.js"></script>
+
 <style>
-   .imgbig, .img100 {width: 100px; height: 100px;display: inline-block;vertical-align: top;margin-left: 10px;}
-   .imgbig{width: 200px;height: 200px;}
+    .imgbig, .img100 {width: 100px; height: 100px;display: inline-block;vertical-align: top;margin-left: 10px;}
+    .imgbig{width: 200px;height: 200px;}
 </style>
-<div class="uc-wp info-uc">
-    <div class="hd">
-        <div class="fl">
-            <h2>头像照片</h2>
-        </div>
-    </div>
-    <div id="type_swf" class="info-space">
-        <img class="imgbig" src="@Model.ImgUrl" />
-        <img class="img100" src="@Model.ImgUrl" />
-    </div>
-    <div class="row-fluid" style="padding-top: 10px;">
-        <div id="fileQueue"></div>
-        <input type="file" id="file_upload" name="file_upload" />
-        <input type="hidden" id="ImgUrl" value="@Model.ImgUrl" />
-        <input type="button" id="imgbt" class="btn btn-primary" value="确定" />
+        @Html.Action("PartInfo","User")
+       <div class="container" style="padding-left:22px;">       
+            <div  class="uc-bd wp mt40" >
+                @Html.Partial("UserNav")
+           <div class="mn" >
+            <div class="uc-wp info-uc">
+                <div class="hd">
+                    <div class="fl">
+                        <h2>头像照片</h2>
+                    </div>
+                </div>
+                <div id="type_swf" class="info-space">
+                    <img class="imgbig" src="@Model.ImgUrl" />
+                    <img class="img100" src="@Model.ImgUrl" />
+                </div>
+                <div class="row-fluid" style="padding-top: 10px;">
+                    <div id="fileQueue"></div>
+                    <input type="file" id="file_upload" name="file_upload" />
+                    <input type="hidden" id="ImgUrl" value="@Model.ImgUrl"  data-up="0" />
+                    <input type="button" id="imgbt" class="btn btn-primary" value="确定" />
+                </div>
+            </div>
+     </div>
     </div>
 </div>
+      
+      
+      
+      
+
 <script>
     $(function() {
-
         $('#file_upload').uploadify({
             'swf': '@Url.Content("~/Content/uploadify/uploadify.swf?var="+(new DateTime()).TimeOfDay)',
             'uploader': '@Url.Action("UploadImg", "User",new{var=(new DateTime()).Date})',
@@ -43,24 +58,27 @@
                     var str = "../../Content/UploadFiles/" + data.SaveName;
                     $(".info-space img").attr("src", str);
                     $("#ImgUrl").val(str);
-                    alert(str);
-
+                    $("#ImgUrl").data("up",1);
                 } else {
-                    alert(data.Message);
+                    toastr.error(data.Message);
                 }
             }
         });
 
-        $("#imgbt").click(function() {
-            var url = $("#ImgUrl").val();
-            $.post('@Url.Action("ChangeAvatar")', { url: url }, function(data) {
-                if (data == 1) {
-                    alert("修改成功");
-                } else {
-                    alert("修改失败");
-                }
-
-            });
+        $("#imgbt").click(function () {
+            var key = $("#ImgUrl").data("up");
+            if (key == 1) {
+                var url = $("#ImgUrl").val();
+                $.post('@Url.Action("ChangeAvatar")', { url: url }, function (data) {
+                      if (data == 1) {
+                          toastr.success("修改成功");
+                      } else {
+                          toastr.error("修改失败");
+                      }
+                  });
+            } else {
+                toastr.info("请上传图片");
+            }
         });
 
     });

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Niqiu.Core.Domain.Common;
+using Niqiu.Core.Domain.User;
 using Niqiu.Core.Helpers;
 using Niqiu.Core.Services;
 using Portal.MVC.Attributes;
@@ -33,7 +34,8 @@ namespace Portal.MVC.Controllers
         public ActionResult Index()
         {
             ViewBag.userName = _portalContext.CurrentUser.Username;
-            return View();
+            var u = _portalContext.CurrentUser;
+            return View(u);
         }
 
         [LoginValid]
@@ -201,6 +203,12 @@ namespace Portal.MVC.Controllers
             return File(bytes, @"image/jpeg");
         }
 
+        public ActionResult PartInfo()
+        {
+            User u = _portalContext.CurrentUser;
+            return PartialView(u);
+        }
+
 
 
         /// <summary>
@@ -330,6 +338,36 @@ namespace Portal.MVC.Controllers
         {
             var result = _userService.GetUserByEmail(email) == null;
             return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+
+        [LoginValid]
+        public ActionResult ChangeMail()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ChangeMail(EmailModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = _portalContext.CurrentUser;
+                user.Email = model.Email;
+                _userService.UpdateUser(user);
+
+                return RedirectToAction("SetEmail");
+            }
+
+            TempData["error"] = "修改失败";
+
+            return View();
+        }
+
+        [LoginValid]
+        public ActionResult SetEmail()
+        {
+            return View(_portalContext.CurrentUser);
         }
 
         /// <summary>
