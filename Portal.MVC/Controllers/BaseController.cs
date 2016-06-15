@@ -13,7 +13,7 @@ using Portal.MVC.Models;
 
 namespace Portal.MVC.Controllers
 {
-    [UserLastActivityIp]
+   // [UserLastActivityIp]
     public class BaseController : Controller 
     {
         private User _curUser;
