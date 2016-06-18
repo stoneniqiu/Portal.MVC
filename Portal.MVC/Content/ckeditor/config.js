@@ -33,11 +33,11 @@ CKEDITOR.editorConfig = function( config ) {
     config.height =300;
 	// Se the most common block elements.
 	config.format_tags = 'p;h1;h2;h3;pre';
-    config.font_names = '宋体/宋体;黑体/黑体;仿宋/仿宋_GB2312;楷体/楷体_GB2312;隶书/隶书;幼圆/幼圆';
+    config.font_names = '瀹嬩綋/瀹嬩綋;榛戜綋/榛戜綋;浠垮畫/浠垮畫_GB2312;妤蜂綋/妤蜂綋_GB2312;闅朵功/闅朵功;骞煎渾/骞煎渾';
 	// Make dialogs simpler.
     config.removeDialogTabs = 'image:advanced;link:advanced';
     
-    var ckfinderPath = "../Content";   //注意这个地方的问题，JS是包含CKEditor和CKFinder的文件夹
+    var ckfinderPath = "/Content";   //娉ㄦ剰杩欎釜鍦版柟鐨勯棶棰橈紝JS鏄寘鍚獵KEditor鍜孋KFinder鐨勬枃浠跺す
    //config.filebrowserBrowseUrl = ckfinderPath + '/ckfinder/ckfinder.html';
    // config.filebrowserImageBrowseUrl = ckfinderPath + '/ckfinder/ckfinder.html?type=Images';
    // config.filebrowserFlashBrowseUrl = ckfinderPath + '/ckfinder/ckfinder.html?type=Flash';
