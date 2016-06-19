@@ -48,6 +48,7 @@
     <Reference Include="System.Drawing.Design" />
     <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -70,13 +71,17 @@
     <Compile Include="Domain\Common\MemoryCacheManager.cs" />
     <Compile Include="Domain\Common\PerRequestCacheManager.cs" />
     <Compile Include="Domain\Config\PortalConfig.cs" />
+    <Compile Include="Domain\Config\PortalInfoSet.cs" />
+    <Compile Include="Domain\Examples\Example.cs" />
     <Compile Include="Domain\IPagedList.cs" />
     <Compile Include="Domain\IWebHelper.cs" />
+    <Compile Include="Domain\News\Press.cs" />
     <Compile Include="Domain\PagedList.cs" />
     <Compile Include="Domain\PortalException.cs" />
     <Compile Include="Domain\PortalVersion.cs" />
     <Compile Include="Domain\Security\DefaultPermissionRecord.cs" />
     <Compile Include="Domain\Security\PermissionRecord.cs" />
+    <Compile Include="Domain\User\Member.cs" />
     <Compile Include="Domain\User\PasswordFormat.cs" />
     <Compile Include="Domain\User\SystemUserRoleNames.cs" />
     <Compile Include="Domain\User\User.cs" />
@@ -116,6 +121,7 @@
     <Compile Include="Services\UserRegistrationResult.cs" />
     <Compile Include="Services\UserService.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
