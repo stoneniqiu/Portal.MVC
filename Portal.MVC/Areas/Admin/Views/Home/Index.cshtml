@@ -16,6 +16,9 @@
     <div class="quick-actions_homepage">
         <ul class="quick-actions">
             <li class="bg_lo span2"> <a href="@Url.Action("Index","User")"> <i class="icon-user-md"></i><span class="label label-success">@ViewBag.UserCount</span>用户 </a> </li>
+            <li class="bg_dy span2"> <a href="@Url.Action("Index","News")"> <i class="icon-copy"></i><span class="label label-primary">@ViewBag.News</span>新闻 </a> </li>
+            <li class="bg_lb span2"> <a href="@Url.Action("Index","Team")"> <i class="icon-user"></i><span class="label label-info">@ViewBag.Members</span>成员 </a> </li>
+            <li class="bg_lr span2"> <a href="@Url.Action("Index","Example")"> <i class="icon-list"></i><span class="label label-success">@ViewBag.Trades</span>案例 </a> </li>
         </ul>
     </div>
 </div>

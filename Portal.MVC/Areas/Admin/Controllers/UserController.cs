@@ -25,7 +25,7 @@ namespace Portal.MVC.Areas.Admin.Controllers
         }
 
 
-        [AdminAuthorize("ManageUsers")]
+       //[AdminAuthorize("ManageUsers")]
         public ActionResult Index()
         {
             var users = _service.GetAllUsers();
@@ -33,7 +33,7 @@ namespace Portal.MVC.Areas.Admin.Controllers
         }
 
         //[Ninject.Inject]
-        [AdminAuthorize("ManageUsers")]
+       // [AdminAuthorize("ManageUsers")]
         public ActionResult Create(int id = 0)
         {
             ViewBag.Des = "新增操作员";
@@ -74,7 +74,7 @@ namespace Portal.MVC.Areas.Admin.Controllers
                     Mobile = model.Mobile,
                     Active = true,
                     //加密存储
-                    Password = Encrypt.EncryptString(model.Password),
+                    Password = Encrypt.GetMd5Code(model.Password),
                 };
                 //默认增加注册角色
                 // 先插入
