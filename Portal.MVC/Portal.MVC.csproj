@@ -13,7 +13,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Portal.MVC</RootNamespace>
     <AssemblyName>Portal.MVC</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
@@ -32,6 +32,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -40,6 +41,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CKFinder">
@@ -51,6 +53,9 @@
     </Reference>
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>..\packages\EntityFramework.6.1.0\lib\net40\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="LitJson">
+      <HintPath>..\packages\LitJson.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
@@ -66,6 +71,15 @@
     <Reference Include="NLog">
       <HintPath>..\packages\NLog.3.1.0.0\lib\net40\NLog.dll</HintPath>
     </Reference>
+    <Reference Include="QuickMark">
+      <HintPath>..\packages\QuickMark.dll</HintPath>
+    </Reference>
+    <Reference Include="Senparc.Weixin">
+      <HintPath>..\packages\Senparc.Weixin.dll</HintPath>
+    </Reference>
+    <Reference Include="Senparc.Weixin.Open">
+      <HintPath>..\packages\Senparc.Weixin.Open.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -78,9 +92,9 @@
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Routing" />
     <Reference Include="System.Web.WebPages.Administration, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml" />
@@ -138,6 +152,9 @@
       <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="ThoughtWorks.QRCode">
+      <HintPath>..\packages\ThoughtWorks.QRCode.dll</HintPath>
+    </Reference>
     <Reference Include="WebActivatorEx">
       <HintPath>..\packages\WebActivatorEx.2.0\lib\net40\WebActivatorEx.dll</HintPath>
     </Reference>
@@ -149,6 +166,9 @@
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.3.0\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="WxPayAPI">
+      <HintPath>..\packages\WxPayAPI.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -159,25 +179,152 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Attributes\AdminAuthorizeAttribute.cs" />
+    <Compile Include="WxPayAPI\example\DownloadBillPage.aspx.cs">
+      <DependentUpon>DownloadBillpage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxPayAPI\example\DownloadBillPage.aspx.designer.cs">
+      <DependentUpon>DownloadBillpage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxPayAPI\example\JsApiPayPage.aspx.cs">
+      <DependentUpon>JsApiPayPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxPayAPI\example\JsApiPayPage.aspx.designer.cs">
+      <DependentUpon>JsApiPayPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxPayAPI\example\MakeQRCode.aspx.cs">
+      <DependentUpon>MakeQRCode.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxPayAPI\example\MakeQRCode.aspx.designer.cs">
+      <DependentUpon>MakeQRCode.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxPayAPI\example\MicroPayPage.aspx.cs">
+      <DependentUpon>MicroPayPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxPayAPI\example\MicroPayPage.aspx.designer.cs">
+      <DependentUpon>MicroPayPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxPayAPI\example\NativeNotifyPage.aspx.cs">
+      <DependentUpon>NativeNotifyPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxPayAPI\example\NativeNotifyPage.aspx.designer.cs">
+      <DependentUpon>NativeNotifyPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxPayAPI\example\NativePayPage.aspx.cs">
+      <DependentUpon>NativePayPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxPayAPI\example\NativePayPage.aspx.designer.cs">
+      <DependentUpon>NativePayPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxPayAPI\example\OrderQueryPage.aspx.cs">
+      <DependentUpon>OrderQueryPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxPayAPI\example\OrderQueryPage.aspx.designer.cs">
+      <DependentUpon>OrderQueryPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxPayAPI\example\ProductPage.aspx.cs">
+      <DependentUpon>ProductPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxPayAPI\example\ProductPage.aspx.designer.cs">
+      <DependentUpon>ProductPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxPayAPI\example\RefundPage.aspx.cs">
+      <DependentUpon>RefundPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxPayAPI\example\RefundPage.aspx.designer.cs">
+      <DependentUpon>RefundPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxPayAPI\example\RefundQueryPage.aspx.cs">
+      <DependentUpon>RefundQueryPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxPayAPI\example\RefundQueryPage.aspx.designer.cs">
+      <DependentUpon>RefundQueryPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxPayAPI\example\ResultNotifyPage.aspx.cs">
+      <DependentUpon>ResultNotifyPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WxPayAPI\example\ResultNotifyPage.aspx.designer.cs">
+      <DependentUpon>ResultNotifyPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WxPayAPI\lib\Config.cs" />
+    <Compile Include="WxPayAPI\lib\Data.cs" />
+    <Compile Include="WxPayAPI\lib\Exception.cs" />
+    <Compile Include="WxPayAPI\lib\HttpService.cs" />
+    <Compile Include="WxPayAPI\lib\Log.cs" />
+    <Compile Include="WxPayAPI\lib\Notify.cs" />
+    <Compile Include="WxPayAPI\lib\WxPayApi.cs" />
     <Compile Include="Attributes\LoginValidAttribute.cs" />
+    <Compile Include="WxPayAPI\business\DownloadBill.cs" />
+    <Compile Include="WxPayAPI\business\JsApiPay.cs" />
+    <Compile Include="WxPayAPI\business\MicroPay.cs" />
+    <Compile Include="WxPayAPI\business\NativeNotify.cs" />
+    <Compile Include="WxPayAPI\business\NativePay.cs" />
+    <Compile Include="WxPayAPI\business\OrderQuery.cs" />
+    <Compile Include="WxPayAPI\business\Refund.cs" />
+    <Compile Include="WxPayAPI\business\RefundQuery.cs" />
+    <Compile Include="WxPayAPI\business\ResultNotify.cs" />
+    <Compile Include="Attributes\Security\AdminAntiForgeryAttribute.cs" />
+    <Compile Include="Attributes\Security\FilePermissionHelper.cs" />
+    <Compile Include="Attributes\Security\PortalHttpsRequirementAttribute.cs" />
+    <Compile Include="Attributes\Security\PublicAntiForgeryAttribute.cs" />
+    <Compile Include="Attributes\Security\SslRequirement.cs" />
     <Compile Include="Attributes\UserLastActivityIpAttribute.cs" />
     <Compile Include="Attributes\ExceptionLogAttribute.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\BasePublicController.cs" />
+    <Compile Include="Controllers\CheckoutController.cs" />
+    <Compile Include="Controllers\CommonController.cs" />
+    <Compile Include="Controllers\ExternalAuthWeiXinController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\ShoppingCartController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\WidgetController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\BaseNopModel.cs" />
+    <Compile Include="Infrastructure\Cache\ModelCacheEventConsumer.cs" />
+    <Compile Include="Infrastructure\HtmlExtensions.cs" />
+    <Compile Include="Infrastructure\NopModelBinder.cs" />
+    <Compile Include="Infrastructure\PortalInit.cs" />
+    <Compile Include="Infrastructure\Routes\GuidConstraint.cs" />
+    <Compile Include="Infrastructure\Routes\IRouteProvider.cs" />
+    <Compile Include="Infrastructure\Routes\IRoutePublisher.cs" />
+    <Compile Include="Infrastructure\Routes\RouteProvider.cs" />
+    <Compile Include="Infrastructure\UI\NotifyType.cs" />
+    <Compile Include="Infrastructure\WebStoreContext.cs" />
     <Compile Include="Logger.cs" />
-    <Compile Include="Models\PortalDb.cs" />
+    <Compile Include="Models\Cms\RenderWidgetModel.cs" />
+    <Compile Include="Models\Common\AddressModel.cs" />
+    <Compile Include="Models\Common\FixInfoModel.cs" />
+    <Compile Include="Models\Common\HeaderLinksModel.cs" />
+    <Compile Include="Models\Media\PictureModel.cs" />
+    <Compile Include="Models\ShoppingCart\EstimateShippingModel.cs" />
+    <Compile Include="Models\ShoppingCart\ShoppingCartModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\EfRepository.cs" />
     <Compile Include="Services\WebWorkContext.cs" />
     <Compile Include="ViewModel\LogonModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\CSS\products\goodsbuy-cart-icon_562ab41.png" />
+    <Content Include="Content\CSS\products\green-success-icon_ad84bfa.png" />
+    <Content Include="Content\CSS\products\ibabycrib.css" />
+    <Content Include="Content\CSS\products\icon-20_9c1a125.png" />
+    <Content Include="Content\CSS\products\pop-close-white-btn_50c3b2a.png" />
     <Content Include="Content\CSS\user_setmail.css" />
     <Content Include="Content\img\backtop.png" />
     <Content Include="Content\img\bg-head.jpg" />
@@ -221,14 +368,62 @@
     <Content Include="Content\img\有问必答.png" />
     <Content Include="Content\img\案例讨论.png" />
     <Content Include="Content\img\版块管理.png" />
-    <Content Include="Content\Photos\book1.jpeg" />
+    <Content Include="css\shoppingcart.css" />
+    <Content Include="images\icon32_appwx_logo.png" />
+    <Content Include="Scripts\public.ajaxcart.js" />
+    <Content Include="Content\Js\product\magnific-popup.js" />
+    <Content Include="Content\Js\product\warmw.js" />
     <Content Include="Content\Photos\book2.jpg" />
-    <Content Include="Content\Photos\book3.jpeg" />
     <Content Include="Content\Photos\book4.jpg" />
-    <Content Include="Content\Photos\index1.png" />
-    <Content Include="Content\Photos\index2.png" />
-    <Content Include="Content\Photos\index3.png" />
-    <Content Include="Content\Photos\index4.png" />
+    <Content Include="Content\Photos\logo.png" />
+    <Content Include="Content\static\all.png" />
+    <Content Include="Content\static\all1.png" />
+    <Content Include="Content\static\bed.png" />
+    <Content Include="Content\static\black-layer-09_04c7348.png" />
+    <Content Include="Content\static\brand100.png" />
+    <Content Include="Content\static\canshu.png" />
+    <Content Include="Content\static\chaung1.png" />
+    <Content Include="Content\static\chuang.png" />
+    <Content Include="Content\static\dapeijian.png" />
+    <Content Include="Content\static\deng.png" />
+    <Content Include="Content\static\deng1.png" />
+    <Content Include="Content\static\diff.png" />
+    <Content Include="Content\static\double.png" />
+    <Content Include="Content\static\graybar.png" />
+    <Content Include="Content\static\guijia.png" />
+    <Content Include="Content\static\guijia1.png" />
+    <Content Include="Content\static\hang.png" />
+    <Content Include="Content\static\icon_partner.jpg" />
+    <Content Include="Content\static\jiafang.png" />
+    <Content Include="Content\static\jiafang1.png" />
+    <Content Include="Content\static\minbar.png" />
+    <Content Include="Content\static\mucha.png" />
+    <Content Include="Content\static\pei.png" />
+    <Content Include="Content\static\s1.jpg" />
+    <Content Include="Content\static\s3.jpg" />
+    <Content Include="Content\static\shafa.png" />
+    <Content Include="Content\static\shafa1.png" />
+    <Content Include="Content\static\text1.png" />
+    <Content Include="Content\static\text2.png" />
+    <Content Include="Content\static\w10.png" />
+    <Content Include="Content\static\w11.png" />
+    <Content Include="Content\static\w12.png" />
+    <Content Include="Content\static\w6.png" />
+    <Content Include="Content\static\w8.png" />
+    <Content Include="Content\static\w9.png" />
+    <Content Include="Content\static\weilan.png" />
+    <Content Include="Content\static\wx_200.png" />
+    <Content Include="Content\static\yan.png" />
+    <Content Include="Content\static\yifu.png" />
+    <Content Include="Content\static\yifu1.png" />
+    <Content Include="Content\static\zdeng.png" />
+    <Content Include="Content\static\zhaung.png" />
+    <Content Include="Content\static\zhaung1.png" />
+    <Content Include="Content\static\zhuan.png" />
+    <Content Include="Content\static\zhuoji.png" />
+    <Content Include="Content\static\zhuoji1.png" />
+    <Content Include="Content\static\zuoyi.png" />
+    <Content Include="Content\static\zuoyi1.png" />
     <Content Include="Content\toastr\toastr.css" />
     <Content Include="Content\toastr\toastr.js" />
     <Content Include="Content\toastr\toastr.min.css" />
@@ -893,7 +1088,6 @@
     <Content Include="Content\Matrix_Admin\login.html" />
     <Content Include="Content\Matrix_Admin\tables.html" />
     <Content Include="Content\Matrix_Admin\widgets.html" />
-    <Content Include="Content\Photos\Diaview.png" />
     <Content Include="Content\uploadify\Change Log.txt" />
     <Content Include="Content\uploadify\jquery.uploadify.js" />
     <Content Include="Content\uploadify\jquery.uploadify.min.js" />
@@ -932,6 +1126,25 @@
     <Content Include="Scripts\form.js" />
     <Content Include="Scripts\html5.js" />
     <Content Include="Content\img\icon" />
+    <Content Include="WxPayAPI\cert\apiclient_cert.p12" />
+    <Content Include="WxPayAPI\example\DownloadBillpage.aspx" />
+    <Content Include="WxPayAPI\example\JsApiPayPage.aspx" />
+    <Content Include="WxPayAPI\example\MakeQRCode.aspx" />
+    <Content Include="WxPayAPI\example\MicroPayPage.aspx" />
+    <Content Include="WxPayAPI\example\NativeNotifyPage.aspx" />
+    <Content Include="WxPayAPI\example\NativePayPage.aspx" />
+    <Content Include="WxPayAPI\example\OrderQueryPage.aspx" />
+    <Content Include="WxPayAPI\example\ProductPage.aspx" />
+    <Content Include="WxPayAPI\example\RefundPage.aspx" />
+    <Content Include="WxPayAPI\example\RefundQueryPage.aspx" />
+    <Content Include="WxPayAPI\example\ResultNotifyPage.aspx" />
+    <Content Include="WxPayAPI\imgs\logo.png" />
+    <Content Include="WxPayAPI\imgs\WePayLogo.png" />
+    <Content Include="WxPayAPI\imgs\按钮标签.png" />
+    <Content Include="WxPayAPI\imgs\绿色logo.png" />
+    <Content Include="WxPayAPI\imgs\说明文字.png" />
+    <Content Include="WxPayAPI\imgs\页签标签.png" />
+    <None Include="Properties\PublishProfiles\warmwood.pubxml" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
@@ -943,6 +1156,8 @@
     <Content Include="Scripts\knockout-2.1.0.debug.js" />
     <Content Include="Scripts\knockout-2.1.0.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
+    <Content Include="Scripts\public.checkout.js" />
+    <Content Include="Scripts\public.common.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\textHighlight.js" />
     <Content Include="Scripts\validate-methods.js" />
@@ -996,6 +1211,19 @@
     <Content Include="Views\User\PartInfo.cshtml" />
     <Content Include="Views\User\SetEmail.cshtml" />
     <Content Include="Views\Shared\UserNav.cshtml" />
+    <Content Include="Views\Product\IBabycrib.cshtml" />
+    <Content Include="Views\Shared\_Notifications.cshtml" />
+    <Content Include="Views\Widget\WidgetsByZone.cshtml" />
+    <Content Include="Views\Common\HeaderLinks.cshtml" />
+    <Content Include="Views\ShoppingCart\Cart.cshtml" />
+    <Content Include="Views\Checkout\OnePageCheckout.cshtml" />
+    <Content Include="Views\Checkout\ShippingAddress.cshtml" />
+    <Content Include="Views\ShoppingCart\CartDetail.cshtml" />
+    <Content Include="Views\User\FixInfo.cshtml" />
+    <Content Include="Views\Checkout\Payment.cshtml" />
+    <Content Include="Views\User\MyOrders.cshtml" />
+    <Content Include="Views\Checkout\ResultNotify.cshtml" />
+    <Content Include="Views\Checkout\PaidSuccess.cshtml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />
@@ -1053,7 +1281,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Admin\Views\Shared\" />
-    <Folder Include="images\" />
+    <Folder Include="Common\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Niqiu.Core\Niqiu.Core.csproj">

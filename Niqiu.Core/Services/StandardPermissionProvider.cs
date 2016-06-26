@@ -46,7 +46,16 @@ namespace Niqiu.Core.Services
         public static readonly PermissionRecord ManageTenant = new PermissionRecord { Name = "管理商户", SystemName = "ManageTenant", Category = "Users" };
 
         public static readonly PermissionRecord SearchOrder = new PermissionRecord { Name = "订单查询", SystemName = "SearchOrder", Category = "Users" };
-         
+
+
+        //public store permissions
+        public static readonly PermissionRecord DisplayPrices = new PermissionRecord { Name = "Public store. Display Prices", SystemName = "DisplayPrices", Category = "PublicStore" };
+        public static readonly PermissionRecord EnableShoppingCart = new PermissionRecord { Name = "Public store. Enable shopping cart", SystemName = "EnableShoppingCart", Category = "PublicStore" };
+        public static readonly PermissionRecord EnableWishlist = new PermissionRecord { Name = "Public store. Enable wishlist", SystemName = "EnableWishlist", Category = "PublicStore" };
+        public static readonly PermissionRecord PublicStoreAllowNavigation = new PermissionRecord { Name = "Public store. Allow navigation", SystemName = "PublicStoreAllowNavigation", Category = "PublicStore" };
+        public static readonly PermissionRecord AccessClosedStore = new PermissionRecord { Name = "Public store. Access a closed store", SystemName = "AccessClosedStore", Category = "PublicStore" };
+
+
 
 
         public virtual IEnumerable<PermissionRecord> GetPermissions()
@@ -54,7 +63,7 @@ namespace Niqiu.Core.Services
             return new[] 
             {
                 AccessAdminPanel,ManageProducts,ManageCategories,ManageUsers,ManageOrders,ManageNews,ManageBlog,ManagePlugins,ManageTopics,ManageForums,ManageSystemLog,ManageDownloadFiles,
-                ManageEngineers,ManageQuestiones,ManageTenant,SearchOrder
+                ManageEngineers,ManageQuestiones,ManageTenant,SearchOrder,DisplayPrices,EnableShoppingCart,EnableWishlist,PublicStoreAllowNavigation,AccessClosedStore
             };
         }
 
@@ -86,6 +95,28 @@ namespace Niqiu.Core.Services
                    {
                        AccessAdminPanel,
                        SearchOrder,
+                   }
+                },
+                  new DefaultPermissionRecord
+                {
+                   UserRoleSystemName   = SystemUserRoleNames.Registered,
+                     PermissionRecords = new []
+                   {
+                       DisplayPrices,
+                       EnableShoppingCart,
+                       EnableWishlist,
+                       PublicStoreAllowNavigation
+                   }
+                },
+                  new DefaultPermissionRecord
+                {
+                   UserRoleSystemName   = SystemUserRoleNames.Guests,
+                      PermissionRecords = new []
+                   {
+                       DisplayPrices,
+                       EnableShoppingCart,
+                       EnableWishlist,
+                       PublicStoreAllowNavigation
                    }
                 },
  

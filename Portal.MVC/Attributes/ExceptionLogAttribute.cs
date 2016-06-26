@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Web.Mvc;
-using ThankNet;
 
 namespace Portal.MVC.Attributes
 {

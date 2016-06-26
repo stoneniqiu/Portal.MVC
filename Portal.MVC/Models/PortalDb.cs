@@ -6,10 +6,15 @@ using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Migrations;
 using System.Linq;
+using System.Reflection;
 using Niqiu.Core.Domain;
+using Niqiu.Core.Domain.Catalog;
 using Niqiu.Core.Domain.Common;
+using Niqiu.Core.Domain.Discounts;
+using Niqiu.Core.Domain.Orders;
 using Niqiu.Core.Domain.Security;
 using Niqiu.Core.Domain.User;
+using Niqiu.Core.Mapping;
 using Niqiu.Core.Mapping.Security;
 using Niqiu.Core.Mapping.User;
 
@@ -19,9 +24,16 @@ namespace Portal.MVC.Models
     {
         public DbSet<User> Users { get; set; }
         public DbSet<UserRole> Roles { get; set; }
-
         public DbSet<PermissionRecord> PermissionRecords { get; set; }
-
+        public DbSet<Product> Products { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Manufacturer> Manufacturers { get; set; }
+        public DbSet<ProductPicture> ProductPictures { get; set; }
+        public DbSet<ProductTag> ProductTags { get; set; }
+        public DbSet<TierPrice> TierPrices { get; set; }
+        public DbSet<Discount> Discounts { get; set; }
+        public DbSet<DiscountRequirement> DiscountRequirements { get; set; } 
 
         public PortalDb()
             : base("SqlConnection")
@@ -36,8 +48,14 @@ namespace Portal.MVC.Models
             modelBuilder.Configurations.Add(new UserMap());
             modelBuilder.Configurations.Add(new UserRoleMap());
             modelBuilder.Configurations.Add(new PermissionRecordMap());
-
-            modelBuilder.Entity<User>().Ignore(n => n.PasswordFormat);
+            //var typesToRegister =
+            //    Assembly.GetExecutingAssembly().GetTypes().Where(type => !String.IsNullOrEmpty(type.Namespace)).ToList()
+            //    .Where(type=>type.BaseType!=null&&type.BaseType.IsGenericType&&type.BaseType.GetGenericTypeDefinition()==typeof(PortalEntityTypeConfiguration<>)).ToList();
+            //foreach (var type in typesToRegister)
+            //{
+            //    dynamic configInstance = Activator.CreateInstance(type);
+            //    modelBuilder.Configurations.Add(configInstance);
+            //}
             base.OnModelCreating(modelBuilder);
         }
 

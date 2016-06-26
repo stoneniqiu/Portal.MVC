@@ -38,7 +38,7 @@
       <HintPath>..\packages\EntityFramework.6.1.0\lib\net40\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="NPOI">
-      <HintPath>..\..\FireControl\FireControl\bin\NPOI.dll</HintPath>
+      <HintPath>..\packages\NPOI.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -58,7 +58,28 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ComponentModel\GenericListTypeConverter.cs" />
+    <Compile Include="ComponentModel\WriteLockDisposable.cs" />
+    <Compile Include="Configuration\ISettings.cs" />
+    <Compile Include="Configuration\NopConfig.cs" />
     <Compile Include="Domain\BaseEntity.cs" />
+    <Compile Include="Domain\Catalog\Category.cs" />
+    <Compile Include="Domain\Catalog\CrossSellProduct.cs" />
+    <Compile Include="Domain\Catalog\Manufacturer.cs" />
+    <Compile Include="Domain\Catalog\Product.cs" />
+    <Compile Include="Domain\Catalog\ProductAttributeCombination.cs" />
+    <Compile Include="Domain\Catalog\ProductCategory.cs" />
+    <Compile Include="Domain\Catalog\ProductManufacturer.cs" />
+    <Compile Include="Domain\Catalog\ProductPicture.cs" />
+    <Compile Include="Domain\Catalog\ProductReview.cs" />
+    <Compile Include="Domain\Catalog\ProductReviewHelpfulness.cs" />
+    <Compile Include="Domain\Catalog\ProductSortingEnum.cs" />
+    <Compile Include="Domain\Catalog\ProductTag.cs" />
+    <Compile Include="Domain\Catalog\ProductTemplate.cs" />
+    <Compile Include="Domain\Catalog\ProductWarehouseInventory.cs" />
+    <Compile Include="Domain\Catalog\RecurringProductCyclePeriod.cs" />
+    <Compile Include="Domain\Catalog\RelatedProduct.cs" />
+    <Compile Include="Domain\Catalog\TierPrice.cs" />
     <Compile Include="Domain\Common\Address.cs" />
     <Compile Include="Domain\Common\Company.cs" />
     <Compile Include="Domain\Common\DbContextExtensions.cs" />
@@ -70,13 +91,47 @@
     <Compile Include="Domain\Common\MemoryCacheManager.cs" />
     <Compile Include="Domain\Common\PerRequestCacheManager.cs" />
     <Compile Include="Domain\Config\PortalConfig.cs" />
+    <Compile Include="Domain\Discounts\Discount.cs" />
+    <Compile Include="Domain\Discounts\DiscountLimitationType.cs" />
+    <Compile Include="Domain\Discounts\DiscountRequirement.cs" />
+    <Compile Include="Domain\Discounts\DiscountType.cs" />
+    <Compile Include="Domain\Discounts\DiscountUsageHistory.cs" />
     <Compile Include="Domain\IPagedList.cs" />
     <Compile Include="Domain\IWebHelper.cs" />
+    <Compile Include="Domain\Media\Download.cs" />
+    <Compile Include="Domain\Media\Picture.cs" />
+    <Compile Include="Domain\Media\PictureType.cs" />
+    <Compile Include="Domain\Orders\Order.cs" />
+    <Compile Include="Domain\Orders\OrderItem.cs" />
+    <Compile Include="Domain\Orders\OrderNote.cs" />
+    <Compile Include="Domain\Orders\OrderStatus.cs" />
+    <Compile Include="Domain\Orders\RecurringPayment.cs" />
+    <Compile Include="Domain\Orders\RecurringPaymentHistory.cs" />
+    <Compile Include="Domain\Orders\ShoppingCartItem.cs" />
+    <Compile Include="Domain\Orders\ShoppingCartType.cs" />
     <Compile Include="Domain\PagedList.cs" />
+    <Compile Include="Domain\Payments\PaymentStatus.cs" />
     <Compile Include="Domain\PortalException.cs" />
     <Compile Include="Domain\PortalVersion.cs" />
     <Compile Include="Domain\Security\DefaultPermissionRecord.cs" />
     <Compile Include="Domain\Security\PermissionRecord.cs" />
+    <Compile Include="Domain\Shipping\DeliveryDate.cs" />
+    <Compile Include="Domain\Shipping\Events.cs" />
+    <Compile Include="Domain\Shipping\Shipment.cs" />
+    <Compile Include="Domain\Shipping\ShipmentItem.cs" />
+    <Compile Include="Domain\Shipping\ShippingMethod.cs" />
+    <Compile Include="Domain\Shipping\ShippingOption.cs" />
+    <Compile Include="Domain\Shipping\ShippingStatus.cs" />
+    <Compile Include="Domain\Shipping\Warehouse.cs" />
+    <Compile Include="Domain\Stores\IStoreMappingService.cs" />
+    <Compile Include="Domain\Stores\IStoreService.cs" />
+    <Compile Include="Domain\Stores\StoreMappingService.cs" />
+    <Compile Include="Domain\Stores\StoreService.cs" />
+    <Compile Include="Domain\Tax\TaxBasedOn.cs" />
+    <Compile Include="Domain\Tax\TaxCategory.cs" />
+    <Compile Include="Domain\Tax\TaxDisplayType.cs" />
+    <Compile Include="Domain\Tax\VatNumberStatus.cs" />
+    <Compile Include="Domain\User\ExternalAuthUserInfo.cs" />
     <Compile Include="Domain\User\PasswordFormat.cs" />
     <Compile Include="Domain\User\SystemUserRoleNames.cs" />
     <Compile Include="Domain\User\User.cs" />
@@ -92,13 +147,64 @@
     <Compile Include="Helpers\SendMail.cs" />
     <Compile Include="Helpers\SqlHelper.cs" />
     <Compile Include="Helpers\XmlHelper.cs" />
+    <Compile Include="IStoreContext.cs" />
+    <Compile Include="Localization\ILocalizedEntity.cs" />
+    <Compile Include="Localization\ILocalizedEnum.cs" />
+    <Compile Include="Localization\Language.cs" />
+    <Compile Include="Localization\LocaleStringResource.cs" />
+    <Compile Include="Localization\LocalizationSettings.cs" />
+    <Compile Include="Localization\LocalizedProperty.cs" />
+    <Compile Include="Mapping\Catelog\CategoryMap.cs" />
+    <Compile Include="Mapping\Catelog\ProductCategoryMap.cs" />
+    <Compile Include="Mapping\Catelog\ProductManufacturerMap.cs" />
+    <Compile Include="Mapping\Catelog\ProductMap.cs" />
+    <Compile Include="Mapping\Catelog\ProductPictureMap.cs" />
+    <Compile Include="Mapping\Catelog\ProductTagMap.cs" />
+    <Compile Include="Mapping\Catelog\TierPriceMap.cs" />
+    <Compile Include="Mapping\Discounts\DiscountMap.cs" />
+    <Compile Include="Mapping\Discounts\DiscountRequirementMap.cs" />
+    <Compile Include="Mapping\Discounts\DiscountUsageHistoryMap.cs" />
+    <Compile Include="Mapping\Media\DownloadMap.cs" />
+    <Compile Include="Mapping\Media\PictureMap.cs" />
+    <Compile Include="Mapping\Orders\OrderItemMap.cs" />
+    <Compile Include="Mapping\Orders\OrderMap.cs" />
+    <Compile Include="Mapping\Orders\ShoppingCartItemMap.cs" />
     <Compile Include="Mapping\PortalEntityTypeConfiguration.cs" />
+    <Compile Include="Mapping\Shipping\ShipmentItemMap.cs" />
+    <Compile Include="Mapping\Shipping\ShipmentMap.cs" />
+    <Compile Include="Mapping\Tax\TaxCategoryMap.cs" />
     <Compile Include="Mapping\User\UserMap.cs" />
     <Compile Include="Mapping\User\UserRoleMap.cs" />
+    <Compile Include="PortalDb.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="PortalVersion.cs" />
+    <Compile Include="Plugins\BasePlugin.cs" />
+    <Compile Include="Plugins\IOfficialFeedManager.cs" />
+    <Compile Include="Plugins\IPlugin.cs" />
+    <Compile Include="Plugins\IPluginFinder.cs" />
+    <Compile Include="Plugins\LoadPluginsMode.cs" />
+    <Compile Include="Plugins\OfficialFeedCategory.cs" />
+    <Compile Include="Plugins\OfficialFeedManager.cs" />
+    <Compile Include="Plugins\OfficialFeedPlugin.cs" />
+    <Compile Include="Plugins\OfficialFeedVersion.cs" />
+    <Compile Include="Plugins\PluginDescriptor.cs" />
+    <Compile Include="Plugins\PluginExtensions.cs" />
+    <Compile Include="Plugins\PluginFileParser.cs" />
+    <Compile Include="Plugins\PluginFinder.cs" />
+    <Compile Include="Plugins\PluginManager.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Mapping\Security\PermissionRecordMap.cs" />
     <Compile Include="Services\AccoutService.cs" />
+    <Compile Include="Services\Catalog\IProductService.cs" />
+    <Compile Include="Services\Catalog\ProductService.cs" />
     <Compile Include="Services\ChangePasswordRequest.cs" />
+    <Compile Include="Services\Cms\IWidgetPlugin.cs" />
+    <Compile Include="Services\Cms\IWidgetService.cs" />
+    <Compile Include="Services\Cms\WidgetExtensions.cs" />
+    <Compile Include="Services\Cms\WidgetService.cs" />
     <Compile Include="Services\FormsAuthenticationService.cs" />
     <Compile Include="Services\IAccountService.cs" />
     <Compile Include="Services\IAuthenticationService.cs" />
@@ -108,14 +214,27 @@
     <Compile Include="Services\IUserAgentHelper.cs" />
     <Compile Include="Services\IUserService.cs" />
     <Compile Include="Services\IWorkContext.cs" />
+    <Compile Include="Services\Orders\IOrderService.cs" />
+    <Compile Include="Services\Orders\IShoppingCartService.cs" />
+    <Compile Include="Services\Orders\OrderExtensions.cs" />
+    <Compile Include="Services\Orders\OrderService.cs" />
+    <Compile Include="Services\Orders\ShoppingCartExtensions.cs" />
+    <Compile Include="Services\Orders\ShoppingCartService.cs" />
     <Compile Include="Services\PasswordChangeResult.cs" />
     <Compile Include="Services\PermissionService.cs" />
+    <Compile Include="Services\Seo\ISlugSupported.cs" />
+    <Compile Include="Services\Seo\SeoExtensions.cs" />
     <Compile Include="Services\StandardPermissionProvider.cs" />
     <Compile Include="Services\UserLoginResults.cs" />
     <Compile Include="Services\UserRegistrationRequest.cs" />
     <Compile Include="Services\UserRegistrationResult.cs" />
     <Compile Include="Services\UserService.cs" />
+    <Compile Include="Stores\IStoreMappingSupported.cs" />
+    <Compile Include="Stores\Store.cs" />
+    <Compile Include="Stores\StoreExtensions.cs" />
+    <Compile Include="Stores\StoreMapping.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

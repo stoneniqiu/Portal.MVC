@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Web;
 using Ninject;
+using Niqiu.Core.Domain.Common;
 using Niqiu.Core.Domain.Config;
 using Niqiu.Core.Domain.User;
 using Niqiu.Core.Helpers;
 using Niqiu.Core.Services;
+using Portal.MVC.Infrastructure;
 
 namespace Portal.MVC.Services
 {
@@ -15,18 +18,18 @@ namespace Portal.MVC.Services
 
         #endregion
 
-          #region Fields
+        #region Fields
 
         private readonly IUserService _userService;
-        private User _cachedUser;
-
+        private readonly ICacheManager _cacheManager;
         #endregion
         public SendMail Mail { get; set; }
 
 
-        public WebWorkContext( IUserService userService )
+        public WebWorkContext(IUserService userService, ICacheManager cacheManager)
         {
             _userService = userService;
+            _cacheManager = cacheManager;
             Mail = new SendMail();
         }
 
@@ -68,10 +71,14 @@ namespace Portal.MVC.Services
         #endregion
 
 
+        private User _cachedCustomer;
+
         public virtual User CurrentUser
         {
             get
             {
+                //  if (_cachedCustomer != null) return _cachedCustomer;
+
 
                 User customer = AuthenticationService.GetAuthenticatedCustomer(); ;
 
@@ -85,41 +92,46 @@ namespace Portal.MVC.Services
                         if (Guid.TryParse(customerCookie.Value, out customerGuid))
                         {
                             var customerByCookie = _userService.GetUserByGuid(customerGuid);
-                            if (customerByCookie != null &&IsCurrentUser)
-                                //this customer (from cookie) should not be registered
-                                //!customerByCookie.IsRegistered())
-                                customer = customerByCookie;
+                             customer = customerByCookie;
                         }
                     }
                 }
+                //需要创建一个用户了。
+                //Init();
 
-
-                //validation
-                if (customer!=null&&!customer.Deleted && customer.Active)
+                if (customer == null || customer.Deleted || !customer.Active)
                 {
-                    SetUserCookie(customer.UserGuid);
+                    customer = _cacheManager.Get("guest", () => _userService.InsertGuestUser());
                 }
 
-                return customer;
+                //validation
+                if (customer != null && !customer.Deleted && customer.Active)
+                {
+                    SetUserCookie(customer.UserGuid);
+                    _cachedCustomer = customer;
+                }
+
+                return _cachedCustomer;
                 ;
             }
             set
             {
                 SetUserCookie(value.UserGuid);
-                _cachedUser = value;
+                _cachedCustomer = value;
             }
         }
 
         public User OriginalUserIfImpersonated { get; private set; }
         public bool IsAdmin { get; set; }
-        public bool IsCurrentUser {
+        public bool IsCurrentUser
+        {
             get { return AuthenticationService.IsCurrentUser; }
         }
 
         public bool SendMail(string toEmails, string emailText, string subject)
         {
             if (string.IsNullOrEmpty(toEmails)) return false;
-            return  Mail.SendaMail(toEmails, emailText, subject);
+            return Mail.SendaMail(toEmails, emailText, subject);
         }
 
         public void AsyncSendMail(string toEmails, string emailText, string subject)
@@ -135,5 +147,59 @@ namespace Portal.MVC.Services
 
         [Inject]
         public IAuthenticationService AuthenticationService { get; set; }
+
+        private void InstallRoles()
+        {
+
+            var rolist = new List<string>
+            {
+                SystemUserRoleNames.Administrators,
+                SystemUserRoleNames.Admin,
+                SystemUserRoleNames.Employeer,
+                SystemUserRoleNames.Registered,
+                SystemUserRoleNames.Guests,
+            };
+            foreach (var ro in rolist)
+            {
+                var role = _userService.GetUserRoleBySystemName(ro);
+                if (role == null)
+                {
+                    role = new UserRole() { Active = true, IsSystemRole = true, Name = ro, SystemName = ro };
+                    _userService.InsertUserRole(role);
+                }
+            }
+        }
+
+
+
+        private void Init()
+        {
+            InstallRoles();
+            InstallAdminUser();
+        }
+
+        private void InstallAdminUser()
+        {
+            var user = _userService.GetUserBySystemName(SystemUserRoleNames.Administrators);
+            if (user == null)
+            {
+                var role = _userService.GetUserRoleBySystemName(SystemUserRoleNames.Administrators);
+                user = new User()
+                {
+                    Active = true,
+                    IsSystemAccount = true,
+                    UserGuid = Guid.NewGuid(),
+                    Username = SystemUserRoleNames.Administrators,
+                    Password = Encrypt.GetMd5Code(SystemUserRoleNames.Admin),
+                    PasswordFormat = PasswordFormat.Encrypted,
+                    CreateTime = DateTime.Now,
+                    Description = "系统管理员",
+                    SystemName = SystemUserRoleNames.Administrators
+                };
+                user.UserRoles.Add(role);
+                _userService.InsertUser(user);
+            }
+
+        }
     }
 }

@@ -1,9 +1,0 @@
-﻿@model IEnumerable<ThankNet.Models.Qmsg>
-<ul class="qul">
-    @foreach (var q in Model)
-    {
-        <li><a href='http://wpa.qq.com/msgrd?v=3&uin=@q.QQnum&site=qq&menu=yes' target='blank'>
-                <img src="../../Content/images/qq1.gif" alt="" /><span>@q.Name</span>
-       </a></li>
-    }
-</ul>

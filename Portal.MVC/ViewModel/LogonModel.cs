@@ -36,7 +36,7 @@ namespace Portal.MVC.ViewModel
 
         [DataType(DataType.Password)]
         [Display(Name = "确认密码")]
-        [Compare("NewPassword", ErrorMessage = "密码和确认密码不匹配。")]
+        [System.ComponentModel.DataAnnotations.Compare("NewPassword", ErrorMessage = "密码和确认密码不匹配。")]
         public string ConfirmPassword { get; set; }
 
 
@@ -70,7 +70,7 @@ namespace Portal.MVC.ViewModel
 
         [DataType(DataType.Password)]
         [Display(Name = "确认密码:")]
-        [Compare("NewPassword", ErrorMessage = "新密码和确认密码不匹配。")]
+        [System.ComponentModel.DataAnnotations.Compare("NewPassword", ErrorMessage = "新密码和确认密码不匹配。")]
         public string ConfirmPassword { get; set; }
     }
     public class RegisterModel
@@ -136,7 +136,7 @@ namespace Portal.MVC.ViewModel
 
         [DataType(DataType.Password)]
         [Display(Name = "确认密码")]
-        [Compare("Password", ErrorMessage = "密码和确认密码不匹配。")]
+        [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "密码和确认密码不匹配。")]
         public string ConfirmPassword { get; set; }
 
 

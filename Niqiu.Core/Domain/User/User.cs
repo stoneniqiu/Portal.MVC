@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Niqiu.Core.Domain.Common;
+using Niqiu.Core.Domain.Orders;
 
 namespace Niqiu.Core.Domain.User
 {
@@ -10,6 +11,7 @@ namespace Niqiu.Core.Domain.User
     {
         private ICollection<Address> _addresses;
         private ICollection<UserRole> _userRoles;
+        private ICollection<ShoppingCartItem> _shoppingCartItems;
 
         public User()
         {
@@ -101,6 +103,22 @@ namespace Niqiu.Core.Domain.User
         /// </summary>
         public DateTime LastActivityDateUtc { get; set; }
 
+        /// <summary>
+        /// 第三方openId
+        /// </summary>
+        public string OpenId { get; set; }
+        /// <summary>
+        /// 认证类型
+        /// </summary>
+        public AuthType AuthType { get; set; }
+
+        public int Sex { get; set; }
+
+        public string Country { get; set; }
+
+        public string City { get; set; }
+
+        public string Province { get; set; }
 
         /// <summary>
         /// Gets or sets customer addresses
@@ -119,7 +137,21 @@ namespace Niqiu.Core.Domain.User
             get { return _userRoles ?? (_userRoles = new Collection<UserRole>()); }
             protected set { _userRoles = value; }
         }
-
+        public virtual ICollection<ShoppingCartItem> ShoppingCartItems
+        {
+            get { return _shoppingCartItems ?? (_shoppingCartItems = new List<ShoppingCartItem>()); }
+            protected set { _shoppingCartItems = value; }
+        }
        
+    }
+
+    public enum AuthType
+    {
+        None,
+        WeiXin,
+        QQ,
+        WeiBo,
+        GitHub,
+        AliPay
     }
 }

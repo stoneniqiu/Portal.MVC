@@ -71,6 +71,7 @@ namespace Niqiu.Core.Services
         /// <param name="systemName">System name</param>
         /// <returns>User</returns>
         User GetUserBySystemName(string systemName);
+        User GetUserByOpenId(string openId);
 
         /// <summary>
         /// Get User by username

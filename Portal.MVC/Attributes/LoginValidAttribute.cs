@@ -46,7 +46,7 @@ namespace Portal.MVC.Attributes
             returnUrl = UrlHelper.GenerateContentUrl(returnUrl, filterContext.HttpContext);
 
             User user = WorkContext.CurrentUser;
-            if (user == null)
+            if (user==null||string.IsNullOrEmpty(user.Username))
             {
                 filterContext.Result = new RedirectResult("~/Account/Logon?returnUrl=" + returnUrl);
             }

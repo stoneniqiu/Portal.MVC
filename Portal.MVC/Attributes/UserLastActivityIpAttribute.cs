@@ -32,7 +32,7 @@ namespace Portal.MVC.Attributes
 
             var user = WorkContext.CurrentUser;
             var ip = WebHelper.GetCurrentIpAddress();
-            if (user != null && user.LastActivityDateUtc.AddMinutes(1.0) < DateTime.UtcNow)
+            if (user != null && user.LastActivityDateUtc.AddMinutes(3.0) < DateTime.UtcNow)
             {
                 user.LastActivityDateUtc = DateTime.UtcNow;
                 user.LastIpAddress = ip;

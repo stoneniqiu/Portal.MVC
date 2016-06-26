@@ -4,10 +4,12 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Niqiu.Core;
 using Niqiu.Core.Domain.Common;
 using Niqiu.Core.Domain.Config;
 using Niqiu.Core.Domain.User;
 using Niqiu.Core.Helpers;
+using Niqiu.Core.Services;
 using Portal.MVC.Attributes;
 using Portal.MVC.Models;
 
@@ -77,10 +79,27 @@ namespace Portal.MVC.Controllers
                     {
                         IsSystemRole = true,
                         Active = true,
-                        Name = "操作员",
+                        Name = "雇员",
                         SystemName = SystemUserRoleNames.Employeer
                     });
 
+                }
+                if (!duoDb.Users.Any())
+                {
+                    var role = duoDb.Roles.FirstOrDefault(n => n.SystemName == SystemUserRoleNames.Administrators);
+                    var user = new User()
+                    {
+                        Active = true,
+                        IsSystemAccount = true,
+                        UserGuid = Guid.NewGuid(),
+                        Username = SystemUserRoleNames.Administrators,
+                        Password = Encrypt.GetMd5Code(SystemUserRoleNames.Admin),
+                        PasswordFormat = PasswordFormat.Encrypted,
+                        CreateTime = DateTime.Now,
+                        Description = "系统管理员",
+                    };
+                    user.UserRoles.Add(role);
+                    duoDb.Users.Add(user);
                 }
 
                 duoDb.SaveChanges();

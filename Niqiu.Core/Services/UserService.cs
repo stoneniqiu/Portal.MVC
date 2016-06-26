@@ -11,12 +11,17 @@ namespace Niqiu.Core.Services
    {
        private readonly IRepository<User> _useRepository;
        private readonly IRepository<UserRole> _userRoleRepository;
+       private readonly IRepository<Address> _addressRepository;
+ 
        private readonly  ICacheManager _cacheManager ;
 
-       public UserService(IRepository<User> useRepository,IRepository<UserRole> userRoleRepository,ICacheManager cacheManager)
+       public UserService(IRepository<User> useRepository,IRepository<UserRole> userRoleRepository,
+           IRepository<Address> addressRepository,
+           ICacheManager cacheManager)
        {
            _useRepository = useRepository;
            _userRoleRepository = userRoleRepository;
+           _addressRepository = addressRepository;
            _cacheManager = cacheManager;
        }
 
@@ -31,7 +36,7 @@ namespace Niqiu.Core.Services
              user.Email += "-DELETED";
          if (!String.IsNullOrEmpty(user.Username))
              user.Username += "-DELETED";
-
+            
            UpdateUser(user);
        }
 
@@ -47,10 +52,7 @@ namespace Niqiu.Core.Services
        {
            if (user == null) throw new ArgumentNullException("user");
 
-         
-
           _useRepository.Insert(user);
-
           //event notification
           //_eventPublisher.EntityInserted(customer);
        }
@@ -100,6 +102,11 @@ namespace Niqiu.Core.Services
            return string.IsNullOrWhiteSpace(systemName) ? null : _useRepository.Table.FirstOrDefault(n => n.SystemName == systemName);
        }
 
+       public User GetUserByOpenId(string openId)
+       {
+           return string.IsNullOrWhiteSpace(openId) ? null : _useRepository.Table.FirstOrDefault(n => n.OpenId == openId);
+       }
+
        public User GetUserByUsername(string username)
        {
            return string.IsNullOrWhiteSpace(username) ? null : _useRepository.Table.FirstOrDefault(n => n.Username == username);
@@ -137,16 +144,16 @@ namespace Niqiu.Core.Services
            {
                UserGuid = Guid.NewGuid(),
                Active = true,
-               LastActivityDateUtc = DateTime.UtcNow,
+               LastActivityDateUtc = DateTime.Now,
            };
 
            //add to 'Guests' role
-           //var guestRole = GetUserRoleBySystemName(SystemUserRoleNames.Guests);
-           //if (guestRole == null)
-           //    throw new PortalException("'Guests' role could not be loaded");
-           //customer.UserRoles.Add(guestRole);
+           var guestRole = GetUserRoleBySystemName(SystemUserRoleNames.Guests);
+           if (guestRole == null)
+               throw new PortalException("'Guests' role could not be loaded");
+           customer.UserRoles.Add(guestRole);
 
-         // _useRepository.Insert(customer);
+           _useRepository.Insert(customer);
   
            return customer;
        }

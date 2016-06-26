@@ -5,11 +5,14 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Ninject;
 using Niqiu.Core.Domain.Common;
 using Niqiu.Core.Domain.User;
 using Niqiu.Core.Helpers;
 using Niqiu.Core.Services;
+using Niqiu.Core.Services.Orders;
 using Portal.MVC.Attributes;
+using Portal.MVC.Models.Common;
 using Portal.MVC.ViewModel;
 
 namespace Portal.MVC.Controllers
@@ -18,16 +21,17 @@ namespace Portal.MVC.Controllers
     {
         private readonly IUserService _userService;
         private readonly IWorkContext _portalContext;
+        private readonly IOrderService _orderService;
+
         private const int PageSize = 5;
         private string ValidEmail;
-        public UserController(IWorkContext portalContext, IUserService userService)
+        public UserController(IWorkContext portalContext,  IOrderService orderService, IUserService userService)
         {
             _portalContext = portalContext;
             _userService = userService;
+            _orderService = orderService;
         }
         #region 个人中心
-
-
 
         [LoginValid]
         [UserLastActivityIp]
@@ -45,6 +49,94 @@ namespace Portal.MVC.Controllers
             return View(u);
         }
         #endregion
+
+        /// <summary>
+        /// 使用微信登录之后需要完善账户信息
+        /// </summary>
+        /// <returns></returns>
+        [Authorize]
+        public ActionResult FixInfo(string openid,string returnUrl="")
+        {
+            ViewBag.Url = returnUrl;
+            var model = new FixInfoModel {OpenId = openid};
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult FixInfo(FixInfoModel model, string returnUrl="")
+        {
+            if (ModelState.IsValid)
+            {
+                var user = _userService.GetUserByEmail(model.Email);
+                //如果一个人登录之后填入别人的邮箱会怎么样 验证密码
+                var openUser = _userService.GetUserByOpenId(model.OpenId);
+                if (user == null)
+                {
+
+                    openUser.Email = model.Email;
+                    openUser.Password = Encrypt.GetMd5Code(model.Password);
+                    openUser.PasswordFormat = PasswordFormat.Encrypted;
+                    openUser.Active = true; 
+                    _userService.UpdateUser(openUser);
+                    Logger.Info("用户在保存，邮箱是：" + openUser.Email);
+                }
+                else
+                {
+                    //假设是自己的邮箱
+                    //验证密码
+                    if (user.Password == Encrypt.GetMd5Code(model.Password))
+                    {
+                        user.ImgUrl = openUser.ImgUrl;
+                        user.Province = openUser.Province;
+                        user.Country = openUser.Country;
+                        user.City = openUser.City;
+                        user.Sex = openUser.Sex;
+                        user.OpenId = openUser.OpenId;
+                        user.Active = true;
+                        _userService.UpdateUser(user);
+                        //则登录为当前的用户
+                        //删除下之前的用户
+                        AuthenticationService.SignIn(user, true);
+
+
+                        var lastusers = _userService.GetAllUsers().Where(n => n.OpenId == model.OpenId).ToList();
+                        foreach (var lastuser in lastusers)
+                        {
+                            if (string.IsNullOrEmpty(lastuser.Email))
+                            {
+                                _userService.DeleteUser(lastuser);
+                            }
+                        }
+
+                    }
+                    else
+                    {
+                        Error("密码错误");
+                        return View();
+                    }
+                }
+               
+
+              
+                if (String.IsNullOrEmpty(returnUrl) || !Url.IsLocalUrl(returnUrl))
+                            return RedirectToAction("Index", "Home");
+                return Redirect(returnUrl);
+            }
+            return View();
+        }
+
+        public ActionResult MyOrders()
+        {
+            var user = _portalContext.CurrentUser;
+            var orders = _orderService.SearchOrders(customerId: user.Id);
+
+            return View(orders);
+        }
+
+
+        [Inject]
+        public IAuthenticationService AuthenticationService { get; set; }
+
 
         #region 修改密码
         [LoginValid]

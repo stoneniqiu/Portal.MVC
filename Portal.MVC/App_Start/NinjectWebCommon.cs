@@ -3,11 +3,14 @@ using System.Web;
 using Microsoft.Web.Infrastructure.DynamicModuleHelper;
 using Ninject;
 using Ninject.Web.Common;
+using Niqiu.Core;
 using Niqiu.Core.Domain;
 using Niqiu.Core.Domain.Common;
 using Niqiu.Core.Domain.Config;
 using Niqiu.Core.Domain.User;
 using Niqiu.Core.Services;
+using Niqiu.Core.Services.Catalog;
+using Niqiu.Core.Services.Orders;
 using Portal.MVC;
 using Portal.MVC.Models;
 using Portal.MVC.Services;
@@ -71,7 +74,7 @@ namespace Portal.MVC
         {
             kernel.Bind<IDbContext>().To<PortalDb>().InSingletonScope();
             kernel.Bind<IWebHelper>().To<WebHelper>().InRequestScope();
-            kernel.Bind<IWorkContext>().To<WebWorkContext>().InRequestScope();
+            kernel.Bind<IWorkContext>().To<WebWorkContext>().InSingletonScope();
             kernel.Bind(typeof(IRepository<>)).To(typeof(EfRepository<>));//带泛型约束注入
 
            //kernel.Bind<ICacheManager>().To<MemoryCacheManager>().InSingletonScope().Named(PortalConfig.PortalCacheStatic);
@@ -82,6 +85,9 @@ namespace Portal.MVC
             kernel.Bind<IUserService>().To<UserService>();
             kernel.Bind<IPermissionService>().To<PermissionService>();
             kernel.Bind<IAccountService>().To<AccoutService>();
+            kernel.Bind<IProductService>().To<ProductService>();
+            kernel.Bind<IOrderService>().To<OrderService>();
+            kernel.Bind<IShoppingCartService>().To<ShoppingCartService>();
             kernel.Bind<ICacheManager>().To<PerRequestCacheManager>();
          
         }        

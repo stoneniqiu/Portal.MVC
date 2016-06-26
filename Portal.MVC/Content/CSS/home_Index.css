@@ -108,3 +108,161 @@ position: absolute;
 top: 0;
 right: 0;
 }
+
+        .banner-slide {
+    width: 999999px;
+    min-width: 1100px;
+    min-height: 366px;
+    left: 0;
+    overflow: hidden;
+    position: relative;
+}
+        #banner_slide>li, .banner-slide>li {
+    width: 100%;
+    height: auto;
+    min-width: 1100px;
+    min-height: 366px;
+    float: left;
+    position: relative;
+    cursor: pointer;
+    list-style-type: none;
+}
+       #carousel-example-generic .carousel-inner .item{
+           height: auto;
+        }
+       #carousel-example-generic{ margin-top: -20px;}
+
+       .products .img-item img{width: 100%}
+       
+        .products .img-item .imgbox {
+            display: inline-block;width: 100%; 
+            overflow: hidden
+        }
+    
+        .products .img-item:hover img {
+            -webkit-transform: scale(1.2, 1.2);
+            -moz-transform: scale(1.2, 1.2);
+            -ms-transform: scale(1.2, 1.2);
+            -o-transform: scale(1.2, 1.2);
+            transform: scale(1.2, 1.2);
+            -webkit-transition: all 1s ease 0s;
+            -moz-transition: all 1s ease 0s;
+            -ms-transition: all 1s ease 0s;
+            -o-transition: all 1s ease 0s;
+            transition: all 1s ease 0s;
+        }
+  .img-item .detail{ text-align: center;}    
+   .img-item .detail h5 {
+    font-size: 18px;
+}                           
+   .img-item .detail {
+    margin-top: 10px;
+    color: #333;
+    line-height: 1.5;
+} .img-item .detail .price {
+    font-size: 22px;
+    color: #e82a2a;
+}.img-item .detail .description {
+    font-size: 14px;
+}
+       /*.products h2{ text-align: center;margin: 50px; }*/
+       .hd {
+    margin: 0 auto 60px;
+    padding-top: 40px;
+    height: 34px;
+    width: 640px;
+    border-bottom: 1px solid #d9d9d9;
+} .hd h2 {
+    margin: 0 auto;
+    width: 50%;
+    line-height: 5px;
+    text-align: center;
+    background: #ffffff;
+    color: #000000;
+    font-size: 38px;
+    font-weight: normal;
+}
+
+  .partner .hd h2 {
+  background: #ffffff;
+}
+.partner .bd img {
+  width: 1190px;
+  height: 532px;
+}
+.partner .bd li {
+  float: left;
+  margin-right: 2%;
+  margin-bottom: 22px;
+  width: 23.33%;
+  *width: 23.3%;
+  height: 120px;
+  text-indent: -9999px;
+  overflow: hidden;
+  border: 1px solid #e5e5e5;
+  background: white url(../static/icon_partner.jpg) no-repeat center 0px;
+}
+.partner .bd .qqclass {
+  text-indent: 0;
+}
+.partner .bd .qqclass a {
+  *float: left;
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-indent: -9999px;
+  overflow: hidden;
+}
+.partner .bd .last {
+  margin-right: 0;
+}
+.partner .bd .yy {
+  background-position: center 0;
+}
+.partner .bd .baidu {
+  background-position: center -120px;
+}
+.partner .bd .alibaba {
+  background-position: center -240px;
+}
+.partner .bd .tencent {
+  background-position: center -360px;
+}
+.partner .bd .netease {
+  background-position: center -480px;
+}
+.partner .bd .sohu {
+  background-position: center -600px;
+}
+.partner .bd .iqiyi {
+  background-position: center -720px;
+}
+.partner .bd .qqclass {
+  background-position: center -840px;
+}
+.partner .bd .youku {
+  background-position: center -960px;
+}
+.partner .bd .sina {
+  background-position: center -1080px;
+}
+.partner .bd .letv {
+  background-position: center -1200px;
+}
+.partner .bd .job51 {
+  background-position: center -1320px;
+}
+.partner .bd .zhaopin {
+  background-position: center -1440px;
+}
+.partner .bd .gdtv {
+  background-position: center -1560px;
+}
+.partner .bd .zjtv {
+  background-position: center -1680px;
+}
+.partner .bd .hntv {
+  background-position: center -1800px;
+}
+
+ .aucvideo{ text-align: center;margin: 30px 0;}

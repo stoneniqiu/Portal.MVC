@@ -15,12 +15,14 @@ namespace Portal.MVC.Controllers
     {
         private readonly IAccountService _accountService;
         private readonly IUserService _service;
+        private readonly IPermissionService _permissionService;
         private readonly IWorkContext _workContext;
-        public AccountController(IUserService repository, IAccountService accountService,IWorkContext workContext)
+        public AccountController(IUserService repository, IAccountService accountService, IWorkContext workContext, IPermissionService iPermissionService)
         {
             _service = repository;
             _workContext = workContext;
             _accountService = accountService;
+            _permissionService = iPermissionService;
         }
 
         #region 修改密码
@@ -94,6 +96,14 @@ namespace Portal.MVC.Controllers
             return View(model);
         }
 
+
+        /// <summary>
+        /// 支持匿名用户添加购物车
+        /// 在登录的时候处理
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="returnUrl"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult Logon(LogOnModel model, string returnUrl)
         {
@@ -110,7 +120,14 @@ namespace Portal.MVC.Controllers
                     case UserLoginResults.Successful:
                     {
                         User user = _service.GetUserByUsername(model.UserName);
+                        if (user == null && model.UserName.Contains("@"))
+                        {
+                            user = _service.GetUserByEmail(model.UserName);
+                        }
                         //sign in new customer
+                        UpdateShoppingCart(user);
+
+
                         AuthenticationService.SignIn(user, model.RememberMe);
 
                         if (String.IsNullOrEmpty(returnUrl) || !Url.IsLocalUrl(returnUrl))
@@ -138,9 +155,25 @@ namespace Portal.MVC.Controllers
             return View(model);
         }
 
+        private void UpdateShoppingCart(User user)
+        {
+            if (_workContext.CurrentUser.ShoppingCartItems.Count > 0 && string.IsNullOrEmpty(_workContext.CurrentUser.Username))
+            {
+                foreach (var item in _workContext.CurrentUser.ShoppingCartItems)
+                {
+                    user.ShoppingCartItems.Add(item);
+                }
+                _workContext.CurrentUser.ShoppingCartItems.Clear();
+                _service.UpdateUser(_workContext.CurrentUser);
+                _service.DeleteUser(_workContext.CurrentUser);
+                _service.UpdateUser(user);
+            }
+        }
+
         [AllowAnonymous]
         public ActionResult Register()
         {
+          //  _permissionService.InstallPermissions(new StandardPermissionProvider());
             var model = new RegisterModel();
             return View(model);
         }
@@ -173,6 +206,7 @@ namespace Portal.MVC.Controllers
                 {
                     if (isApprove)
                     {
+                        UpdateShoppingCart(user);
                         AuthenticationService.SignIn(user, true);
                     }
                     if (String.IsNullOrEmpty(returnUrl) || !Url.IsLocalUrl(returnUrl))
@@ -196,6 +230,7 @@ namespace Portal.MVC.Controllers
         public ActionResult LogOff()
         {
             AuthenticationService.SignOut();
+            SetUserCookie(Guid.Empty);
             return RedirectToAction("Logon", "Account");
         }
 
@@ -253,9 +288,7 @@ namespace Portal.MVC.Controllers
         public ActionResult ValidMail(string name)
         {
             User user = _service.GetUserByUsername(name);
-
             if (user == null) return View("NoData");
-
 
             if (!user.Active)
             {

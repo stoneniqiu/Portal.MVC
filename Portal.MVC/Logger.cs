@@ -11,7 +11,7 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
-namespace ThankNet
+namespace Portal.MVC
 {
     /// <summary>
     /// Class Logger

@@ -21,6 +21,8 @@ namespace Niqiu.Core.Services
 
         public void SignIn(User user, bool createPersistentCookie)
         {
+            if(user==null) return;
+
             var now = DateTime.UtcNow.ToLocalTime();
             var ticket = new FormsAuthenticationTicket(1, user.Username, now, now.Add(_expirationTimeSpan),
                 createPersistentCookie, user.Username, FormsAuthentication.FormsCookiePath);

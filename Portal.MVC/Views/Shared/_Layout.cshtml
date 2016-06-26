@@ -2,8 +2,13 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=0.2, minimum-scale=0.2, maximum-scale=1.0, user-scalable=yes">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="造作，为您提供国际获奖设计师原创家居设计，包括沙发、桌椅、床、衣柜等家具套系，更有抱枕、台灯、装饰画等家居饰品。全部产品免费配送，物流到家。">
+    <meta content="index, follow" name="robots">
+    <meta name="Keywords" content="智能家居，免费配送，包邮，原创设计">
+    <meta name="robots" content="all">
+    <meta http-equiv="Window-target" content="_top">
 
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
@@ -16,136 +21,114 @@
     <link href="~/Content/CSS/custom.css" rel="stylesheet" />
     <link rel="shortcut icon" type="image/x-icon" href="~/Content/favicon.ico" />
     <link rel="icon" type="image/x-icon" href="~/Content/favicon.ico" />
-
-    <style>
-        .bgcolor {
-            background-color: #2e8b57;
-        }
-
-        .jump-top-box {
-            width: 40px;
-            position: fixed;
-            z-index: 999;
-            top: 600px;
-            right: 5px;
-        }
-
-            .jump-top-box .jump-top {
-                margin-bottom: 5px;
-            }
-
-            .jump-top-box .jump-top, .jump-top-box .jump-feedback, .jump-top-box .jump-profhelp, .jump-top-box .jump-goto-naire {
-                height: 40px;
-                display: block;
-                position: relative;
-                z-index: 1;
-            }
-
-                .jump-top-box .jump-top a {
-                    background-position: -1278px -279px;
-                }
-
-                .jump-top-box .jump-top a {
-                    background-repeat: no-repeat;
-                    background-image: url(/Content/img/common_z_c3a7666.png);
-                }
-
-                .jump-top-box .jump-top a, .jump-top-box .jump-feedback a, .jump-top-box .jump-profhelp a, .jump-top-box .jump-goto-naire a {
-                    color: #fff;
-                    font-size: 0;
-                    _text-indent: -1000px;
-                    text-decoration: none;
-                    display: block;
-                    padding: 6px 8px 8px;
-                    height: 40px;
-                    width: 40px;
-                    line-height: 14px;
-                    position: absolute;
-                    z-index: 2;
-                    left: 0;
-                    top: 0;
-                    overflow: hidden;
-                    -webkit-border-radius: 2px;
-                    -moz-border-radius: 2px;
-                    border-radius: 2px;
-                }
-
-            .jump-top-box .jump-task-list {
-                width: 40px;
-                padding-top: 87px;
-                height: 14px;
-                margin-top: 5px;
-                position: relative;
-                font-family: "Microsoft YaHei",arial,"\5b8b\4f53",monospace;
-            }
-
-                .jump-top-box .jump-task-list .service {
-                    cursor: pointer;
-                    border: 1px solid #cacbcc;
-                    border-radius: 2px;
-                    display: block;
-                    padding: 10px;
-                    color: #8b8b8b;
-                    text-align: center;
-                    line-height: 1.2;
-                    font-size: 14px;
-                    position: absolute;
-                    left: 0;
-                    top: 0;
-                    z-index: 10;
-                    background: #fff;
-                }
-
-        .msglist {
-        }
-    </style>
-
+    <link href="~/Content/Matrix_Admin/font-awesome/css/font-awesome.css" rel="stylesheet" />
     <script src="~/Scripts/respond.min.js"></script>
-
     <script src="~/Scripts/jquery-1.9.1.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
     <script src="~/Scripts/bootstrap-paginator.js"></script>
-    <script src="~/Scripts/jquery.pin.min.js"></script>
-
     <script src="~/Content/layer/layer.js"></script>
     <script src="~/Content/layer/extend/layer.ext.js"></script>
     <script src="~/Content/toastr/toastr.min.js"></script>
+    <script src="~/Scripts/public.common.js"></script>
+    <script src="~/Scripts/public.ajaxcart.js"></script>
+    <style>
+    </style>
 </head>
 
 <body>
-
     <div class="wrapper">
-        <div id="header">
+        <div id="header"  >
             <div class="viewport-wrapper">
                 <div class="container">
-                    <a class="header-logo" href="/">Reading</a>
+                    <a class="header-logo" href="/">WarmWood</a>
                     <div class="header-account">
-                        @Html.Partial("_LoginPartial")
+                       @Html.Action("HeaderLinks","Common")
                     </div>
                     <ul class="header-nav">
                         <li class="nav-item home"><a href="@Url.Action("Index", "Home")">首页</a></li>
-                        <li class="nav-item product"><a href="@Url.Action("BookWay", "Home")">书山有路</a></li>
-                        <li class="nav-item example">
-                            <a href="#">书单</a>
+                        <li class="nav-item products" id="header_tags">
+                            <a href="#">产品<span class="icon-caret-down"></span></a>
+                            @*<ul class="items" role="menu">
+                                    <li><a href="#">淘书</a></li>
+                                    <li><a href="#">淘书</a></li>
+                                    <li class="divider"></li>
+                                </ul>*@
 
+                        </li>
+                        <li class="nav-item example">
+                            <a href="#">租赁服务</a>
                         </li>
                         <li class="nav-item download">
-                            <a href="#">静好</a>
-                           
+                            <a href="#">APP</a>
                         </li>
-                        <li class="nav-item train">
-                            <a href="#">淘书</a>
-                            <ul class="items" role="menu">
-                                <li><a href="#">淘书</a></li>
-                                <li><a href="#">淘书</a></li>
-                                <li class="divider"></li>
-                            </ul>
+                        <li class="nav-item download">
+                            <a href="#">母婴安全</a>
                         </li>
-
+                        <li class="nav-item download">
+                            <a href="#">视频中心</a>
+                        </li>
+                        <li class="nav-item download">
+                            <a href="#">木材赏析</a>
+                        </li>
+                        <li class="nav-item download">
+                        </li>
                     </ul>
+                    <div class="header-tags">
+                        <ul>
+                            <li>
+                                <img class="screening-img-normal" src="~/Content/static/all.png">
+                                <img class="screening-img-hover" src="~/Content/static/all1.png">
+                                <p>全部</p>
+                            </li>
+                            <li tagid="4">
+                                <img class="screening-img-normal" src="~/Content/static/shafa.png">
+                                <img class="screening-img-hover" src="~/Content/static/shafa1.png">
+                                <p>沙发</p>
+                            </li>
+                            <li tagid="3">
+                                <img class="screening-img-normal" src="~/Content/static/zuoyi.png">
+                                <img class="screening-img-hover" src="~/Content/static/zuoyi1.png">
+                                <p>座椅</p>
+                            </li>
+                            <li tagid="2">
+                                <img class="screening-img-normal" src="~/Content/static/zhuoji.png">
+                                <img class="screening-img-hover" src="~/Content/static/zhuoji1.png">
+                                <p>桌几</p>
+                            </li>
+                            <li tagid="5">
+                                <img class="screening-img-normal" src="~/Content/static/guijia.png">
+                                <img class="screening-img-hover" src="~/Content/static/guijia1.png">
+                                <p>柜架</p>
+                            </li>
+                            <li tagid="1">
+                                <img class="screening-img-normal" src="~/Content/static/chuang.png">
+                                <img class="screening-img-hover" src="~/Content/static/chaung1.png">
+                                <p>床</p>
+                            </li>
+                            <li tagid="6">
+                                <img class="screening-img-normal" src="~/Content/static/jiafang.png">
+                                <img class="screening-img-hover" src="~/Content/static/jiafang1.png">
+                                <p>家纺</p>
+                            </li>
+                            <li tagid="8">
+                                <img class="screening-img-normal" src="~/Content/static/deng.png">
+                                <img class="screening-img-hover" src="~/Content/static/deng1.png">
+                                <p>灯具</p>
+                            </li>
+                            <li tagid="7">
+                                <img class="screening-img-normal" src="~/Content/static/zhaung.png">
+                                <img class="screening-img-hover" src="~/Content/static/zhaung1.png">
+                                <p>装饰</p>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
+        
+        <script>
+            AjaxCart.init(false, ".header-account .cart-qty", ".header-account .wishlist-qty","#flyout-cart")
+        </script>
         <div id="content">
             @RenderBody()
         </div>
@@ -155,47 +138,57 @@
     </div>
     <footer>
         <div class="container">
-
             <div class="row">
-                <div class="col-md-9" style="padding-left: 15px;">
-                    <ul id="footul" class="nav navbar-nav">
-                        <li>
-                            <h4><a href="#">nav</a></h4>
+                <div class="col-sm-12 col-md-9 footer-list">
+                    <ul class="row">
+                        <li class="col-xs-12 col-sm-3 col-md-3">
+                            <h5>产品</h5>
+                            <dl>
+                                <dd><a href="@Url.Action("IBabycrib","Product")">智能婴儿床</a></dd>
+                            </dl>
                         </li>
-                        <li>
-                            <h4><a href="#">nav</a></h4>
+                        <li class="col-xs-12  col-sm-3 col-md-3">
+                            <h5>关于我们</h5>
+                            <dl>
+                                <dd><a>公司简介</a></dd>
+                                <dd><a>新闻动态</a></dd>
+                                <dd><a>加入我们</a></dd>
+                            </dl>
                         </li>
-                        <li>
-                            <h4><a href="#">nav</a></h4>
+                        <li class="col-xs-12  col-sm-3 col-md-3">
+                            <h5>服务</h5>
+                            <dl>
+                                <dd><a>体验点</a></dd>
+                                <dd><a>加入我们</a></dd>
+                            </dl>
                         </li>
-                        <li>
-                            <h4><a href="#">nav</a></h4>
-                        </li>
-                        <li>
-                            <h4><a href="#">nav</a></h4>
+                        <li class="col-xs-12  col-sm-3 col-md-3">
+                            <img src="~/Content/static/wx_200.png" />
                         </li>
                     </ul>
-                    <div class="clear"></div>
-                    <p class="fsmall" style="margin-top:40px;">Copyright © <a href="http://www.cnblogs.com/stoneniqiu/" target="_blank" >stoneniqiu </a> 书山有路读书群：</p>
                 </div>
-                <div class=" col-md-3 footerinfo">
-                    <p class="fsmall">书山有路公益组织</p>
-                    <p class="fsmall">业务咨询:76617768</p>
+                <div class=" col-md-3 company">
+                    <img src="~/Content/Photos/logo.png" />
+                    <p>北京我木我的科技有限公司</p>
                 </div>
             </div>
         </div>
+        <p class="copyright">
+            Copyright © 2016 warmwood.com Inc.All Rights Reserved. 版权所有 京ICP备1504780号-2 <br />
+            客服电话：400-0071-380 客服邮箱：warmwood@warmwood.com 联系我们：contact@warmwood.com
+        </p>
     </footer>
-
     <div class="jump-top-box">
         <div class="jump-top">
             <a href="#" target="_self">返回顶部</a>
         </div>
-        <div class="jump-task-list">
+        @*<div class="jump-task-list">
             <a class="service" data-action="open-task-list">在线客服</a>
-        </div>
+        </div>*@
     </div>
     <div>
     </div>
+    <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://"); document.write(unescape("%3Cspan id='cnzz_stat_icon_1257186807'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1257186807%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script>
 </body>
 </html>
 
@@ -210,30 +203,30 @@
             token = patt.exec(pathname)[0];
         }
         switch (token) {
-            case "Example":
-                changenavcss(".example");
-                break;
-            case "Download":
-                changenavcss(".download");
-                break;
-            case "Product":
-                changenavcss(".product");
-                break;
-            case "SoftPurchase":
-                changenavcss(".soft");
-                break;
-            case "Ask":
-                changenavcss(".train");
-                break;
-            case "Topic":
-                changenavcss(".forum");
-                break;
-            case "About":
-                changenavcss(".about");
-                break;
-            case "Home":
-                changenavcss(".home");
-                break;
+        case "Example":
+            changenavcss(".example");
+            break;
+        case "Download":
+            changenavcss(".download");
+            break;
+        case "Product":
+            changenavcss(".product");
+            break;
+        case "SoftPurchase":
+            changenavcss(".soft");
+            break;
+        case "Ask":
+            changenavcss(".train");
+            break;
+        case "Topic":
+            changenavcss(".forum");
+            break;
+        case "About":
+            changenavcss(".about");
+            break;
+        case "Home":
+            changenavcss(".home");
+            break;
         }
 
     }
@@ -260,27 +253,66 @@
 
         //给导航栏栏目添加下拉列表，当鼠标放在栏目上面时显示出来。
         $(".header-nav li").bind("mouseenter", function () { $(this).children("ul").slideDown(); })
-                           .bind("mouseleave", function () { $(this).children("ul").slideUp(); });
+            .bind("mouseleave", function () { $(this).children("ul").slideUp(); });
         $("ul.items").bind("mouseleave", function () {
             //隐藏列表
             $(this).slideUp();
         });
 
-        //返回页面顶部
-        $(".jump-top a").bind("mouseenter", function () {
-
-        }).bind("mouseleave", function () {
-
+        $('.jump-top').click(function (event) {
+            event.preventDefault();
+            $('html, body').animate({ scrollTop: 0 }, 500);
         });
-
 
         $(window).scroll(function () {
             if ($("body").scrollTop() == 0) {
-                $(".jump-top").css("visibility", "hidden");
+                // $(".jump-top").css("visibility", "hidden");
+                $(".jump-top").fadeOut(200);
             } else {
-                $(".jump-top").css("visibility", "visible");
+                //$(".jump-top").css("visibility", "visible");
+                $('.jump-top').fadeIn(200);
             }
+ 
+        });
+    });
 
+
+    $(function () {
+        var tagsTime;
+        $(document).on('mouseover mouseout', '#header_tags', function (event) {
+            var $headerTagsBox = $('.header-tags');
+            if (event.type == 'mouseover') {
+                clearTimeout(tagsTime);
+                // alert(tagsTime);
+                $headerTagsBox.slideDown(300);
+            }
+            else if (event.type == 'mouseout') {
+                tagsTime = setTimeout(function () {
+                    $headerTagsBox.slideUp(200);
+                }, 200);
+            }
+        });
+        $('.header-tags').hover(function () {
+            clearTimeout(tagsTime);
+        }, function () {
+            var $me = $(this);
+            tagsTime = setTimeout(function () {
+                $me.slideUp(200);
+            }, 200);
+        });
+        $(document).on('click', '.header-tags li', function () {
+            var $li = $(this);
+            var tagid = $li.attr('tagid');
+            if ($li.hasClass('header-tags-liclick')) {
+                $li.removeClass('header-tags-liclick');
+            } else {
+                $li.addClass('header-tags-liclick').siblings().removeClass('header-tags-liclick');
+            }
+            if (tagid) {
+                location.href = '';
+            } else {
+                location.href = '';
+            }
         });
     });
 </script>

@@ -1,37 +1,18 @@
 ﻿@{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "我木我的-看我婴儿床";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <link href="~/Content/CSS/home_Index.css" rel="stylesheet" />
- 
 
 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-    <!-- Indicators -->
-    <ol class="carousel-indicators  mydot display-inblock">
-        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-        <li data-target="#carousel-example-generic" data-slide-to="3"></li>
-    </ol>
-    <!-- Wrapper for slides -->
     <div class="carousel-inner">
         <div class="item active ">
-            <img src="~/Content/Photos/book1.jpg" />
-            @*    <div class="carousel-caption">
-                    first
-                </div>*@
+            <a href="@Url.Action("IBabycrib","Product")" ><img src="~/Content/static/s3.jpg" /></a>
         </div>
         <div class="item ">
-            <img src="~/Content/Photos/book2.jpg" />
-        </div>
-        <div class="item ">
-            <img src="~/Content/Photos/book3.jpg" />
-        </div>
-        <div class="item ">
-            <img src="~/Content/Photos/book4.jpg" />
+            <a href="@Url.Action("IBabycrib","Product")"><img src="~/Content/static/s1.jpg" /></a>
         </div>
     </div>
-    <!-- Controls -->
     <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
         <span class="glyphicon glyphicon-chevron-left"></span>
     </a>
@@ -40,68 +21,98 @@
     </a>
 </div>
 
+@*<div class="preheating-banner">
+        <div class="preheating-headlayer" style="display: block;"></div>
+        <div class="banner-arrow-btn banner-btn-prev"></div>
+        <div class="banner-arrow-btn banner-btn-next"></div>
+        <ul class="banner-slide" >
 
-
-<div class="container" >
-    <div class="tit bluet">
-        Portal.MVC 简介
-    </div>
-    <div class="article-post">
-        项目是基于MVC4+EF,带有角色，权限，用户中心及账户相关(登录,注册,修改密码，找回密码等)等基本功能。参考的开源项目
-        <a target="_blank" href="http://www.nopcommerce.com/">nopcommerce</a>，这是一个电商架构的MVC项目，我对其进行了简化，之前主要是方便我自己搭建一些小的网站。
-        我没有分太多的层级，核心的部分在<strong>Niqiu.Core</strong>类库里面.分四个部分
-        <ul>
-            <li><strong>Domain:</strong>包含主要的领域模型,比如User,UserRole,PermissionRecord等</li>
-            <li><strong>Helpers:</strong>包含一些帮助类，比如xml，email</li>
-            <li><strong>Mapping:</strong>数据映射</li>
-            <li><strong>Services:</strong>服务部分的接口和实现</li>
+            <li jump="bed.html" style="">
+                <a href='http://www.warmwood.com/bed.html'><img src="~/Content/static/s3.jpg" style=" display: inline;"></a>
+            </li>
+            <li jump="bed.html" style="">
+                <a href='bed.html'><img src="~/Content/static/s1.jpg" style=" display: inline;"></a>
+            </li>
         </ul>
-        <p>而网站部分重要的有一些可以复用的Attributes,AccountController等，下面介绍下2个我认为重要点的部分</p>
-        <h3>Ninject依赖注入:</h3>
-        <p>
-            Nop中使用的是<a href="http://autofac.org/">Autofac</a>，并构建了一个强大的<strong>EnginContext</strong>管理所有的依赖注入项，在这个项目中我拿掉了这一部分，换成<a target="_blank" href="http://www.ninject.org/">Ninject</a>来完成IOC的工作。并不涉及这两个组件的优劣问题，而且我认为前者的功能更要
-            强悍一些。Ninject是在<strong>NinjectWebCommon</strong>类中注册的.它在App_Start文件夹下。 
-            如下：
-            <pre>
-                <code>
-      kernel.Bind&lt;IPermissionservice&gt;().To&lt;Permissionservice&gt;();
-</code>
-</pre>
-        </p>
-        <h3>权限管理:</h3>
-        <p>默认设定了三种角色，Administrators，Admins，Employeer，他们分别配置了不同的权限，权限指定是在<strong>StandardPermissionProvider</strong>这个类中完成的，表示一个角色拥有哪些权限,Administrators拥有所有权限。
-            <pre>
-  <code>
-     new DefaultPermissionRecord
-      {
-        UserRoleSystemName   = SystemUserRoleNames.Admin,
-        PermissionRecords = new []
-         {
-            AccessAdminPanel,
-            SearchOrder,
-            ManageUsers,
-          }
-       },
-     </code>
-</pre>
-            而权限验证的时候，在响应的Action上面加上AdminAuthorize和权限名称即可。
-            <pre>
-<code>
-        <strong>[AdminAuthorize("ManageUsers")]</strong>
-        public ActionResult Index()
-        {
-        }
-</code>
-</pre>
-            后台只有给用户设置角色的页面，我没做新增角色并分配权限的页面。不过这个实现起来也很简单了。如有其它的问题可以看我的<a href="http://www.cnblogs.com/stoneniqiu/">博客</a>，或者联系我。
-        </p>
-    </div>
-    <div class="tit bluet">
-       关于分享
-    </div>
-    <div class="article-post">
-        首先还是希望这个工程对大家有帮助，说的好听是为社区做一些贡献，但分享的知识的主要目的还是在于为我自己，分享的过程是对过去知识一个梳理，并存档入库，这种感觉就像是盛了一杯水倒掉了，进而我需要找新的水装满这个水杯。
-    </div>
+    </div>*@
+
+<div class="container">
+
+    <div id="movie_player">
+        <div id="mod_tenvideo_flash_player_1460993305816" class="tenvideo_player">
+        </div></div>
+    <div id="movie_player_2"></div>
      
 
+    <div class="row aucvideo">
+        <embed wmode="direct" flashvars="vid=q0181vy3z2l&amp;tpid=0&amp;showend=1&amp;showcfg=0&amp;searchbar=1&amp;shownext=1&amp;list=2&amp;outhost=http%3A%2F%2Fv.qq.com%2Fboke%2Fpage%2Fq%2F0%2Fl%2Fq0181vy3z2l.html&amp;openbc=0&amp;fakefull=1&amp;title=%20%E7%9C%8B%E6%88%91%E5%A9%B4%E5%84%BF%E5%BA%8A%E5%AE%A3%E4%BC%A0%E7%89%87" src="http://imgcache.qq.com/tencentvideo_v1/player/TencentPlayer.swf?max_age=86400&amp;v=20140714" quality="high" name="tenvideo_flash_player_1457709839262" id="tenvideo_flash_player_1457709839262" bgcolor="#000000" width="720px" height="472px" align="middle" allowscriptaccess="always" allowfullscreen="true" type="application/x-shockwave-flash" pluginspage="http://get.adobe.com/cn/flashplayer/">
     </div>
+    <div class="hd">
+        <h2>本季设计作品</h2>
+    </div>
+    <div class="row products">
+        <div class="col-md-12">
+            <div class="col-md-6 img-item">
+                <a href="@Url.Action("IBabycrib", "Product")">
+                    <div class="imgbox">
+                        <img src="~/Content/static/bed.png"/>
+                    </div>
+                    <div class="detail">
+                        <h5>智能婴儿床</h5>
+                        @*<div class="description">一台能教会你弹琴的钢琴</div>*@
+                        <div class="price">7999￥起</div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-6 img-item">
+                <a href="http://www.warmwood.com/bed.html">
+                    <div class="imgbox">
+                        <img src="~/Content/static/zdeng.png"/>
+                    </div>
+                    <div class="detail">
+                        <h5>猪鼻凳</h5>
+                        <div class="price">199￥</div>
+                    </div>
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+@*<div style="background-color:transparent;background-image:url(//gdp.alicdn.com/imgextra/i1/2090245787/TB2..UuiFXXXXabXXXXXXXXXXXX_!!2090245787.jpg);background-repeat:no-repeat;height:460px; position:relative;">
+    <div class="vidoe-box">
+        <div class="sn-simple-logo" style="background-color:transparent;width:auto;border:none 0;padding:0;white-space:nowrap;color:#FFFFFF;left:643px;top:0px;height:460px;width:630px;z-index:2;">    <embed src="//cloud.video.taobao.com//play/u/2090245787/p/2/e/1/t/1/32106250.swf" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="100%" height="100%" allowscriptaccess="never" flashvars="scene=taobao_shop">  </div> <div class="sn-simple-logo" style="background-color:transparent;width:auto;border:none 0;padding:0;left:0px;top:0px;height:460px;z-index:1;"> <a href="//detail.tmall.com/item.htm?spm=0.0.0.0.uKiwiC&amp;id=39305491102&amp;scene=taobao_shop" target="_blank" style="display:block;font-size:0;"><img src="//gdp.alicdn.com/imgextra/i4/1862941194/T2a2R1XD0aXXXXXXXX-1862941194.png" width="1920" height="400"></a> </div>
+    </div>
+</div>*@
+
+<div class="container">
+   
+    <div class="hd">
+        <h2>合作伙伴</h2>
+    </div>
+
+    <div class="row partner">
+        <ul class="bd">
+            <li class="yy" title="YY.com">YY.com</li>
+            <li class="baidu" title="百度">百度</li>
+            <li class="alibaba" title="阿里巴巴">阿里巴巴</li>
+            <li class="tencent last" title="腾讯网">腾讯网</li>
+            <li class="netease" title="网易">网易</li>
+            <li class="sohu" title="搜狐">搜狐</li>
+            <li class="iqiyi" title="爱奇艺">爱奇艺</li>
+            <li class="qqclass last" title="腾讯精品课">
+                <a href="#" rel="noflow" target="_blank">腾讯精品课</a>
+            </li>
+            <li class="youku" title="优酷">优酷</li>
+            <li class="sina" title="新浪">新浪</li>
+            <li class="letv" title="乐视网">乐视网</li>
+            <li class="job51 last" title="前程无忧">前程无忧</li>
+            <li class="zhaopin" title="智联招聘">智联招聘</li>
+            <li class="gdtv" title="广东卫视">广东卫视</li>
+            <li class="zjtv" title="浙江卫视">浙江卫视</li>
+            <li class="hntv last" title="湖南卫视">湖南卫视</li>
+        </ul>
+    </div>
+</div>

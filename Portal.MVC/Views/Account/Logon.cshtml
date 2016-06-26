@@ -11,46 +11,49 @@
     <div class="row">
         <div class="col-md-12">
             <div class="loginbox">
-            @using (Html.BeginForm()) {
-    @Html.ValidationSummary(true)
+                @using (Html.BeginForm()) {
+                    @Html.ValidationSummary(true)
 
-                <h3 class="title">登录</h3>
-        <div class="form-group editor-field">
-            @Html.TextBoxFor(model => model.UserName,new{ @class="form-control",placeholder="用户名"})
-            @Html.ValidationMessageFor(model => model.UserName)
-        </div>
-        <div class="form-group editor-field">
-            @Html.PasswordFor(model => model.Password,new{ @class="form-control",placeholder="密码"})
-            @Html.ValidationMessageFor(model => model.Password)
-        </div>
-        <div class="form-group editor-field">
-            @Html.EditorFor(model => model.RememberMe)
-            @Html.LabelFor(model => model.RememberMe,new{@class="tip"})
-            @Html.ValidationMessageFor(model => model.RememberMe)
+                    <h3 class="title">登录</h3>
+                    <div class="form-group editor-field">
+                        @Html.TextBoxFor(model => model.UserName,new{ @class="form-control",placeholder="用户名"})
+                        @Html.ValidationMessageFor(model => model.UserName)
+                    </div>
+                    <div class="form-group editor-field">
+                        @Html.PasswordFor(model => model.Password,new{ @class="form-control",placeholder="密码"})
+                        @Html.ValidationMessageFor(model => model.Password)
+                    </div>
+                    <div class="form-group editor-field">
+                        @Html.EditorFor(model => model.RememberMe)
+                        @Html.LabelFor(model => model.RememberMe,new{@class="tip"})
+                        @Html.ValidationMessageFor(model => model.RememberMe)
             
-            <a class="abright" href="@Url.Action("ForgotPwd","User")">忘记密码</a>
-        </div>
+                        <a class="abright" href="@Url.Action("ForgotPwd","User")">忘记密码</a>
+                    </div>
 
-        <p>
-            <input type="submit" class="btn btn-primary" value="登录" />
+                    <p>
+                        <input type="submit" class="btn btn-primary" value="登录" />
             
-            <a class="abright" href="@Url.Action("Register")">注册账号</a>
-        </p>
-}
-<div class="vendor-block">
-        合作账号登录:
-       @* <a title="使用CSDN账号登录" class="vendor-logo icon-csdn" href="/signup/csdn">CSDN</a>*@
-        <a title="使用GitHub账号登录" class="vendor-logo icon-github js-github-signin" href="#">xxx</a>
-       @* <a title="使用OsChina账号登录" class="vendor-logo icon-oschina" href="/signup/oschina">OsChina</a>
-        <a title="微信扫码登录" class="vendor-logo icon-wechat-small" href="/signup/wechat">微信扫码登录</a>*@
-      </div>
+                        <a class="abright" href="@Url.Action("Register")">注册账号</a>
+                    </p>
+                }
+                <div class="vendor-block">
+                    合作账号登录:
+                    @* <a title="使用CSDN账号登录" class="vendor-logo icon-csdn" href="/signup/csdn">CSDN</a>*@
+                    @*<a title="使用GitHub账号登录" class="vendor-logo icon-github js-github-signin" href="#">xxx</a>*@
+                    @* <a title="使用OsChina账号登录" class="vendor-logo icon-oschina" href="/signup/oschina">OsChina</a>*@
+                    <a title="微信扫码登录" class="vendor-logo icon-wechat-small" href="https://open.weixin.qq.com/connect/qrconnect?appid=wxd96be4258f671daa&redirect_uri=http://www.warmwood.com/WeiXinAuth&response_type=code&scope=snsapi_login&state=3d6be0a4035d839573b04816624a415e#wechat_redirect">
+                        <img src="~/images/icon32_appwx_logo.png" /></a>
+                </div>
  
-    </div>
+            </div>
         </div>
 
     </div>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
 </div>
+
+@Html.Partial("info")
