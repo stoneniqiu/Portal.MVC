@@ -31,9 +31,9 @@ namespace Portal.MVC.Areas.Admin.Controllers
              _permissionService.InstallPermissions(new StandardPermissionProvider());
             using (var db = new PortalDb())
             {
-                ViewBag.News = db.Presses.Count();
-                ViewBag.Members = db.Members.Count();
-                ViewBag.Trades = db.Examples.Count();
+               // ViewBag.News = db.Presses.Count();
+                //ViewBag.Members = db.Members.Count();
+                //ViewBag.Trades = db.Examples.Count();
             }
             return View();
         }
