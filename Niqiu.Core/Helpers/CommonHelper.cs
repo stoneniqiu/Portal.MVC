@@ -17,6 +17,186 @@ namespace Niqiu.Core.Helpers
     /// </summary>
     public partial class CommonHelper
     {
+
+
+        public static bool ValidateString(string data, ValidataType datatype)
+        {
+            bool ok = false;//返回结果 
+            Regex regex = null;
+            switch (datatype)
+            {
+                case ValidataType.Email:  //email格式
+                    regex = new Regex(@"\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*");
+                    break;
+                case ValidataType.Domain://域名格式"(^\w+(-\w+)*)(\.(\w+(-\w+)*))*(\?\S*)?$" //^\w+([-.]\w+)*\.\w+([-.]\w+)*$
+                    regex = new Regex(@"(^\w+(-\w+)*)(\.(\w+(-\w+)*))*(\?\S*)?$");
+                    break;
+                case ValidataType.Phone://座机电话格式
+                    regex = new Regex(@"^((\(\d{2,3}\))|(\d{3}\-))?(\(0\d{2,3}\)|0\d{2,3}-)?[1-9]\d{6,7}(\-\d{1,4})?$");
+                    break;
+                case ValidataType.Mobile://手机格式
+                    //  regex = new Regex(@"^13\d{9}$|^15\d{9}$|^18\d{9}$|^0\d{9,10}$");
+                    regex = new Regex(@"^13\d{9}$|^15\d{9}$|^14\d{9}$|^18\d{9}$|^0\d{9,10}$");
+                    break;
+                case ValidataType.Url://url格式
+                    regex = new Regex("^http:\\/\\/[A-Za-z0-9]+\\.[A-Za-z0-9]+[\\/=\\?%\\-&_~`@[\\]\':+!]*([^<>\"\"])*$");
+                    break;
+                case ValidataType.Money://货币
+                    regex = new Regex(@"^\d+(\.\d+)?$");
+                    break;
+                case ValidataType.Number://正整数
+                    regex = new Regex(@"^\d+$");
+                    break;
+                case ValidataType.Zip://邮编
+                    regex = new Regex(@"^\d{6}$");
+                    break;
+                case ValidataType.Ip://IP地址
+                    regex = new Regex(@"^[\d\.]{7,15}$");
+                    break;
+                case ValidataType.QQ://QQ号
+                    regex = new Regex(@"^[1-9]\d{4,9}$");
+                    break;
+                case ValidataType.Integer://整型
+                    regex = new Regex(@"^[-\+]?\d+$");
+                    break;
+                case ValidataType.Double://浮点数 
+                    regex = new Regex(@"^[-\+]?\d+(\.\d+)?$");
+                    break;
+                case ValidataType.English://英文
+                    regex = new Regex(@"^[A-Za-z]+$");
+                    break;
+                case ValidataType.Chinese://中文
+                    regex = new Regex(@"^[\u0391-\uFFE5]+$");
+                    break;
+                case ValidataType.Enandcn://中文和英文
+                    regex = new Regex(@"^[\w\u0391-\uFFE5][\w\u0391-\uFFE5\-\.]+$");
+                    break;
+            }
+            if (regex != null)
+            {
+                ok = regex.IsMatch(data);
+            }
+            return ok;
+        }
+
+        public static string ConverTime(double timesp)
+        {
+            var sec = 0;
+            int min = 0;
+            if (timesp < 1)
+            {
+                //说明是不到一分钟 就显示描述
+                sec = (int)(timesp * 60);
+                return sec + "秒";
+            }
+            if (timesp < 60)
+            {
+                //说明不到一小时
+                var total = timesp * 60;
+                min = (int)(total / 60);
+                sec = (int)(total % 60);
+                return string.Format("{0}分{1}秒", min, sec);
+            }
+
+            int hour = 0;
+            hour = (int)(timesp / 60);
+            min = (int)(timesp % 60);
+            return string.Format("{0}小时{1}", hour, min);
+        }
+
+        public static string FileLenth(int bit)
+        {
+            if (bit < 1024)
+                return string.Format("{0}b", bit);
+
+            var newk = bit / 1024;
+
+            if (newk < 1024)
+            {
+                return string.Format("{0}kb", newk);
+            }
+            var m = newk / 1024;
+            if (m < 1024)
+            {
+                return string.Format("{0}M", m);
+            }
+
+            return string.Format("{0}G", Math.Round((double)m / 1024, 2));
+
+        }
+
+        #region  比较字符串相似度
+        private static int min(int one, int two, int three)
+        {
+            int min = one;
+            if (two < min)
+            {
+                min = two;
+            }
+            if (three < min)
+            {
+                min = three;
+            }
+            return min;
+        }
+        private static int LD(String str1, String str2)
+        {
+            int[,] d;     // 矩阵 
+            int n = str1.Length;
+            int m = str2.Length;
+            int i;     // 遍历str1的 
+            int j;     // 遍历str2的 
+            char ch1;     // str1的 
+            char ch2;     // str2的 
+            int temp;     // 记录相同字符,在某个矩阵位置值的增量,不是0就是1 
+            if (n == 0)
+            {
+                return m;
+            }
+            if (m == 0)
+            {
+                return n;
+            }
+            d = new int[n + 1, m + 1];
+            for (i = 0; i <= n; i++)
+            {     // 初始化第一列 
+                d[i, 0] = i;
+            }
+            for (j = 0; j <= m; j++)
+            {     // 初始化第一行 
+                d[0, j] = j;
+            }
+            for (i = 1; i <= n; i++)
+            {     // 遍历str1 
+                ch1 = str1[i - 1];
+                // 去匹配str2 
+                for (j = 1; j <= m; j++)
+                {
+                    ch2 = str2[j - 1];
+                    if (ch1 == ch2)
+                    {
+                        temp = 0;
+                    }
+                    else
+                    {
+                        temp = 1;
+                    }
+                    // 左边+1,上边+1, 左上角+temp取最小 
+                    d[i, j] = min(d[i - 1, j] + 1, d[i, j - 1] + 1, d[i - 1, j - 1] + temp);
+                }
+            }
+            return d[n, m];
+        }
+
+        //返回两个字符串的相似度，返回一个0到100之间的整数，值越大，表示相似度越高
+        public static int SimilarStrings(String newStr, String targetStr)
+        {
+            int ld = LD(newStr, targetStr);
+            double i = 1 - (double)ld / (double)Math.Max(newStr.Length, targetStr.Length);
+            int similar = Convert.ToInt32(Math.Round((Convert.ToDecimal(i)), 2, MidpointRounding.AwayFromZero) * 100);
+            return similar;
+        }
+        #endregion
         /// <summary>
         /// Ensures the subscriber email or throw.
         /// </summary>
