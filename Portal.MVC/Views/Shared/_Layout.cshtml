@@ -1,286 +1,47 @@
 ﻿<!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
+<head lang="en">
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1, minimum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta http-equiv="Expires" content="-1">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="screen-orientation" content="portrait">
+    <meta name="x5-orientation" content="portrait">
+    <!-- UC默认竖屏 ，UC强制全屏 -->
+    <meta name="full-screen" content="yes">
+    <meta name="browsermode" content="application">
+    <!-- QQ强制竖屏 QQ强制全屏 -->
+    <meta name="x5-orientation" content="portrait">
+    <meta name="x5-fullscreen" content="true">
+    <meta name="x5-page-mode" content="app">
     <title>@ViewBag.Title</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-
-    <link href="~/Content/toastr/toastr.min.css" rel="stylesheet" />
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/Content/CSS/portalbase.css" rel="stylesheet" />
-    <link href="~/Content/CSS/Site.css" rel="stylesheet" />
-    <link href="~/Content/CSS/custom.css" rel="stylesheet" />
-    <link rel="shortcut icon" type="image/x-icon" href="~/Content/favicon.ico" />
-    <link rel="icon" type="image/x-icon" href="~/Content/favicon.ico" />
-
-    <style>
-        .bgcolor {
-            background-color: #2e8b57;
-        }
-
-        .jump-top-box {
-            width: 40px;
-            position: fixed;
-            z-index: 999;
-            top: 600px;
-            right: 5px;
-        }
-
-            .jump-top-box .jump-top {
-                margin-bottom: 5px;
-            }
-
-            .jump-top-box .jump-top, .jump-top-box .jump-feedback, .jump-top-box .jump-profhelp, .jump-top-box .jump-goto-naire {
-                height: 40px;
-                display: block;
-                position: relative;
-                z-index: 1;
-            }
-
-                .jump-top-box .jump-top a {
-                    background-position: -1278px -279px;
+    <link href="/css/style.css" rel="stylesheet" type="text/css">
+    <script src="~/js/jquery-1.11.3.min.js"></script>
+    <script>
+        $(function () {
+            $(".datebox table td").click(function() {
+                if (!$(this).hasClass('ab')) {
+                    $(".datebox table td").removeClass('ab').children('.subscribe').remove();
+                    $(this).addClass('ab')
+                    $(this).html('<div>' + $(this).html() + '</div><div class="subscribe">预约</div>');
                 }
-
-                .jump-top-box .jump-top a {
-                    background-repeat: no-repeat;
-                    background-image: url(/Content/img/common_z_c3a7666.png);
-                }
-
-                .jump-top-box .jump-top a, .jump-top-box .jump-feedback a, .jump-top-box .jump-profhelp a, .jump-top-box .jump-goto-naire a {
-                    color: #fff;
-                    font-size: 0;
-                    _text-indent: -1000px;
-                    text-decoration: none;
-                    display: block;
-                    padding: 6px 8px 8px;
-                    height: 40px;
-                    width: 40px;
-                    line-height: 14px;
-                    position: absolute;
-                    z-index: 2;
-                    left: 0;
-                    top: 0;
-                    overflow: hidden;
-                    -webkit-border-radius: 2px;
-                    -moz-border-radius: 2px;
-                    border-radius: 2px;
-                }
-
-            .jump-top-box .jump-task-list {
-                width: 40px;
-                padding-top: 87px;
-                height: 14px;
-                margin-top: 5px;
-                position: relative;
-                font-family: "Microsoft YaHei",arial,"\5b8b\4f53",monospace;
-            }
-
-                .jump-top-box .jump-task-list .service {
-                    cursor: pointer;
-                    border: 1px solid #cacbcc;
-                    border-radius: 2px;
-                    display: block;
-                    padding: 10px;
-                    color: #8b8b8b;
-                    text-align: center;
-                    line-height: 1.2;
-                    font-size: 14px;
-                    position: absolute;
-                    left: 0;
-                    top: 0;
-                    z-index: 10;
-                    background: #fff;
-                }
-
-        .msglist {
-        }
-    </style>
-
-    <script src="~/Scripts/respond.min.js"></script>
-
-    <script src="~/Scripts/jquery-1.9.1.js"></script>
-    <script src="~/Scripts/bootstrap.min.js"></script>
-    <script src="~/Scripts/bootstrap-paginator.js"></script>
-    <script src="~/Scripts/jquery.pin.min.js"></script>
-
-    <script src="~/Content/layer/layer.js"></script>
-    <script src="~/Content/layer/extend/layer.ext.js"></script>
-    <script src="~/Content/toastr/toastr.min.js"></script>
+            });
+        })
+    </script>
 </head>
-
 <body>
-
     <div class="wrapper">
-        <div id="header">
-            <div class="viewport-wrapper">
-                <div class="container">
-                    <a class="header-logo" href="/">Reading</a>
-                    <div class="header-account">
-                        @Html.Partial("_LoginPartial")
-                    </div>
-                    <ul class="header-nav">
-                        <li class="nav-item home"><a href="@Url.Action("Index", "Home")">首页</a></li>
-                        <li class="nav-item product"><a href="@Url.Action("BookWay", "Home")">书山有路</a></li>
-                        <li class="nav-item example">
-                            <a href="#">书单</a>
-
-                        </li>
-                        <li class="nav-item download">
-                            <a href="#">静好</a>
-                           
-                        </li>
-                        <li class="nav-item train">
-                            <a href="#">淘书</a>
-                            <ul class="items" role="menu">
-                                <li><a href="#">淘书</a></li>
-                                <li><a href="#">淘书</a></li>
-                                <li class="divider"></li>
-                            </ul>
-                        </li>
-
-                    </ul>
-                </div>
-            </div>
-        </div>
         <div id="content">
             @RenderBody()
         </div>
-
         @RenderSection("scripts", required: false)
-
-    </div>
-    <footer>
-        <div class="container">
-
-            <div class="row">
-                <div class="col-md-9" style="padding-left: 15px;">
-                    <ul id="footul" class="nav navbar-nav">
-                        <li>
-                            <h4><a href="#">nav</a></h4>
-                        </li>
-                        <li>
-                            <h4><a href="#">nav</a></h4>
-                        </li>
-                        <li>
-                            <h4><a href="#">nav</a></h4>
-                        </li>
-                        <li>
-                            <h4><a href="#">nav</a></h4>
-                        </li>
-                        <li>
-                            <h4><a href="#">nav</a></h4>
-                        </li>
-                    </ul>
-                    <div class="clear"></div>
-                    <p class="fsmall" style="margin-top:40px;">Copyright © <a href="http://www.cnblogs.com/stoneniqiu/" target="_blank" >stoneniqiu </a> 书山有路读书群：</p>
-                </div>
-                <div class=" col-md-3 footerinfo">
-                    <p class="fsmall">书山有路公益组织</p>
-                    <p class="fsmall">业务咨询:76617768</p>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <div class="jump-top-box">
-        <div class="jump-top">
-            <a href="#" target="_self">返回顶部</a>
-        </div>
-        <div class="jump-task-list">
-            <a class="service" data-action="open-task-list">在线客服</a>
-        </div>
     </div>
     <div>
     </div>
 </body>
 </html>
-
-<script>
-    window.onload = function () {
-        var pathname = location.pathname.substr(1);
-        var token;
-        if (pathname == "") {
-            token = "Home";
-        } else {
-            var patt = new RegExp("[a-z]{1,}", "i");
-            token = patt.exec(pathname)[0];
-        }
-        switch (token) {
-            case "Example":
-                changenavcss(".example");
-                break;
-            case "Download":
-                changenavcss(".download");
-                break;
-            case "Product":
-                changenavcss(".product");
-                break;
-            case "SoftPurchase":
-                changenavcss(".soft");
-                break;
-            case "Ask":
-                changenavcss(".train");
-                break;
-            case "Topic":
-                changenavcss(".forum");
-                break;
-            case "About":
-                changenavcss(".about");
-                break;
-            case "Home":
-                changenavcss(".home");
-                break;
-        }
-
-    }
-    function changenavcss(navItem) {
-        $(".header-nav").children(navItem).addClass("nav-active");
-        $(".header-nav").children(navItem).children("a").css("color", "#57b382");
-    }
-
-    $(function () {
-        toastr.options = {
-            "closeButton": false,
-            "debug": false,
-            "positionClass": "toast-bottom-right",
-            "onclick": null,
-            "showDuration": "300",
-            "hideDuration": "1000",
-            "timeOut": "3000",
-            "extendedTimeOut": "1000",
-            "showEasing": "swing",
-            "hideEasing": "linear",
-            "showMethod": "fadeIn",
-            "hideMethod": "fadeOut"
-        }
-
-        //给导航栏栏目添加下拉列表，当鼠标放在栏目上面时显示出来。
-        $(".header-nav li").bind("mouseenter", function () { $(this).children("ul").slideDown(); })
-                           .bind("mouseleave", function () { $(this).children("ul").slideUp(); });
-        $("ul.items").bind("mouseleave", function () {
-            //隐藏列表
-            $(this).slideUp();
-        });
-
-        //返回页面顶部
-        $(".jump-top a").bind("mouseenter", function () {
-
-        }).bind("mouseleave", function () {
-
-        });
-
-
-        $(window).scroll(function () {
-            if ($("body").scrollTop() == 0) {
-                $(".jump-top").css("visibility", "hidden");
-            } else {
-                $(".jump-top").css("visibility", "visible");
-            }
-
-        });
-    });
-</script>
+ 

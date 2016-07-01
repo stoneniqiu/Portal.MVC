@@ -1,6 +1,6 @@
 ﻿@if (TempData["err"] != null)
 {
-    <div class="alert alert-error">@TempData["err"]</div>
+    <div class="alert alert-danger">@TempData["err"]</div>
 }
 
 @if (TempData["msg"] != null)
@@ -10,5 +10,5 @@
 
 @if (TempData["info"] != null)
 {
-    <div class="alert alert-success">@TempData["info"]</div>
+    <div class="alert alert-info">@TempData["info"]</div>
 }

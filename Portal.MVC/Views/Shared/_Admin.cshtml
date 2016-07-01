@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="~/Content/Matrix_Admin/css/bootstrap-theme.min.css" />
     <link rel="stylesheet" href="~/Content/Matrix_Admin/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/Content/Matrix_Admin/css/bootstrap-responsive.min.css" />
-    <link rel="stylesheet" href="~/Content/Matrix_Admin/css/fullcalendar.css" />
     <link rel="stylesheet" href="~/Content/Matrix_Admin/css/matrix-style.css" />
     <link rel="stylesheet" href="~/Content/Matrix_Admin/css/matrix-media.css" />
     <link rel="stylesheet" href="~/Content/Matrix_Admin/css/uniform.css" />
@@ -19,14 +18,20 @@
     <script src="~/Content/Matrix_Admin/js/jquery.min.js"></script>
     <script src="~/Content/Matrix_Admin/js/bootstrap.min.js"></script>
     <script src="~/Content/Matrix_Admin/js/matrix.js"></script>
-    
+
+    <script src="~/Content/plupload-2.1.8/js/plupload.full.min.js"></script>
+    <script src="~/Content/Js/admin.js"></script>
+    <script src="~/Content/ckeditor/ckeditor.js"></script>
+
     <style>
         table tbody tr td:first-child {
             text-align: center;
         }
+
         .controls label, input[type='checkbox'] {
             display: inline-block !important;
         }
+
             .controls label:hover {
                 color: black;
             }
@@ -39,11 +44,16 @@
             color: red;
         }
 
- .editor-label {margin-left: 20px;margin-top: 10px;}
- .editor-field {padding-left: 20px;padding-bottom: 10px;
+        .editor-label {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
 
-    border-bottom: 1px solid #eeeeee;
- }
+        .editor-field {
+            padding-left: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eeeeee;
+        }
     </style>
 </head>
 <body>
@@ -58,20 +68,21 @@
         <ul class="nav">
             <li class="dropdown" id="profile-messages">
                 <a title="" href="#" data-toggle="dropdown" data-target="#profile-messages" class="dropdown-toggle"><i class="icon icon-user"></i><span class="text">欢迎  
-                          @if (Request.IsAuthenticated) {
+                          @if (Request.IsAuthenticated)
+                          {
                               <text>
-                                  <span>@User.Identity.Name</span>
+                              <span>@User.Identity.Name</span>
                               </text>
-                          }                                                                                                                                                  
-                     </span><b class="caret"></b></a>
+                          }
+                </span><b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li><a href="#"><i class="icon-user"></i>我的资料</a></li>
                     <li class="divider"></li>
-                    <li><a href="@Url.Action("LogOff", "Account")"><i class="icon-key"></i>退出</a></li>
+                    <li><a href="/Account/LogOff"><i class="icon-key"></i>退出</a></li>
                 </ul>
             </li>
 
-            <li class=""><a title="" href="@Url.Action("LogOff","Account")"><i class="icon icon-share-alt"></i><span class="text">退出</span></a></li>
+            <li class=""><a title="" href="/Account/LogOff"><i class="icon icon-share-alt"></i><span class="text">退出</span></a></li>
         </ul>
     </div>
     <!--close-top-Header-menu-->
@@ -87,15 +98,76 @@
     <div id="sidebar">
 
         <ul>
-            <li id="home" class=""><a href="@Url.Action("Index","Home")"><i class="icon icon-home"></i><span>控制面板</span></a> </li>
+            <li id="home" class=""><a href="@Url.Action("Index", "Home")"><i class="icon icon-home"></i><span>控制面板</span></a> </li>
+            <li id="huji" class="submenu" >
+                <a href="#"><i class="icon icon-group"></i><span>户籍办理</span></a>
+                <ul>
+                    <li><a href="@Url.Action("Borrows","HuJi")">户籍卡借用审批</a></li>
+                    <li><a href="@Url.Action("NoCrimeList", "HuJi")">无犯罪记录审批</a></li>
+                    <li><a href="@Url.Action("MoveList", "HuJi")">户口迁进迁出审批</a></li>
+                    <li><a href="@Url.Action("IDCardList", "HuJi")">身份证补办审批</a></li>
+                </ul>
+            </li>
+            <li id="car" class="submenu">
+                <a href="#"><i class="icon icon-truck"></i><span>车证办理</span></a>
+                <ul>
+                    <li><a href="@Url.Action("ACardList","Car")">A证申办</a></li>
+                    <li><a href="@Url.Action("BCardList","Car")">B证申办</a></li>
+                    <li><a href="@Url.Action("CCardList","Car")">C证申办</a></li>
+                    <li><a href="@Url.Action("TempCardList", "Car")">临时车证申办</a></li>
+                    <li><a href="@Url.Action("WorkCardList", "Car")">施工车证申办</a></li>
+                </ul>
+            </li>
+            <li id="fire" class="submenu">
+                <a href="#"><i class="icon icon-fire"></i><span>消防审批</span></a>
+                <ul>
+                    <li><a href="@Url.Action("OnFireList","Fire")">动火证办理</a></li>
+                    <li><a href="@Url.Action("ChemicalList", "Fire")">危险化学品购买</a></li>
+                    <li><a href="@Url.Action("RenovationList", "Fire")">装修改造施工备案</a></li>
+                    <li><a href="@Url.Action("CompletedList", "Fire")">竣工备案</a></li>
+                </ul>
+            </li>
+            <li id="activity" class="submenu">
+                <a href="#"><i class="icon icon-heart"></i><span>活动审批</span></a>
+                <ul>
+                    <li><a href="@Url.Action("ActivityList", "Fire")">活动审批</a></li>
+                </ul>
+            </li>
+            <li id="exam" class="submenu">
+                <a href="#"><i class="icon icon-edit"></i><span>测试管理</span></a>
+                <ul>
+                    <li><a href="@Url.Action("Questions","Exam")">题库</a></li>
+                    <li><a href="">规则</a></li>
+                </ul>
+            </li>
+            <li id="course" class="submenu">
+                <a href="#"><i class="icon icon-play"></i><span>课程管理</span></a>
+                <ul>
+                    <li><a href=""></a></li>
+                    <li><a href=""></a></li>
+                </ul>
+            </li>
+            <li id="photo" class="submenu">
+                <a href="#"><i class="icon icon-camera"></i><span>隐患随手拍</span></a>
+                <ul>
+                    <li><a href="@Url.Action("PhotoList","Photo")">隐患随手拍</a></li>
+                </ul>
+            </li>
+            <li id="found" class="submenu">
+                <a href="#"><i class="icon icon-hand-up"></i><span>失物招领</span></a>
+                <ul>
+                    <li><a href="@Url.Action("FoundLostList","Photo")">失物招领</a></li>
+                </ul>
+            </li>
             <li id="usermanage" class="submenu">
                 <a href="#"><i class="icon icon-user-md"></i><span>用户管理</span></a>
                 <ul>
-                    <li><a href="@Url.Action("Index", "User",new{area="Admin"})">操作员查询</a></li>
+                    <li><a href="@Url.Action("Index", "User", new { area = "Admin" })">操作员查询</a></li>
                     <li><a href="@Url.Action("Create", "User")">新增操作员</a></li>
                     @*<li><a href="@Url.Action("ChangePassword", "Account")">密码重置</a></li>*@
                 </ul>
             </li>
+
         </ul>
     </div>
     <!--sidebar-menu-->
@@ -106,7 +178,7 @@
     @RenderSection("scripts", required: false)
 
     <script type="text/javascript">
-        
+
         $("th input:checkbox").click(function () {
             var checkedStatus = this.checked;
             var checkbox = $(this).parents('.widget-box').find('tr td:first-child input:checkbox');
@@ -131,7 +203,7 @@
                 if (newURL == "-") {
                     resetMenu();
                 }
-                // else, send page to designated URL
+                    // else, send page to designated URL
                 else {
                     document.location.href = newURL;
                 }
@@ -143,5 +215,5 @@
             document.gomenu.selector.selectedIndex = 2;
         }
     </script>
-</body> 
+</body>
 </html>

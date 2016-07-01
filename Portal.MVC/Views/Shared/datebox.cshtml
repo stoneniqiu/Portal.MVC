@@ -1,0 +1,29 @@
+﻿<div class="datebox">
+    <script language="javascript">
+        function is_leap(year) {
+            return (year % 100 == 0 ? res = (year % 400 == 0 ? 1 : 0) : res = (year % 4 == 0 ? 1 : 0));
+        } //是否为闰年
+        var nstr = new Date(); //当前Date资讯
+        var ynow = nstr.getFullYear(); //年份
+        var mnow = nstr.getMonth(); //月份
+        var dnow = nstr.getDate(); //今日日期
+        var n1str = new Date(ynow, mnow, 1); //当月第一天Date资讯
+        var firstday = n1str.getDay(); //当月第一天星期几
+        var m_days = new Array(31, 28 + is_leap(ynow), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31); //各月份的总天数
+        var tr_str = Math.ceil((m_days[mnow] + firstday) / 7); //表格所需要行数
+        //打印表格第一行（有星期标志）
+        document.write("<table cellspacing='0'><tr><td>周日</td><td>周一</td><td>周二</td><td>周三</td><td>周四</td><td>周五</td><td>周六</td></tr>");
+        for (i = 0; i < tr_str; i++) { //表格的行
+            document.write("<tr>");
+            for (k = 0; k < 7; k++) { //表格每行的单元格
+                idx = i * 7 + k; //单元格自然序列号
+                date_str = idx - firstday + 1; //计算日期
+                (date_str <= 0 || date_str > m_days[mnow]) ? date_str = "&nbsp;" : date_str = idx - firstday + 1; //过滤无效日期（小于等于零的、大于月总天数的）
+                //打印日期：今天底色样式
+                date_str == dnow ? document.write("<td class='ab'>" + "<div>" + date_str + "</div>" + "<div class='subscribe'>预约</div>" + "</td>") : document.write("<td>" + date_str + "</td>");
+            }
+            document.write("</tr>"); //表格的行结束
+        }
+        document.write("</table>"); //表格结束
+    </script>
+</div>

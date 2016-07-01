@@ -1,0 +1,23 @@
+﻿@using Niqiu.Core.Domain
+@model Niqiu.Core.Domain.VerifyEntity
+           
+@if (Model.State == VerifyState.Padding)
+{
+    <div class="btn-group">
+        <button data-toggle="dropdown" title="审核" class="btn btn-primary dropdown-toggle">申请中 <span class="caret"></span></button>
+        <ul class="dropdown-menu">
+            <li><a data-id="@Model.Id" data-state="@VerifyState.Passed" href="#">通过</a></li>
+            <li><a data-id="@Model.Id" data-state="@VerifyState.Refuse" href="#">拒绝</a></li>
+        </ul>
+    </div>
+}
+
+@if (Model.State == VerifyState.Passed)
+{
+    <label class="label label-success">已通过</label>
+}
+
+@if (Model.State == VerifyState.Refuse)
+{
+    <label class="label label-default">已拒绝</label>
+}
