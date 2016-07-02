@@ -25,6 +25,8 @@ namespace Portal.MVC.Attributes
         {
             string contr = filterContext.RouteData.Values["controller"].ToString();
             string action = filterContext.RouteData.Values["action"].ToString();
+
+            var url = filterContext.RequestContext.HttpContext.Request.FilePath;
             IDictionary<string, object> parmdatas = filterContext.ActionParameters;
             string parms = "?";
             int i = 0;
@@ -46,9 +48,22 @@ namespace Portal.MVC.Attributes
             returnUrl = UrlHelper.GenerateContentUrl(returnUrl, filterContext.HttpContext);
 
             User user = WorkContext.CurrentUser;
+
+            if (_isAdmin)
+            {
+                if (user == null)
+                {
+                    filterContext.Result = new RedirectResult("~/Account/Logon?returnUrl=" + returnUrl);
+                }
+                if (!WorkContext.IsAdmin)
+                {
+                    filterContext.Result = new RedirectResult("~/Account/Logon?returnUrl=" + returnUrl+"&msg='false'");
+                }
+            }
+
             if (user == null)
             {
-                filterContext.Result = new RedirectResult("~/Account/Logon?returnUrl=" + returnUrl);
+                filterContext.Result = url.Contains("/Admin") ? new RedirectResult("~/Account/Logon?returnUrl=" + returnUrl) : new RedirectResult("~/Account/MLogon?returnUrl=" + returnUrl);
             }
 
             // 如果已经登录 但不是角色，就需要跳转到只是页面 提示是管理员才能登录

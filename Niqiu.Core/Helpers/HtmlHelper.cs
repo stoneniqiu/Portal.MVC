@@ -24,7 +24,7 @@ namespace Niqiu.Core.Helpers
 
             var img = new TagBuilder("img");
             img.MergeAttribute("src", url);
-            img.MergeAttribute("style", string.Format("width:{0}", length));
+            img.MergeAttribute("style", string.Format("width:{0}px", length));
 
             tagA.InnerHtml = img.ToString();
 
@@ -46,6 +46,23 @@ namespace Niqiu.Core.Helpers
                 selectList.Add(option);
             }
             return helper.DropDownList(name, selectList);
+        }
+
+        public static string EnumToText(this HtmlHelper helper, Enum eEnum)
+        {
+            var enumType = eEnum.GetType();
+            var field = enumType.GetField(eEnum.ToString());
+            var display = field.GetCustomAttributes(typeof(DisplayAttribute), false).FirstOrDefault() as DisplayAttribute;
+            return display != null ? display.Name : eEnum.ToString();
+        }
+
+        public static string EnumToTextFor<TModel, TProperty>(this HtmlHelper<TModel> html, Expression<Func<TModel, TProperty>> expression)
+        {
+            ModelMetadata modelMetadata = ModelMetadata.FromLambdaExpression(expression, html.ViewData);
+            var enumType = modelMetadata.ModelType;
+            var field = enumType.GetField(modelMetadata.Model.ToString());
+            var display = field.GetCustomAttributes(typeof(DisplayAttribute), false).FirstOrDefault() as DisplayAttribute;
+            return display != null ? display.Name : modelMetadata.Model.ToString();
         }
 
         public static MvcHtmlString EnumToDropDownListFor<TModel, TProperty>(this HtmlHelper<TModel> html, Expression<Func<TModel, TProperty>> expression, object htmlAttributes=null)
