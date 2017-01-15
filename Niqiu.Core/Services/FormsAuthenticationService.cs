@@ -1,7 +1,8 @@
-﻿using System;
+using System;
 using System.Web;
 using System.Web.Security;
 using Niqiu.Core.Domain.User;
+using Niqiu.Core.Helpers;
 
 namespace Niqiu.Core.Services
 {
@@ -10,7 +11,7 @@ namespace Niqiu.Core.Services
         private readonly IUserService _userService;
         private readonly TimeSpan _expirationTimeSpan;
 
-        private User _cachedUser;
+      //  private User _cachedUser;
 
         public FormsAuthenticationService(IUserService userService)
         {
@@ -21,9 +22,13 @@ namespace Niqiu.Core.Services
 
         public void SignIn(User user, bool createPersistentCookie)
         {
-            var now = DateTime.UtcNow.ToLocalTime();
-            var ticket = new FormsAuthenticationTicket(1, user.Username, now, now.Add(_expirationTimeSpan),
-                createPersistentCookie, user.Username, FormsAuthentication.FormsCookiePath);
+            var now = DateTime.Now.ToLocalTime();
+            var ts = new TimeSpan(7, 0, 0, 0);//7天
+            if(user==null) return;
+            var key = Encrypt.EncryptString(user.Username + "_" + DateTime.Now.Ticks + Encrypt.GenerateOrderNumber());
+            var ticket = new FormsAuthenticationTicket(1, user.Username, now, now.Add(ts), false, key, FormsAuthentication.FormsCookiePath);
+            //var ticket = new FormsAuthenticationTicket(1, user.Username, now, now.Add(_expirationTimeSpan),
+            //    createPersistentCookie, user.Username, FormsAuthentication.FormsCookiePath);
             var encryptedTicket = FormsAuthentication.Encrypt(ticket);
             var cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket) {HttpOnly = true};
             if (ticket.IsPersistent)
@@ -37,30 +42,34 @@ namespace Niqiu.Core.Services
                 cookie.Domain = FormsAuthentication.CookieDomain;
             }
             HttpContext.Response.Cookies.Add(cookie);
+            HttpContext.Session["User"] = user;
             //nop源码中没有这一句，务必保证webconfig中的认证是form的。
-           // FormsAuthentication.SetAuthCookie(user.Username, createPersistentCookie);
-            _cachedUser = user;
+            FormsAuthentication.SetAuthCookie(user.Username, createPersistentCookie);
+            //_cachedUser = user;
         }
 
         public void SignOut()
         {
-            _cachedUser = null;
+          //  _cachedUser = null;
             FormsAuthentication.SignOut();
         }
 
         public User GetAuthenticatedCustomer()
         {
-            if (_cachedUser != null) return _cachedUser;
+            if (HttpContext.Session["User"]!=null)
+                return HttpContext.Session["User"] as User;
             if (HttpContext == null || HttpContext.Request == null || !HttpContext.Request.IsAuthenticated ||
-                !(HttpContext.User.Identity is FormsIdentity))
+               !(HttpContext.User.Identity is FormsIdentity))
             {
                 return null;
             }
+           // if (_cachedUser != null) return _cachedUser;
             var formsIdentity = (FormsIdentity)HttpContext.User.Identity;
             var user = GetAuthenticatedUserFromTicket(formsIdentity.Ticket);
             if (user != null && user.Active && !user.Deleted )//&& user.IsRegistered()
-                _cachedUser = user;
-            return _cachedUser;
+               // _cachedUser = user;
+            return user;
+            return null;
         }
 
         public bool IsCurrentUser
